@@ -1,0 +1,157 @@
+Nombre del sistema: Mainumby.
+
+Nombre de la Base de datos: mustardSeed
+
+
+
+- VERIFICAR QUE FUNCIONE BIEN LISTADO, QUE MUESTRE TODAS LAS COLUMNAS DE LA TABLA.
+
+- CONTROLAR EL MODEL, CONTROLLER Y EL ARCHIVO DE MIGRACIONES.
+
+- HACER UN CRUD COMPLETO PARA VERIFICAR QUE FUNCIONE TODO LE PROCESO.
+
+- PROBAR VALIDACIONES DE CAMPOS: DEJAR EN BLACO, NOMBRES REPETIDOS, CARACTERES ESPECIALES(ACENTOS, COMILLA SIMPLE),
+CANTIDAD DE VALORES MINIMOS Y MAXIMOS PERMITIDOS, CUANDO SE CREA Y SE ACTUALIZAN REGISTROS.
+
+- DIRECCIONAMIENTO DE TODOS LOS ENLACES(BOTONES, ENLACES, CUANDO SE CARGA VER ADONDE DIRECCIONA,
+CUANDO SE ACTUALIZA VER A DONDE SE DIRECCIONA, CUANDO SE ELIMINA ADONDE DIRECCIONA).
+
+- VERIFICAR QUE LOS COMENTARIOS Y DEMAS ESTEN CORRECTAMENTE EN EL CODIGO.
+
+
+
+###POSTERIORMENTE: TRATAR DE HACER PANTALLAS BIEN ENTENDIBLES Y "AMIGABLES"(USAR CUADROS DE DIALOGO, ETC.).
+
+#POSTERIORMENTE: AGREGAR VALIDACIONES CON JQUERY O JAVASCRIPT PURO PARA LOS CAMPOS DE CADA FORMULARIO.
+#POSTERIORMETE: A LOS BOTONES DE LOS FORMULARIOS, BLOQUEAR UNA VEZ QUE SE PRESIONA SOBRE DICHO BOTON.
+#POSTERIORMENTE: ARREGLAR O QUITAR EL BOTON CANCELAR DE LOS FORMULARIOS.
+
+#POSTERIORMENTE: A TODO EL SISTEMA SE LE DEBE AGREGAR UN SISTEMA AUNQUE SEA BASICO DE PERMISOS Y ROLES 
+O TIPOS DE USUARIOS.
+
+####POSTERIORMENTE: PARA QUE LAS CONSULTAS SQL SEAN MAS FACILES DENTRO DEL SISTEMA, USAR LAS CARDINALIDADES
+DE LARAVEL EN LOS MODELOS, SE PUEDE HACER IGUAL A UN TUTORIAL QUE YA SE VIO PARA TAL EFECTO.
+
+####POSTERIORMENTE: LOS VALORES INGRESADOS EN LOS FORMULARIOS SE DEBEN QUEDAR EN CADA INPUT YA QUE AL RECARGAR
+LA PAGINA Y MOSTRAR LOS ERRORES SE PIERDEN DICHOS DATOS CARGADOS, SOLO SE PODRIA MOSTRAR EL ERROR EN EL INPUT
+EL CUAL ESTA GENERANDO DICHO ERROR, LOS DEMAS DEJAR CON LOS DATOS QUE YA SE CARGARON BIEN.
+
+####POSTERIORMENTE: UNIFICAR TODO EL CODIGO DE LOS CONTROLLERS PARA LOS CRUD PORQUE ACTUALMENTE ESTAN HECHOS
+DE DIFERENTES FORMAS, ESO SE DEBE UNIFICAR PARA QUE ME AYUDE A AGILIZAR TODA LA FUTURA PROGRAMACION.
+
+
+
+####POSTERIORMETE: PARA LAS LISTAS DE TODOS LOS FORMULARIOS, SI ESTAN VACIOS SE PUEDE PONER UN MENSAJE
+DE QUE NO EXISTEN Y UN ENLACE PARA CARGAR NUEVO REGISTRO PARA ESA LISTA.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+Tabla: Paises
+verificacion: ok
+#al cargar el registro "españa" no convierte la letra "ñ" en mayusculas.
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Departamentos
+verificacion: ok
+#al cargar el registro "Alto Paraná" no convierte la letra a con acento en mayusculas.
+#al editar el listado de paises no trae por defecto el pais que le corresponde al departamento
+en la lista de paises, solo muestra la lista y por defecto pone en el formulario el primer
+registro de la lista.
+#al actualizar el registro no trae por defecto el pais con el que se le cargo, solo muestra
+el primero por defecto.
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Ciudades
+verificacion: ok
+#se tiene que poder guardar una ciudad sin un departamento, el caso de asuncion que no le pertenece
+a ningun departamento.
+#en la lista de departamentos NO se filtra por pais, me salen todos los departamentos de cualquier pais, osea relacionado con cualquier pais, ejemplo: cargue un departamento de china y igual me listo...
+#al cargar el registro "Asunción" NO convierte la letra con acento en mayusculas.
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Barrios
+verificacion: ok
+#tanto para barrios y ciudades si se pueden repetir nombres de barrios o ciudades, lo que no se debe poder
+repetir es una pareja de ciudad/departamento o barrio/ciudad(recomendado poner doble campo unique).
+#la lista de ciudades NO se filtra por ningun criterio.
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Tipos Direcciones
+verificacion: ok
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Tipos Contactos
+verificacion: ok
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Tipos Emails
+verificacion: ok
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Personas
+verificacion: ok
+#en las listas no muestra el valor seleccionado cuando se quiere actualizar un registro.
+#no carga en el campo comentarios nada cuando se intenta actualizar
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Direcciones
+verificacion: ok
+#no carga en el campo comentarios nada cuando se intenta actualizar
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Tipos Documentos
+verificacion: ok
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Documentos
+verificacion: ok
+#se debe realizar la validacion de que no se repita persona+tipodocumento+numerodocumento
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Contactos
+verificacion: ok
+#se debe realizar la validacion de que no se repita persona+tipodocumento+numerodocumento
+--------------------------------------------------------------------------------------------------------------------
+Tabla: Emails
+verificacion: ok
+
+
+
+
+
+
+MUESTRA TODAS LAS COLUMNAS DE LA TABLA:
+CONTROLAR EL MODEL, CONTROLLER Y EL ARCHIVO DE MIGRACIONES:
+HACER UN CRUD COMPLETO PARA VERIFICAR QUE FUNCIONE TODO LE PROCESO:
+PROBAR VALIDACIONES DE CAMPOS: DEJAR EN BLACO, NOMBRES REPETIDOS, CARACTERES ESPECIALES(ACENTOS, COMILLA SIMPLE),
+CANTIDAD DE VALORES MINIMOS Y MAXIMOS PERMITIDOS, CUANDO SE CREA Y SE ACTUALIZAN REGISTROS: 
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+
+
+
+
+
+convenciones de clave foranea laravel
+ejemplo: publicaciones, categorias
+categoria_id en publicaciones, nombre de la tabla en sigular, _ nombre de la columna
+
+php artisan migrate:fresh
+
+
+publicaciones = emails
+categorias = tipos_emails
+
+convencion de nombre:
+ejemplo: tablas: publicaciones, categorias;
+publicaciones -> categoria_id: se debe agregar como clave foranea en la tabla publicaciones el nombre de la
+tabla categorias en singular guion bajo a continuacion nombre de la columna, ejemplo: categoria_id
+
+
+
+
+variables en plural cuando es mas de uno
+variables en singular cuando es uno solo
+metodo construct: mantener variables para las listas.
+metodo index: variables en plural
+metodos show, edit, update: varibles en singular
+
+
+	

@@ -1,0 +1,11 @@
+<p class="info"><strong>#C&oacute;digo Identificador</strong>:&nbsp;&nbsp;{{$direccion->id}}</p>
+<p class="info"><strong>Persona</strong>:&nbsp;&nbsp;{{$direccion->persona_nombres}}</p>
+<p class="info"><strong>Tipo Direcci&oacute;n</strong>:&nbsp;&nbsp;{{$direccion->tipo_direccion_desc}}</p>
+<p class="info"><strong>Barrio</strong>:&nbsp;&nbsp;{{$direccion->barrio_desc}}</p>
+<p class="info"><strong>Calle</strong>:&nbsp;&nbsp;{{$direccion->calle}}</p>
+<p class="info"><strong>Numero Casa</strong>:&nbsp;&nbsp;{{$direccion->numero_casa}}</p>
+<p class="info"><strong>Piso</strong>:&nbsp;&nbsp;{{$direccion->piso}}</p>
+<p class="info"><strong>Departamento</strong>:&nbsp;&nbsp;{{$direccion->departamento}}</p>
+<p class="info"><strong>Comentario</strong>:&nbsp;&nbsp;{{$direccion->comentario}}</p>
+<p class="info"><strong>Fecha Creaci&oacute;n</strong>:&nbsp;&nbsp;{{$direccion->created_at}}</p>
+<p class="info"><strong>Fecha Actualizaci&oacute;n</strong>:&nbsp;&nbsp;{{$direccion -> updated_at}}</p>
