@@ -1,0 +1,209 @@
+SI TIRA ERROR DE QUE NO RECONOCE LO DEL SQL...
+could not find driver laravel
+- https://stackoverflow.com/questions/25329302/laravel-error-pdoexception-could-not-find-driver-in-postgresql
+
+
+
+
+libpq.dll
+- https://es.dll-files.com/libpq.dll.html
+- https://es.dll-files.com/support/#208340625
+
+libpq.dll in xampp
+- https://stackoverrun.com/es/q/4696233
+
+Probar buscando y descargando el de 64bits.
+Probar haciendo composer update (ESTO ME FUNCIONO)
+
+
+Pegue ese archivo en las siguientes carpetas:
+C:\Windows\System32\libpq.dll
+C:\xampp\php\ext\libpq.dll
+---------------------------------------------------------------------------------------------------------
+
+
+- migrations existing database laravel
+
+https://laracasts.com/discuss/channels/laravel/creating-migrations-from-existing-database
+
+https://github.com/oscarafdev/migrations-generator(NO ME SIRVE PARA ESTA VERSION) DECIDI NO USAR NOMAS
+----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+LARAVEL COLLECTIVE
+https://laravelcollective.com/docs/6.x/html
+
+$ composer require laravelcollective/html
+----------------------------------------------------------------------------------------------------------
+
+
+
+
+Formas y formas de usar validate() de laravel.
+
+https://webmobtuts.com/backend-development/laravel-different-ways-of-using-validator-this-validate-validatormake-form-request-classes/
+validate() laravel
+Validation laravel message
+https://styde.net/como-personalizar-los-mensajes-de-error-de-validacion-de-formularios-en-laravel/
+https://stackoverflow.com/questions/45007905/custom-laravel-validation-messages
+-----------------------------------------------------------------------------------------------------------
+
+
+validate unique update laravel
+
+https://www.itsolutionstuff.com/post/laravel-unique-validation-on-update-exampleexample.html
+https://stackoverflow.com/questions/23587833/laravel-validation-unique-on-update
+-----------------------------------------------------------------------------------------------------------
+
+
+insert con transacciones laravel
+https://www.laraveltip.com/insertar-registros-con-transacciones-en-eloquent/
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+cardinalidad laravel
+
+https://www.youtube.com/watch?v=hR9474tdzSc&list=PLhFAH4E45x8sJQKW92TYE-pW-x1_2XX8G&index=54
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+show list field label condition in laravel
+https://www.codegrepper.com/code-examples/php/option+value+selected+in+laravel+blade
+
+
+belongsTo laravel
+Eloquent: Relationships
+https://laravel.com/docs/7.x/eloquent-relationships
+Eloquent Relationships laravel
+
+
+
+
+metodo show laravel
+https://es.stackoverflow.com/questions/47693/crear-metodo-show-en-laravel
+
+
+
+drop down table list laravel
+https://stackoverflow.com/questions/59942700/how-to-create-drop-down-list-data-that-came-from-different-table-name-in-laravel
+
+
+drop down list edit laravel
+https://stackoverflow.com/questions/49208800/laravel-editing-a-dropdown-option-in-a-form
+
+
+
+
+
+
+validate unique campo compuesto laravel
+
+
+unique:table,column,except,idColumn
+
+
+
+
+
+use Session laravel que es
+https://styde.net/uso-de-sesiones-en-laravel-5-1/
+
+
+
+textarea edit laravel
+https://stackoverflow.com/questions/23327845/laravel-textarea-does-not-refill-when-using-inputold
+
+
+
+if exists variable laravel blade
+https://stackoverflow.com/questions/37425978/check-if-variable-exist-in-laravels-blade-directive
+
+
+
+
+
+use App\Model laravel que es
+https://styde.net/introduccion-a-eloquent-orm-en-laravel-6/
+
+
+sb admin 2 form examples
+
+
+validacion de campos jquery
+
+
+validacion de campos javascript
+https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation
+https://uniwebsidad.com/libros/javascript/capitulo-7/validacion
+
+
+
+
+
+
+
+usuario:admin
+contraseña: vs*jl%QqQn#MOIu9BR
+
+
+
+JQuery Validator NO FUNCIONA CON ESTA PLANTILLA!!
+
+
+
+import clases en javascript
+https://es.stackoverflow.com/questions/141088/como-importar-clases-en-javascript
+
+
+
+
+agregar nuevo item a lista jquery
+https://www.iteramos.com/pregunta/63652/como-agregar-elementos-a-una-lista-desordenada-ul-usando-jquery
+
+
+insertar recuperar ultimo id insertado laravel
+https://es.stackoverflow.com/questions/303670/c%C3%B3mo-obtener-el-%C3%BAltimo-id-insertado-en-laravel
+
+img src laravel
+
+
+https://sb-admin-pro.startbootstrap.com/account-profile.html
+
+
+
+
+
+* sb admin 2 nav tabs
+https://stackoverflow.com/questions/63519474/bootstrap-tab-content-does-not-show-up-correctly-after-using-bootstrap-admin-te
+
+
+
+
+
+fecha hora en javascript
+https://professor-falken.com/programacion/javascript/como-obtener-la-fecha-y-hora-actuales-en-javascript/
+
+
+
+append jquery table
+https://www.tutorialrepublic.com/faq/how-to-add-remove-table-rows-dynamically-using-jquery.php
+
+
+
+
+
+
+maestro detalle laravel
+https://www.youtube.com/watch?v=Zj0pshSSlEo&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR
+https://www.youtube.com/watch?v=LozMODdAvvk&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR&index=20     ***
+https://www.youtube.com/watch?v=PJEP1c9ViCY&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR&index=22     ***
+https://www.youtube.com/watch?v=ja5opcun6kU&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR&index=24     ****
+

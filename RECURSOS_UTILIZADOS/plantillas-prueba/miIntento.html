@@ -1,0 +1,359 @@
+MI INTENTO...
+
+
+{!! Form::open(['route' => 'personas.store', 'method' => 'post', 'id' => 'personaForm']) !!}
+	<!-- <br>
+	<div class="container">
+		<br> -->
+		<!-- Tab list -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#tab-1">Tab-1</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#tab-2">Tab-2</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#tab-3">Tab-3</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div id="tab-1" class="container tab-pane active">
+				<br>
+				<!-- <h3>Tab-1</h3>
+				<h1>Red</h1>
+				<p>red red red red red red</p> -->
+				<div class="row">
+					<div class="col-lg-4">
+
+						<!-- Default Card Example -->
+						<!-- <div class="card mb-4">
+							<div class="card-header">Default Card Example</div>
+							<div class="card-body">
+								This card uses Bootstrap's default styling with no utility classes added. 
+								Global styles are the only things modifying the look and feel of this 
+								default card example.
+							</div>
+						</div> -->
+
+						<!-- Basic Card Example -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+							</div>
+							<div class="card-body text-center">
+								<!-- The styling for this basic card example is created by using default Bootstrap 
+								utility classes. By using utility classes, the style of the card component can 
+								be easily modified with no need for any custom CSS! -->
+								
+								<!-- Profile picture image-->
+								<img class="img-account-profile rounded-circle mb-2" src="{{URL::asset('/img/profile-1.png')}}" alt="" />
+								<!-- Profile picture help block-->
+								<div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+								<!-- Profile picture upload button-->
+								<button class="btn btn-primary" type="button">Upload new image</button>
+								
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-lg-8">
+					
+						<!-- Basic Card Example -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+							</div>
+							<div class="card-body">
+								<!-- The styling for this basic card example is created by using default Bootstrap 
+								utility classes. By using utility classes, the style of the card component can 
+								be easily modified with no need for any custom CSS! -->
+								
+								<!-- Form Group (username)-->
+								<!-- <div class="mb-3">
+									<label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+									<input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username" />
+								</div> -->
+								<div class="mb-3">
+									<label class="small mb-1" for="id">#C&oacute;digo Identificador</label>
+									<label class="text-xs" for="id">(Campo Autogenerado)</label>
+									<input class="form-control" id="id" name="id" type="text" readonly />
+								</div>
+								<!-- Form Row-->
+								<div class="row gx-3 mb-3">
+									<!-- Form Group (first name)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputFirstName">First name</label>
+										<input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie" />
+									</div> -->
+									<div class="col-md-6">
+										<label class="small mb-1" for="nombres">Nombres o Raz&oacute;n Social</label>
+										<label class="text-xs" for="nombres">(*) Campo Obligatorio</label>
+										<input class="form-control" id="nombres" name="nombres" type="text" placeholder="Ingrese Nombres o Raz&oacute;n Social" autofocus />
+									</div>
+									<!-- Form Group (last name)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputLastName">Last name</label>
+										<input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna" />
+									</div> -->
+									<div class="col-md-6">
+										<label class="small mb-1" for="apellidos">Apellidos</label>
+										<input class="form-control" id="apellidos" name="apellidos" type="text" placeholder="Ingrese Apellidos" />
+									</div>
+								</div>
+								<!-- Form Row        -->
+								<div class="row gx-3 mb-3">
+									<!-- Form Group (organization name)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputOrgName">Organization name</label>
+										<input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap" />
+									</div> -->
+									<div class="col-md-6">
+										<label class="small mb-1" for="fecha_nacimiento">Fecha Nacimiento</label>
+										<input class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" type="date" />
+									</div>
+									<!-- Form Group (location)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputLocation">Location</label>
+										<input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA" />
+									</div>-->
+									<div class="col-md-6">
+										<label class="small mb-1" for="tipo_persona">Tipo Persona</label>
+										<select name="tipo_persona" id="tipo_persona" class="form-control">
+											<option value="f">F&iacute;sica</option>
+											<option value="j">Jur&iacute;dica</option>
+										</select>
+									</div>
+								</div>
+								<!-- Form Group (email address)-->
+								<!-- <div class="mb-3">
+									<label class="small mb-1" for="inputEmailAddress">Email address</label>
+									<input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com" />
+								</div> -->
+								<div class="mb-3">
+									<label class="small mb-1" for="comentario">Comentarios</label>
+									<textarea id="comentario" name="comentario" class="form-control" rows="3" maxlength="500"></textarea>
+								</div>
+								<!-- Form Row-->
+								<!-- <div class="row gx-3 mb-3"> -->
+									<!-- Form Group (phone number)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputPhone">Phone number</label>
+										<input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567" />
+									</div> -->
+									<!-- Form Group (birthday)-->
+									<!-- <div class="col-md-6">
+										<label class="small mb-1" for="inputBirthday">Birthday</label>
+										<input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988" />
+									</div>
+								</div> -->
+								
+							</div>
+						</div>
+
+						<!-- Dropdown Card Example -->
+						<!-- <div class="card shadow mb-4">
+							<!-- Card Header - Dropdown --
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								<h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
+								<div class="dropdown no-arrow">
+									<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+										<div class="dropdown-header">Dropdown Header:</div>
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</div>
+								</div>
+							</div>
+							<!-- Card Body --
+							<div class="card-body">
+								Dropdown menus can be placed in the card header in order to extend the functionality of a 
+								basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the 
+								card header can be clicked on in order to toggle a dropdown menu.
+							</div>
+						</div> -->
+
+						<!-- Collapsable Card Example -->
+						<!-- <div class="card shadow mb-4">
+							<!-- Card Header - Accordion --
+							<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+								<h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+							</a>
+							<!-- Card Content - Collapse --
+							<div class="collapse show" id="collapseCardExample">
+								<div class="card-body">
+									This is a collapsable card example using Bootstrap's built in collapse functionality. 
+									<strong>Click on the card header</strong> to see the card body collapse and expand!
+								</div>
+							</div>
+						</div> -->
+
+					</div>
+
+				</div>
+				<!--fff-->
+			</div>
+
+			<div id="tab-2" class="container tab-pane fade">
+				<br>
+				<!-- <h3>Tab-2</h3>
+				<table class="table table-bordered table-responsive table-hover dataTable display" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+					<thead>
+						<tr role="row">                                        
+							<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 100px;">Date</th>
+							<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 50px;">Name</th>                                                                        
+						</tr>
+					</thead>                                                    
+					<tfoot>
+						<tr><th rowspan="1" colspan="1">Date</th><th rowspan="1" colspan="1">Name</th></tr>
+					</tfoot> 
+					<tbody>
+						<tr><td>19-12-2000</td><td>Chris</td></tr>
+						<tr><td>03-06-2014</td><td>John</td></tr>
+					</tbody>                                    
+				</table> -->
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<!-- Basic Card Example -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+							</div>
+							<div class="card-body">
+								<!-- The styling for this basic card example is created by using default Bootstrap 
+								utility classes. By using utility classes, the style of the card component can 
+								be easily modified with no need for any custom CSS! -->
+								
+								<!-- Payment method 1-->
+								@if (count($lista_tiposDocumentos) > 0)
+									<!-- Form Group (email address)-->
+									<div class="mb-3">
+										<!--<label class="small mb-1" for="tipoDocumento_id">Seleccione Tipo de Documento</label>-->
+										<label class="small mb-1" for="tmp_tipoDocumentoId">Seleccione Tipo de Documento</label>
+										<!-- <select name="item_tipoDocumento_id" id="item_tipoDocumento_id" class="form-control" autofocus="true"> -->
+										<select name="tmp_tipoDocumentoId" id="tmp_tipoDocumentoId" class="form-control" autofocus="true">
+											@foreach ($lista_tiposDocumentos as $tipoDocumento)
+												<option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->nombre }}</option>
+											@endforeach
+										</select>
+									</div>
+								@else
+									<div class="alert alert-info" role="alert">
+										<div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
+										<strong>Listado:</strong> Tipos de Documentos
+										<br/>
+										Debe <a href="{!!URL::to('/tiposdocumentos/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
+									</div>
+								@endif
+								
+								<!-- Form Group (email address)-->
+								<div class="mb-3">
+									<label class="small mb-1" for="item_numero_documento">N&uacute;mero de Documento</label>
+									<!-- <input class="form-control" id="item_numero_documento" name="item_numero_documento" type="text" placeholder="Ingrese N&uacute;mero de documento" /> -->
+									<input class="form-control" id="tmp_numeroDocumento" name="tmp_numeroDocumento" type="text" placeholder="Ingrese N&uacute;mero de documento" />
+								</div>
+								<!-- Save changes button-->
+								<!-- <button id="btn_agregarItem_createFormDocumento" class="btn btn-primary" type="button">Agregar a la lista</button> -->
+								<button id="btn_agregarTmp_createFormDocumento" class="btn btn-primary" type="button">Agregar a la lista</button>
+								
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+							  <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+							</div>
+							<div class="card-body">
+							
+								<!-- Alert info documentos -->
+								<div id="alertInfoDocumentos" class="alert alert-info" role="alert">
+									<div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
+									<strong>Listado:</strong> Documentos
+									<br/>
+									Debe Cargar Datos para Visualizar el Listado.
+								</div>
+							
+								<!-- DataTales Example -->
+								<div id="listadoDocumento" class="table-responsive" style="display: none">
+									<table class="table" id="dataTableDocumentos" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Tipo Documento</th>
+												<th>Numero Doc.</th>
+												<th>Estado</th>
+												<th>Fecha Creacion</th>
+												<th>Fecha Actualizacion</th>
+												<th>¿Eliminar?</th>
+												<!--<th>Status</th>-->
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Tipo Documento</th>
+												<th>Numero Doc.</th>
+												<th>Estado</th>
+												<th>Fecha Creacion</th>
+												<th>Fecha Actualizacion</th>
+												<th>¿Eliminar?</th>
+												<!--<th>Status</th>-->
+											</tr>
+										</tfoot>
+										<tbody>
+											<!--
+											<tr>
+												<td>Tiger Nixon</td>
+												<td>System Architect</td>
+												<td>Edinburgh</td>
+												<td>61</td>
+												<td>2011/04/25</td>
+												<td>$320,800</td>
+												<td><span class="badge badge-light text-dark">Pending</span></td>
+											</tr>
+											<tr>
+											  <td>Garrett Winters</td>
+											  <td>Accountant</td>
+											  <td>Tokyo</td>
+											  <td>63</td>
+											  <td>2011/07/25</td>
+											  <td>$170,750</td>
+											  <td><span class="badge badge-success">Paid</span></td>
+											</tr>
+											-->
+										</tbody>
+									</table>
+									<button type="button" id="btn_deleteItemDocumento" class="btn btn-primary">Eliminar de la lista</button>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--fff-->
+			</div>
+
+			<div id="tab-3" class="container tab-pane fade">
+				<br>
+				<h3>Tab-3</h3>
+				<h1>Yellow</h1>
+				<p>yellow yellow yellow yellow yellow</p>
+			</div>
+		</div>
+	<!-- </div> -->
+	
+	{{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
+{!!Form::close()!!}
+

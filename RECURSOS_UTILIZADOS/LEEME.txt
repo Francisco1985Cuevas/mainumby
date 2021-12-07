@@ -1,0 +1,49 @@
+Nombre del sistema: Mainumby.
+
+Nombre de la Base de datos: mustardSeed
+
+
+EL EJEMPLO BASE ES EMAIL
+
+
+Tabla: Paises
+Ruta: http://127.0.0.1:8000/paises
+Controller: PaisController.php
+Model: Pais.php
+Migracion: \database\migrations\2020_09_23_194357_create_paises_table.php
+Request Validation: StorePaisRequest.php, UpdatePaisRequest.php
+views: \views\pais\list.blade.php, \views\pais\create.blade.php, \views\pais\edit.blade.php, \views\pais\show.blade.php
+Modal Eliminar Registro en edit.blade.php, list.blade.php
+
+
+
+
+Tabla: Departamentos
+Ruta: http://127.0.0.1:8000/departamentos
+Controller: DepartamentoController.php
+Model: Departamento.php
+Migracion: \database\migrations\2020_09_30_114224_create_departamentos_table.php
+Request Validation: StoreDepartamentoRequest.php, UpdateDepartamentoRequest.php
+Views: \views\departamento\list.blade.php, \views\departamento\edit.blade.php, \views\departamento\show.blade.php[ESTE NO ANDA]
+Problema: No se puede actualizar.
+
+
+
+Tabla: Ciudades
+Ruta: http://127.0.0.1:8000/ciudades
+Controller: CiudadController.php
+Model: Ciudad.php
+Migracion: \database\migrations\2020_11_01_192748_create_ciudades_table.php
+Request Validation: StoreCiudadRequest.php, UpdateCiudadRequest.php
+Views: \views\ciudad\list.blade.php, \views\ciudad\create.blade.php, \views\ciudad\edit.blade.php
+Problema:funciona a medias la vista show,
+PENDIENTE:REVISAR LA PARTE DEL JAVASCRIPT DE TODOS
+
+
+
+
+
+
+
+
+
