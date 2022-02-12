@@ -14,12 +14,11 @@ class CreateContactosTable extends Migration
     public function up()
     {
         Schema::create('contactos', function (Blueprint $table) {
-            //$table->id();
             $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_contacto_id');
-            $table->string('numero_contacto', 20)->nullable($value = false);
-            $table->string('comentario', 500)->nullable($value = true);
+            $table->string('numero_contacto', 60)->nullable($value = false);
+            $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

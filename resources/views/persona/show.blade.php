@@ -41,7 +41,11 @@
 
 			<div class="card-body">
                 {!!Form::model($persona, ['route'=>  ['personas.show', $persona->id], 'method'=>'POST', 'files'=> true])!!}
+
                     @include('persona.forms.formulario-detalle')
+
+
+
                 {!!Form::close()!!}
 			</div>
 		</div>

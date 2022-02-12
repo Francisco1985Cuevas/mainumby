@@ -18,8 +18,9 @@ class CreateEmailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_email_id');
-            $table->string('descripcion', 60)->nullable($value = false);
-            $table->string('comentario', 500)->nullable($value = true);
+            $table->string('descripcion', 255)->nullable($value = false);
+            //$table->string('comentario', 500)->nullable($value = true);
+            $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

@@ -40,6 +40,10 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
+                <!-- -->
+                @include('alerts.request')
+                <!-- -->
+
 				@if(Session::has('mostrar_en_listado'))
 					@if(Session::has('message'))
 						<div class="alert alert-success alert-dismissible fade show" role="alert">

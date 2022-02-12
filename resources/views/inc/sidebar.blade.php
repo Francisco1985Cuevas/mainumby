@@ -40,10 +40,10 @@
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposdocumentos">Tipos Documentos</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposemails">Tipos Emails</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/personas">Personas</a>
-                <a class="collapse-item" href="http://127.0.0.1:8000/contactos">Contactos x Persona</a>
+                <!-- <a class="collapse-item" href="http://127.0.0.1:8000/contactos">Contactos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/documentos">Documentos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/direcciones">Direcciones x Persona</a>
-                <a class="collapse-item" href="http://127.0.0.1:8000/emails">Emails x Persona</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/emails">Emails x Persona</a> -->
 			</div>
 		</div>
 	</li>

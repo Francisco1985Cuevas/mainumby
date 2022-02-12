@@ -229,4 +229,46 @@ class DepartamentoController extends Controller
         return Redirect::to('/departamentos');
     }
 
+
+    /**
+     * Show a list of the specific resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    /*public function list($id)
+    {
+        //echo "im in AjaxController index";
+        if (isset($id)) {
+            // Obtener los Departamentos que correspondan con el ID dado (o null si no es encontrado).
+            $departamentos = Departamento::find($id);
+
+            return response()->json(['departamentos'=>$departamentos, 'succes'=>true]);
+        } else {
+            return response()->json(['succes'=>false]);
+        }
+    }*/
+    /*public function listDepartamentos(Request $request){
+        if(isset($request->texto)){
+            $departamentos = Departamento::wherePais_id($request->texto)->get();
+            return response()->json(
+                [
+                    'lista' => $departamentos,
+                    'success' => true
+                ]
+                );
+        }else{
+            return response()->json(
+                [
+                    'success' => false
+                ]
+                );
+
+        }
+
+    }*/
+
+
+
+
 }

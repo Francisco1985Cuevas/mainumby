@@ -18,5 +18,14 @@ class Contacto extends Model
      *
      * @var array
      */
-    protected $fillable = ['persona', 'tipo_contacto', 'numero_contacto', 'comentario'];
+    protected $fillable = ['persona_id', 'tipo_contacto_id', 'numero_contacto', 'comentario'];
+
+
+    /**
+     * Get the tipo_contacto_id that owns the Contacto.
+     */
+    public function tipoContacto() {
+        return $this->belongsTo(TipoContacto::class);
+    }
+
 }

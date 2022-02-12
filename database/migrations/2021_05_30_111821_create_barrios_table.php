@@ -15,7 +15,7 @@ class CreateBarriosTable extends Migration
     {
         Schema::create('barrios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 60)->nullable($value = false);
+            $table->string('nombre', 255)->nullable($value = false);
             $table->string('abreviatura', 3)->nullable($value = true);
             $table->unsignedBigInteger('ciudad_id');
             $table->timestamps();

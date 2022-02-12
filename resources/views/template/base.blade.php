@@ -105,6 +105,6 @@
         {!!Html::script('js/demo/fnts.js')!!}
 
         @stack('scriptsPersona')
-
+        @stack('scriptsPersonaEdit')
 	</body>
 </html>

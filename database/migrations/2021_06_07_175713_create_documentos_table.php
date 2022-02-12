@@ -18,8 +18,8 @@ class CreateDocumentosTable extends Migration
             //$table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_documento_id');
-            $table->string('numero_documento', 20)->nullable($value = false);
-            $table->string('comentario', 500)->nullable($value = true);
+            $table->string('numero_documento', 60)->nullable($value = false);
+            $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

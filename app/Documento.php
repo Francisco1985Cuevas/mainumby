@@ -19,4 +19,13 @@ class Documento extends Model
      * @var array
      */
     protected $fillable = ['persona_id', 'tipo_documento_id', 'numero_documento', 'comentario'];
+
+
+    /**
+     * Get the tipo_documento_id that owns the Documento.
+     */
+    public function tipoDocumento() {
+        return $this->belongsTo(TipoDocumento::class);
+    }
+
 }

@@ -46,3 +46,27 @@ Route::resource('documentos', 'DocumentoController');
 Route::resource('tiposemails', 'TipoEmailController');
 
 Route::resource('emails', 'EmailController');
+
+
+//Route::get('/list', 'DepartamentoController@list');
+//Route::get('/list','PersonaController@list');
+//Route::post('/listDepartamentos', 'DepartamentoController@listDepartamentos');
+//Route::get('listDepartamentos','PersonaController@listDepartamentos');
+//Route::resource('personas/listDepartamentos', 'PersonaController@listDepartamentos');
+//Route::get('personas/listDepartamentos', 'PersonaController@listDepartamentos');
+//Route::get('/personas/listDepartamentos', 'PersonaController@listDepartamentos');
+//Route::get('/listDepartamentos', 'PersonaController@listDepartamentos');
+
+//Route::get('dropdownlist','DataController@getCountries');
+//Route::get('dropdownlist/getstates/{id}','DataController@getStates');
+//Route::get('dropdownlist','DataController@getCountries');
+//Route::get('dropdownlist/getdepartamentos/{id}','PersonaController@getDepartamentos');
+//Route::get('getdepartamentos/{id}','PersonaController@getDepartamentos');
+
+//Route::get('dropdownlist','DataController@getCountries');
+//Route::get('dropdownlist/getstates/{id}','DataController@getStates');
+
+Route::get('dropdownlist/DepartamentosPais/{id}','DataController@DepartamentosPais');
+//Route::get('http://127.0.0.1:8000/dropdownlist/getdepartamentos/{id}','DataController@getDepartamentos');
+Route::get('dropdownlist/CiudadesDepartamento/{id}','DataController@CiudadesDepartamento');
+Route::get('dropdownlist/BarriosCiudad/{id}','DataController@BarriosCiudad');

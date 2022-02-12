@@ -23,7 +23,7 @@ class Email extends Model
     /**
      * Get the tipo_email that owns the Email.
      */
-    public function tipo_email() {
+    public function tipoEmail() {
         return $this->belongsTo(TipoEmail::class);
     }
 

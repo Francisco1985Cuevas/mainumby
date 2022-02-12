@@ -14,16 +14,15 @@ class CreateDireccionesTable extends Migration
     public function up()
     {
         Schema::create('direcciones', function (Blueprint $table) {
-            //$table->id();
             $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_direccion_id');
             $table->unsignedBigInteger('barrio_id');
-            $table->string('calle', 500)->nullable($value = true);
-            $table->string('numero_casa', 10)->nullable($value = true);
-            $table->string('piso', 10)->nullable($value = true);
-            $table->string('departamento', 20)->nullable($value = true);
-            $table->string('comentario', 500)->nullable($value = true);
+            $table->text('calle')->nullable($value = true);
+            $table->string('numero_casa', 30)->nullable($value = true);
+            $table->string('piso', 30)->nullable($value = true);
+            $table->string('departamento', 60)->nullable($value = true);
+            $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

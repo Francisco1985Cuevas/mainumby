@@ -42,13 +42,6 @@
                     <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
                     Expandir para Visualizar las Grillas de Datos.
                 </div>
-                <!-- Alert info campos obligatorios -->
-                <!-- <div id="alertInfoCamposObligatorios" class="alert alert-info" role="alert">
-                    <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
-                    <strong>Formulario:</strong> Personas
-                    <br/>
-                    Debe Expandir Expandir para Visualizar las opciones de Carga de datos.
-                </div>-->
 
 				@include('alerts.request')
 
@@ -81,7 +74,7 @@
                                         {!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('nombres', 'Nombres') !!}
+                                        {!! Form::label('nombres', 'Nombres/Raz&oacute;n Social') !!}
                                         {!! Form::label('nombres', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
                                         {!! Form::text('nombres', null, ['class'=>'form-control', 'required'=>'required', 'maxlength'=>60, 'id'=>'nombres', 'autofocus'=>true]) !!}
                                     </div>
@@ -96,12 +89,20 @@
                                     <div class="form-group">
                                         {!! Form::label('tipo_persona', 'Tipo Persona') !!}
                                         <select name="tipo_persona" id="tipo_persona" class="form-control">
-                                            <option value="f">F&iacute;sica</option>
+                                            <option value="f" selected >F&iacute;sica</option>
                                             <option value="j">Jur&iacute;dica</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        {!! Form::label('sexo', 'Sexo') !!}
+                                        <select name="sexo" id="sexo" class="form-control">
+                                            <option value="f">Femenino</option>
+                                            <option value="m" selected >Masculino</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         {!! Form::label('comentario', 'Comentarios') !!}
+                                        {!! Form::label('comentario', ' (Campo opcional, puede ingresar algun breve comentario sobre los datos personales)', ['class' => 'text-xs']); !!}
                                         <textarea id="comentario" name="comentario" class="form-control" rows="3" maxlength="500"></textarea>
                                     </div>
                                 </div>
@@ -116,13 +117,13 @@
                             <div id="collapseTwoo" class="accordion-collapse collapse" aria-labelledby="headingTwoo" data-bs-parent="#accordionPersona">
                                 <div class="accordion-body">
                                     <div class="mb-3">
-                                        <code>Los Datos de Documentos son Obligatorios.</code>
+                                        <code>Los Datos de Documento son Obligatorios.</code>
                                     </div>
 
                                     @if (count($lista_tiposDocumentos) > 0)
                                         <!-- Form Group (addItem_tipoDocumentoId) -->
                                         <div class="form-group">
-                                            <label for="addItem_tipoDocumentoId">Tipo de Documento</label>
+                                            <label for="addItem_tipoDocumentoId">Seleccione el Tipo de Documento</label>
                                             <select name="addItem_tipoDocumentoId" id="addItem_tipoDocumentoId" class="form-control">
                                             <option value="">Seleccione Opci&oacute;n...</option>
                                                 @foreach ($lista_tiposDocumentos as $tipoDocumento)
@@ -142,13 +143,14 @@
 
                                     <!-- Form Group (addItem_numeroDocumento) -->
                                     <div class="form-group">
-                                        <label for="addItem_numeroDocumento">N&uacute;mero de documento</label>
-                                        <input class="form-control" id="addItem_numeroDocumento" name="addItem_numeroDocumento" type="text" placeholder="Ingrese N&uacute;mero de documento" />
+                                        <label for="addItem_numeroDocumento">Ingrese el N&uacute;mero de Documento</label>
+                                        <input class="form-control" id="addItem_numeroDocumento" name="addItem_numeroDocumento" type="text" />
                                         <div class="invalid-feedback">El campo <b>N&uacute;mero de documento</b> es obligatorio.</div>
                                     </div>
                                     <!-- Form Group (addItem_comentarioDocumento) -->
                                     <div class="form-group">
                                         <label for="addItem_comentarioDocumento">Comentario</label>
+                                        <label for="addItem_comentarioDocumento" class="text-xs">(Opcional, puede agregar un breve comentario acerca del Documento ingresado...)</label>
                                         <textarea id="addItem_comentarioDocumento" name="addItem_comentarioDocumento" class="form-control" rows="3" maxlength="500"></textarea>
                                     </div>
                                     <!-- Boton Add item a la lista documentos -->
@@ -209,7 +211,7 @@
                                     @if (count($lista_tiposDirecciones) > 0)
                                         <!-- Form Group (addItem_tipoDireccionId) -->
                                         <div class="form-group">
-                                            <label for="addItem_tipoDireccionId">Seleccione Tipo de Direcci&oacute;n</label>
+                                            <label for="addItem_tipoDireccionId">Seleccione el Tipo de Direcci&oacute;n</label>
                                             <select id="addItem_tipoDireccionId" name="addItem_tipoDireccionId" class="form-control ">
                                                 <option selected value="">Seleccione Opci&oacute;n...</option>
                                                 @foreach ($lista_tiposDirecciones as $tipoDireccion)
@@ -226,26 +228,37 @@
                                         </div>
                                     @endif
 
-                                    @if (count($lista_barrios) > 0)
-                                        <!-- Form Group (addItem_barrioId) -->
-                                        <div class="form-group">
-                                            <label for="addItem_barrioId">Seleccione Barrio</label>
-                                            <select id="addItem_barrioId" name="addItem_barrioId" class="form-control">
-                                                <option selected value="">Seleccione Opci&oacute;n...</option>
-                                                @foreach ($lista_barrios as $barrio)
-                                                    <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @else
-                                        <div class="alert alert-info" role="alert">
-                                            <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
-                                            <strong>Listado:</strong> Barrios
-                                            <br/>
-                                            Debe <a href="{!!URL::to('/barrios/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
-                                        </div>
-                                    @endif
-
+                                    <!-- Form Group (addItem_paisId) -->
+                                    <div class="form-group">
+                                        <label for="addItem_paisId">Seleccione Pa&iacute;s</label>
+                                        <select id="addItem_paisId" name="addItem_paisId" class="form-control">
+                                            <option selected value="">Seleccione Opci&oacute;n...</option>
+                                            @foreach ($lista_paises as $pais)
+                                                <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!-- Form Group (addItem_departamentoId) -->
+                                    <div class="form-group">
+                                        <label for="addItem_departamentoId">Seleccione Departamento</label>
+                                        <select id="addItem_departamentoId" name="addItem_departamentoId" class="form-control">
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
+                                    <!-- Form Group (addItem_ciudadId) -->
+                                    <div class="form-group">
+                                        <label for="addItem_ciudadId">Seleccione Ciudad</label>
+                                        <select id="addItem_ciudadId" name="addItem_ciudadId" class="form-control">
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
+                                    <!-- Form Group (addItem_barrioId) -->
+                                    <div class="form-group">
+                                        <label for="addItem_barrioId">Seleccione Barrio</label>
+                                        <select id="addItem_barrioId" name="addItem_barrioId" class="form-control">
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
                                     <!-- Form Group (addItem_calle) -->
                                     <div class="form-group">
                                         <label for="addItem_calle">Calle</label>
@@ -423,7 +436,6 @@
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionPersona">
                                 <div class="accordion-body">
-                                    <!-- <strong>This is the second item's accordion body.</strong> It is hidden by default, until the -->
                                     @if (count($lista_tiposEmails) > 0)
                                         <!-- Form Group (addItem_tipoEmailId) -->
                                         <div class="form-group">
@@ -500,17 +512,9 @@
                                     </div>
                                     <!-- End of DataTales Email -->
 
-
-
-
-
                                 </div>
                             </div>
                         </div>
-
-
-
-
 
                     </div>
 
@@ -531,6 +535,9 @@
         var contadorDirecciones = 0;
         var contadorContactos = 0;
         var contadorEmails = 0;
+
+        //Host Name and Protocol
+ 		var host = window.location.protocol + "//" + window.location.host; //obtiene por ejemplo: http://localhost:8080
 
         //boton Agregar item Documento
         $("#btn_addItem_createFormDocumento").click(function() {
@@ -835,6 +842,74 @@
 				$('#alertInfoEmails').show();
 			}
 		}
+
+
+        //Selects dependientes de Pais-Departamento-Ciudad-Barrios.
+        jQuery(document).ready(function (){
+            jQuery('select[name="addItem_paisId"]').on('change', function() {
+                var pais_id = jQuery(this).val();
+                if(pais_id){
+                    jQuery.ajax({
+                        url : host+'/dropdownlist/DepartamentosPais/' +pais_id,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="addItem_departamentoId"]').empty();
+                            $('select[name="addItem_departamentoId"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="addItem_departamentoId"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="addItem_departamentoId"]').empty();
+                }
+            });
+        });
+
+        jQuery(document).ready(function (){
+            jQuery('select[name="addItem_departamentoId"]').on('change', function() {
+                var departamento_id = jQuery(this).val();
+                if(departamento_id){
+                    jQuery.ajax({
+                        url : host+'/dropdownlist/CiudadesDepartamento/' +departamento_id,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="addItem_ciudadId"]').empty();
+                            $('select[name="addItem_ciudadId"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="addItem_ciudadId"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="addItem_ciudadId"]').empty();
+                }
+            });
+        });
+
+        jQuery(document).ready(function (){
+            jQuery('select[name="addItem_ciudadId"]').on('change', function() {
+                var ciudad_id = jQuery(this).val();
+                if(ciudad_id){
+                    jQuery.ajax({
+                        url : host+'/dropdownlist/BarriosCiudad/' +ciudad_id,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="addItem_barrioId"]').empty();
+                            $('select[name="addItem_barrioId"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="addItem_barrioId"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="addItem_barrioId"]').empty();
+                }
+            });
+        });
 
     </script>
 @endpush

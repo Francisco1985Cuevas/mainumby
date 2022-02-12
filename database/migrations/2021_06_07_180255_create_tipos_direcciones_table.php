@@ -15,8 +15,9 @@ class CreateTiposDireccionesTable extends Migration
     {
         Schema::create('tipos_direcciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 60)->nullable($value = false);
+            $table->string('nombre', 255)->nullable($value = false);
             $table->string('abreviatura', 3)->nullable($value = true);
+            $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
             //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR TIPOS DE DIRECCIONES
