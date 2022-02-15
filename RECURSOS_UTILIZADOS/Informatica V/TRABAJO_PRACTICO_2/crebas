@@ -1,0 +1,119 @@
+/*==============================================================*/
+/* DBMS name:      Sybase SQL Anywhere 10                       */
+/* Created on:     28/06/2015 18:30:04                          */
+/*==============================================================*/
+
+
+if exists(select 1 from sys.sysforeignkey where role='persona_ciudad') then
+    alter table personas
+       delete foreign key persona_ciudad
+end if;
+
+if exists(
+   select 1 from sys.systable 
+   where table_name='ciudades'
+     and table_type in ('BASE', 'GBL TEMP')
+) then
+    drop table ciudades
+end if;
+
+if exists(
+   select 1 from sys.systable 
+   where table_name='personas'
+     and table_type in ('BASE', 'GBL TEMP')
+) then
+    drop table personas
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='CODIGO') then
+   drop domain CODIGO
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='CODIGO2') then
+   drop domain CODIGO2
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='DESCRIPCION') then
+   drop domain DESCRIPCION
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='DOCUMENTO') then
+   drop domain DOCUMENTO
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='FECHA') then
+   drop domain FECHA
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='NOMBRE') then
+   drop domain NOMBRE
+end if;
+
+if exists(select 1 from sys.sysusertype where type_name='SEXO') then
+   drop domain SEXO
+end if;
+
+/*==============================================================*/
+/* Domain: CODIGO                                               */
+/*==============================================================*/
+create domain CODIGO as numeric(10) default autoincrement 
+     check (@column is null or (@column between 1 and 9999999999));
+
+/*==============================================================*/
+/* Domain: CODIGO2                                              */
+/*==============================================================*/
+create domain CODIGO2 as numeric(10) 
+     check (@column is null or (@column between 1 and 9999999999));
+
+/*==============================================================*/
+/* Domain: DESCRIPCION                                          */
+/*==============================================================*/
+create domain DESCRIPCION as varchar(500);
+
+/*==============================================================*/
+/* Domain: DOCUMENTO                                            */
+/*==============================================================*/
+create domain DOCUMENTO as varchar(20);
+
+/*==============================================================*/
+/* Domain: FECHA                                                */
+/*==============================================================*/
+create domain FECHA as date;
+
+/*==============================================================*/
+/* Domain: NOMBRE                                               */
+/*==============================================================*/
+create domain NOMBRE as varchar(30);
+
+/*==============================================================*/
+/* Domain: SEXO                                                 */
+/*==============================================================*/
+create domain SEXO as char(1) 
+     check (@column is null or (@column in ('f','m')));
+
+/*==============================================================*/
+/* Table: ciudades                                              */
+/*==============================================================*/
+create table ciudades 
+(
+   ciudad               CODIGO                         not null default autoincrement,
+   nombre               NOMBRE                         not null,
+   constraint PK_CIUDADES primary key clustered (ciudad)
+);
+
+/*==============================================================*/
+/* Table: personas                                              */
+/*==============================================================*/
+create table personas 
+(
+   persona              CODIGO                         not null default autoincrement,
+   ciudad               CODIGO2                        not null,
+   constraint PK_PERSONAS primary key clustered (persona)
+);
+
+alter table personas
+   add constraint persona_ciudad foreign key (ciudad)
+      references ciudades (ciudad)
+      on update restrict
+      on delete restrict;
+

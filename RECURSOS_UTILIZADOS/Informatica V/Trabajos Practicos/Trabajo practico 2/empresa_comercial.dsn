@@ -1,0 +1,5 @@
+[ODBC]
+DRIVER=SQL Anywhere 12
+UID=DBA
+Encryption=NONE
+Integrated=NO

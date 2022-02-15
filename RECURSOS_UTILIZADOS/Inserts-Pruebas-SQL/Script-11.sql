@@ -1,26 +1,70 @@
 -- database: localhost - mustardSeed
 
 
-insert into paises (nombre, abreviatura, created_at) values('Paraguay', 'PY', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Argentina', 'PY', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Brasil', 'BR', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Uruguay', 'URU', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Bolivia', 'BOL', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Ecuador', 'EC', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Colombia', 'COL', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Peru', 'PU', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Venezuela', 'VEN', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Estados Unidos', 'USA', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Canada', 'CAN', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Mexico', 'ME', NOW());
-insert into paises (nombre, abreviatura, created_at) values('España', 'ESP', NOW());
-insert into paises (nombre, abreviatura, created_at) values('Portugal', 'POR', NOW());
+insert into paises (nombre, abreviatura, created_at) values('PARAGUAY', 'PY', NOW());
+insert into paises (nombre, abreviatura, created_at) values('ARGENTINA', 'ARG', NOW());
+insert into paises (nombre, abreviatura, created_at) values('BRASIL', 'BR', NOW());
+insert into paises (nombre, abreviatura, created_at) values('URUGUAY', 'URU', NOW());
+insert into paises (nombre, abreviatura, created_at) values('BOLIVIA', 'BOL', NOW());
+insert into paises (nombre, abreviatura, created_at) values('ECUADOR', 'EC', NOW());
+insert into paises (nombre, abreviatura, created_at) values('COLOMBIA', 'COL', NOW());
+insert into paises (nombre, abreviatura, created_at) values('PERU', 'PU', NOW());
+insert into paises (nombre, abreviatura, created_at) values('VENEZUELA', 'VEN', NOW());
+insert into paises (nombre, abreviatura, created_at) values('ESTADOS UNIDOS', 'USA', NOW());
+insert into paises (nombre, abreviatura, created_at) values('CANADA', 'CAN', NOW());
+insert into paises (nombre, abreviatura, created_at) values('MEXICO', 'ME', NOW());
+insert into paises (nombre, abreviatura, created_at) values('ESPAÑA', 'ESP', NOW());
+insert into paises (nombre, abreviatura, created_at) values('PORTUGAL', 'POR', NOW());
+insert into paises (nombre, abreviatura, created_at) values('FRANCIA', 'FRA', NOW());
+insert into paises (nombre, abreviatura, created_at) values('SUECIA', 'SUE', NOW());
+insert into paises (nombre, abreviatura, created_at) values('SUIZA', 'SUI', NOW());
+insert into paises (nombre, abreviatura, created_at) values('ARABIA SAUDITA', 'AS', NOW());
+insert into paises (nombre, abreviatura, created_at) values('JAPON', 'JAP', NOW());
+insert into paises (nombre, abreviatura, created_at) values('CHINA', 'CH', NOW());
+insert into paises (nombre, abreviatura, created_at) values('COREA DEL SUR', 'CS', NOW());
+insert into paises (nombre, abreviatura, created_at) values('NIGERIA', 'NIG', NOW());
 
 
-
-insert into departamentos (nombre, abreviatura, pais_id) values('central', 'cen', 1);
-insert into departamentos (nombre, abreviatura, pais_id) values('san pedro', 'sp', 1);
-insert into departamentos (nombre, abreviatura, pais_id) values('concepcion', 'con', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CENTRAL', 'CEN', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('MISIONES', 'MS', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('ÑEEMBUCU', 'NEM', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('ALTO PARANA', 'AP', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('AMAMBAY', 'AM', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CORDILLERA', 'COR', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CAAGUAZU', 'CAA', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('BOQUERON', 'BOQ', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('ITAPUA', 'ITA', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('PRESIDENTE HAYES', 'PH', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('PARAGUARI', 'PAR', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('GUAIRA', 'GUA', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CANINDEYU', 'CAN', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CONCEPCION', 'CON', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('SAN PEDRO', 'SP', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('CAAZAPA', 'CAA', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('ALTO PARAGUAY', 'AP', 1);
+insert into departamentos (nombre, abreviatura, pais_id) values('BUENOS AIRES', 'BS', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('CATAMARCA', 'CAT', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('CHACO', 'CH', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('CHUBUT', 'CH', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('CORDOBA', 'COR', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('CORRIENTES', 'COR', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('ENTRE RIOS', 'ER', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('FORMOSA', 'FOR', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('JUJUY', 'JU', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('LA PAMPA', 'LP', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('LA RIOJA', 'LR', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('MENDOZA', 'MEN', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('MISIONES', 'MIS', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('NEUQUEN', 'NEU', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('RIO NEGRO', 'RN', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SALTA', 'SAL', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SAN JUAN', 'SJ', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SAN LUIS', 'SL', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SANTA CRUZ', 'SC', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SANTA FE', 'SF', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('SANTIAGO DEL ESTERO', 'SDE', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('TIERRA DEL FUEGO', 'TF', 2);
+insert into departamentos (nombre, abreviatura, pais_id) values('TUCUMAN', 'TUC', 2);
 
 
 insert into ciudades (nombre, abreviatura, departamento_id) values('Asuncion', 'ASU', 1);

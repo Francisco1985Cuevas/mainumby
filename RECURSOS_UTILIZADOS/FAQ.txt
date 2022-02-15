@@ -207,3 +207,31 @@ https://www.youtube.com/watch?v=LozMODdAvvk&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFm
 https://www.youtube.com/watch?v=PJEP1c9ViCY&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR&index=22     ***
 https://www.youtube.com/watch?v=ja5opcun6kU&list=PLZPrWDz1MolrxS1uw-u7PrnK66DCFmhDR&index=24     ****
 
+
+
+
+
+
+
+
+
+
+
+tabla de personas tabla de usuarios
+https://es.stackoverflow.com/questions/385107/manera-adecuada-de-almacenar-roles-persona-y-usuario-en-una-base-de-datos
+https://codenostra.com/es/separar-la-tabla-de-usuario-de-la-tabla-de-personas-en-una-base-de-datos-relacional.html
+tabla de usuarios tabla de tipos usuarios
+https://es.stackoverflow.com/questions/140696/que-tablas-usar-para-una-base-de-datos-que-almacene-roles-de-usuarios
+tipos de usuarios
+https://cursosonlineweb.com/usuarios.html
+
+
+
+
+
+AGREGAR CONSTRAINT EN USERS
+alter table add column laravel migration
+https://stackoverflow.com/questions/16791613/laravel-add-a-new-column-to-existing-table-in-a-migration
+
+
+tabla de personas tabla de proveedores tabla de usuarios

@@ -1,0 +1,231 @@
+	Pasos para crear las bases de datos.
+
+
+Primero usar un CASE, en este caso seria abir el power designer
+porque ese es el CASE.
+CASE:herramienta que usamos para "Diseñar" las bases de datos.
+	
+
+	Esta Tiene que ser la configuracion general
+	del power designer physical Data Model.
+
+
+Abrir el power designer y ir hasta el menu FILE y elegir la opcion
+NEW...
+Luego aparece una ventana en la cual en la opcion Model Type: se
+Tiene que elegir Physical Data Model..
+tambien en las opciones de la ventana tiene que estar "tildado"
+new model...
+En la pestaña GENERAL en DBMS: se tiene que elegir Sybase SQL 
+Anywhere 10..., y tildar Share DBMS definition, en First diagram: 
+physical diagram y luego pulsar el boton Aceptar.
+
+Ahora ya tenemos un area de trabajo para diseñar nuestro diseño de
+la base de datos en el costado izquierdo de la pantalla suele
+aparecer el "Workspace" y debajo de Workspace un nombre que aparece
+por defecto eso se puede cambiar con solo tocar con el mouse y 
+ponerle el nombre que deseamos ponerle despues hacer extender el"+"
+y volver a ponerle el mismo nombre anterior para que cambie y le
+asigne un nombre a nuestro diseño.
+Luego ir hasta el menu TOOLS y ir hasta la opcion 
+Customize Toolsbar... Aparecera una ventana en la cual tenemos
+que marcar las siguientes opciones:
+Standard, Diagram, View, Layout, Palette y Predefined Symbols...
+luego dar clic en el boton CLOSE.
+
+Ahora ir hasta el menu TOOLS y elegir la opcion Display 
+Preferences... y aparecer una ventana,Observe que en ella podemos 
+modificar el aspecto de la ventana de trabajo (actualmente en color
+blanco y sin grilla), de modo a "pintarla" (ver Window color:) 
+del color que deseemos e indicar.
+si queremos ver una grilla o malla de puntos (ver "Display")
+
+En Category Elegir la opcion TABLE y nos muestra las propiedades
+de Tablas seleccionar o "Tildar" en TABLE: Columns,All Columns
+en TABLE COLUMNS:Data types,replace by domains,key indicators,
+NULL/NOT NULL,. en STEREOTYPE:column.
+
+Ahora configuraremos las propiedades de REFERENCE...
+Ir hasta Reference(siempre dentro de display preferences)
+y seleccionar o "tildar" en Center text: Join, en END TEXT: 
+Cardinality.
+
+Ahora configuraremos las propiedades de VIEW...
+Ir hasta View(siempre dentro de display preferences)
+y seleccionar o "tildar" en View: Columns,All columns,tables;
+en View Columns:Name,data types.
+y luega dar clic en el boton Aceptar.
+
+
+Ahora ir hasta el menu TOOLS y elegir la opcion MODEL OPTIONS...
+Y en la opcion Category: en MODEL SETTINGS:Data_type; Reference:
+Auto-reuse columns, Luego pulsar "Set As Default".
+
+Luego, para los dominios (domain):(siempre dentro de Model Options)
+en la pestaña Name: Naming_template:<None>, maximun length:254,
+Character Case:Mixed Case.
+Valid Character: tildar All valid.
+Ahora en la pestaña CODE:Character Case:Uppercase, lo demas no 
+tocar.
+
+Luego, para las tablas (table):(siempre dentro de Model Options)
+en la pestaña Name: Naming_template:<None>, maximun length:254,
+Character Case:Mixed Case.
+Valid Character: tildar All valid.
+Ahora en la pestaña CODE:Character Case:Mixed case, lo demas no 
+tocar.
+
+Luego, para las columnas (column):(siempre dentro de Model Options)
+en la pestaña Name: Naming_template:<None>, maximun length:254,
+Character Case:Mixed Case.
+Valid Character: tildar All valid.
+Ahora en la pestaña CODE:Character Case:Mixed case, lo demas no 
+tocar.
+
+Luego, para las referencias (references):(siempre dentro de Model 
+Options)
+en la pestaña Name: Naming_template:<None>, maximun length:254,
+Character Case:Mixed Case.
+Valid Character: tildar All valid.
+Ahora en la pestaña CODE:Character Case:Mixed case, lo demas no 
+tocar.
+
+Finalmente, para las vistas (view):(siempre dentro de Model Options)
+en la pestaña Name: Naming_template:<None>, maximun length:254,
+Character Case:Mixed Case.
+Valid Character: tildar All valid.
+Ahora en la pestaña CODE:Character Case:Mixed case, lo demas no 
+tocar.
+
+
+
+Ahora el power designer ya esta configurado y podemos trabajar
+en el.
+
+
+
+
+
+Si ya tenemos las tablas definidas lo más recomendable hacer 
+es crear primeramente los dominios.
+
+
+Para eso ir hasta el menu MODEL y elegir Domains...
+se abre una ventana que se llama "List of domain" donde podemos 
+crear los dominios,en ella hacer los dominios que necesitamos.
+
+
+
+Para ello en Name: se escribe el nombre del dominio luego pulsar
+el icono de "Properties" se abre una ventana de propiedades del 
+dominio... En la pestaña General en la opcion Data type Elegir
+el boton con un dibujo de signo de pregunta(?) y se abre la ventana
+Standart Data Types en ella elegir el tipo de dato del dominio
+que estamos creando, luego en lengt elegir la cantidad de digitos
+que va a tener ese dominio(en caso de que sea numerico)
+despues darle OK y Aceptar.
+En la pestaña Standard Cheks en Values Minimum:(poner el valor
+minimo del dominio, y maximum el valor maximo)
+Ej:si el dominio elejido es numerico(4) en minimun seria:1
+y en maximun seria(9999)(Cada 9 representa la cantidad de digitos
+que usara ese lugar osea del 1 al 9)
+Luego proceder a crear tablas seleccionar el icono de tablas
+y pegarlas en la hoja de trabajo del powerdesigner
+
+Luego darle doble clic a la tabla y se entra en las propiedades
+de la tabla y ponerle nombre a la tabla y en la Pestaña Columns
+ir colocando las columnas de la tabla y sus correspondientes 
+dominios...
+Luego crear las correspondientes relaciones entre las tablas.
+
+
+
+
+
+
+
+
+Ahora Tenemos que crear el objeto base de datos y a la vez el
+perfil de acceso.
+Para eso:
+Abrir el motor de bases de datos en este caso el SYBASE CENTRAL.
+
+
+
+Luego en Plug-ins elegir SQL Anywhere 10(doble clic) despues en 
+la pestaña "Tools" seleccionar la opcion "Create Database..."
+ a la ventana que aparece darle clic en Next,
+a la segunda ventana otra vez clic en Next,
+en la tercera ventana nos pide donde creara el objeto base de datos
+en "browse" buscar el destino(elegido por el programador).
+luego esperar que el motor construya el objeto base de datos
+y si en Status aparece "Complete ya se creo el objeto BD."
+Sino hubo algun error durante el proceso de creacion.
+si esto pasa volver a hacer todos los pasos hasta que salga bien.
+darle clic en close.
+
+
+	
+	Luego para el PERFIL DE ACCESO.
+
+ir hasta la pestaña Tools nuevamente y elegir la opcion open ODBC
+Administrator.
+En la pestaña DSN DE USUARIO darle clic en el boton Agregar.
+elegir el controlador SQL Anywhere 10 darle clic en finalizar
+Se abre otra ventana en la pestaña ODBC en Data source name:
+elegir el nombre de la base de datos recien creada
+en la pestaña Login: el usuario y el password y en la pestaña 
+Database en Server name el nombre de la Base de datos y en browse 
+buscar esa base de datos en la carpeta o el lugar donde la habiamos
+guardado.
+despues volver a irse hasta la pestaña ODBC y darle Test Connection
+para verificar si se conecta correctamente.
+
+
+
+	
+	Ahora crear el Perfil de acceso(en el PowerDesigner)
+
+En el menú elegir: Database\Configure Connections... 
+y aparece la ventana del Administrador de Origenes de Datos ODBC.
+Dar click en el botón [Agregar]
+elegir el controlador SQL Anywhere 10 darle clic en finalizar
+Se abre otra ventana en la pestaña ODBC en Data source name:
+elegir el nombre de la base de datos recien creada
+en la pestaña Login: el usuario y el password y en la pestaña 
+Database en Server name el nombre de la Base de datos y en browse 
+buscar esa base de datos en la carpeta o el lugar donde la habiamos
+guardado.
+despues volver a irse hasta la pestaña ODBC y darle Test Connection
+para verificar si se conecta correctamente.
+
+
+
+
+
+
+Ahora CONECTAR el CASE al objeto base de datos mediante el 
+perfil (en el power designer)osea conectar el PowerDesigner a la 
+base de datos.
+Para ello: En el menú elegir: Database\Connect... y aparece la 
+siguiente ventana. En ella elegir en "Machine data source"
+el nombre del Profile de acceso al OBD con el cual desea trabajar. 
+Normalmente debe ser un OBD vacio (recién creado).
+
+
+
+Generar los objetos del diseño en el objeto base de datos.
+
+
+Para ello Ir hasta el menu Database y elegir la opcion
+Generate Database y se tienen que generar las tablas
+despues tiene que aparecer una ventana donde se generaron
+las tablas y darle clic en el boton Run para que ejecute
+las tablas si todo esta bien tiene que ejecutar las tablas.
+
+
+
+Por Ultimo testear el objeto base de datos(desde el sybase)
+osea probar las tablas cargando datos.
+
+

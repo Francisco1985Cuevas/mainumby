@@ -1,0 +1,22 @@
+Consulta 1: Una persona puede tener un solo tipo de documento o muchos?
+	    porque si es mas de un tipo de documento se necesita una tabla
+	    donde almacenar los tipos de documentos de una persona si es que
+	    tiene mas de uno.
+
+
+Consulta 2: Hace falta o no crear dominios para los tipos de datos?
+
+
+Consulta 3: Persona de Contacto con la empresa?
+
+
+Consulta 4: Una descripción del puesto vacante?, es un campo donde se carga la
+	    descripcion escrita por el propio cliente corporativo o podria ser
+	    una lista de "cargos" cargados ya previamente en la base de datos
+
+Consulta 5: En el caso de los beneficios, se debe tener un campo donde el usuario
+	    cliente corporativo ingrese manualmente o escriba los beneficios o 
+	    hacer una lista de beneficios, pero si se hace esto entonces solo
+	    se podra cargar un beneficio para esa oferta se tendria que hacer
+	    una tabla de beneficios por ofertas de empleo?
+	    
