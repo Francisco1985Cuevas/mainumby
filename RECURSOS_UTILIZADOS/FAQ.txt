@@ -235,3 +235,9 @@ https://stackoverflow.com/questions/16791613/laravel-add-a-new-column-to-existin
 
 
 tabla de personas tabla de proveedores tabla de usuarios
+
+
+
+
+add check constraint column unique case sensitive postgres
+https://stackoverflow.com/questions/16905867/deferrable-case-insensitive-unique-constraint
