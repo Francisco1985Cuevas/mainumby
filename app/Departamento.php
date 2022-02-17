@@ -19,7 +19,7 @@ class Departamento extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'abreviatura', 'pais_id'];
+    protected $fillable = ['nombre', 'abreviatura', 'pais_id', 'region'];
 
 
     /**

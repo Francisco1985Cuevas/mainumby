@@ -22,6 +22,13 @@ class CreateCiudadesTable extends Migration
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('departamento_id')->references('id')->on('departamentos')->nullable($value = true)->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+
+            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE CIUDAD Y DEPARTAMENTO
+            $table->unique(['nombre', 'departamento_id']);
+
+            //Un campo por el cual realizamos consultas frecuentemente es "nombre", indexar
+            //la tabla por ese campo sería útil.
+            $table->index('nombre');
         });
     }
 

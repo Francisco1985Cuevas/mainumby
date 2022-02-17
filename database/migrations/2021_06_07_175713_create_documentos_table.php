@@ -31,6 +31,12 @@ class CreateDocumentosTable extends Migration
 
             //ASIGNAR CAMPOS UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR DOCUMENTOS-PERSONA
             $table->unique(['persona_id', 'tipo_documento_id', 'numero_documento']);
+
+            //Un campo por el cual realizamos consultas frecuentemente es "numero_documento", indexar
+            //la tabla por ese campo sería útil.
+            $table->index('numero_documento');
+
+
         });
     }
 

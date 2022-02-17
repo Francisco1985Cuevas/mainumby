@@ -22,6 +22,10 @@ class CreatePersonasTable extends Migration
             $table->string('sexo', 1)->nullable($value = true);
             $table->text('comentario')->nullable($value = true);
             $table->timestamps();
+
+            //Un campo por el cual realizamos consultas frecuentemente es "nombres", indexar
+            //la tabla por ese campo sería útil.
+            $table->index('nombres');
         });
     }
 

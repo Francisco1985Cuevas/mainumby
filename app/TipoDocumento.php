@@ -18,6 +18,6 @@ class TipoDocumento extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'abreviatura'];
+    protected $fillable = ['nombre', 'abreviatura', 'comentario'];
 
 }

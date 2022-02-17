@@ -22,6 +22,13 @@ class CreateBarriosTable extends Migration
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('ciudad_id')->references('id')->on('ciudades')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+
+            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE BARRIO Y CIUDAD
+            $table->unique(['nombre', 'ciudad_id']);
+
+            //Un campo por el cual realizamos consultas frecuentemente es "nombre", indexar
+            //la tabla por ese campo sería útil.
+            $table->index('nombre');
         });
     }
 

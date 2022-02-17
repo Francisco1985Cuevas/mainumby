@@ -24,7 +24,7 @@ class CreateDepartamentosTable extends Migration
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('pais_id')->references('id')->on('paises')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
 
-            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE DEPARTAMENTO
+            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE DEPARTAMENTO Y PAIS
             $table->unique(['nombre', 'pais_id']);
         });
     }

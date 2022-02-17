@@ -34,7 +34,7 @@ class CreateDireccionesTable extends Migration
             //$table->index(['id', 'persona']);
 
             //ASIGNAR CAMPOS UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR DIRECCIONES-PERSONA
-            $table->unique(['persona_id', 'tipo_direccion_id', 'barrio_id']);
+            $table->unique(['persona_id', 'tipo_direccion_id', 'calle']);
         });
     }
 
