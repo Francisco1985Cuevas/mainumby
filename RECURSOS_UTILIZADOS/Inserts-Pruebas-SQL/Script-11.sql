@@ -42,7 +42,6 @@ insert into departamentos (nombre, abreviatura, pais_id, region, created_at, upd
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('SAN PEDRO', 'SP', 1, 'Región Oriental', now(), now());
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('CAAZAPA', 'CAA', 1, 'Región Oriental', now(), now());
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('ALTO PARAGUAY', 'AP', 1, 'Región Occidental', now(), now());
-
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('BUENOS AIRES', 'BS', 2, '', now(), now());
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('CATAMARCA', 'CAT', 2, 'Región Noroeste', now(), now());
 insert into departamentos (nombre, abreviatura, pais_id, region, created_at, updated_at) values('CHACO', 'CH', 2, 'Región Llanura Platense', now(), now());
@@ -69,9 +68,14 @@ insert into departamentos (nombre, abreviatura, pais_id, region, created_at, upd
 
 
 insert into ciudades (nombre, abreviatura, departamento_id) values('Asuncion', 'ASU', 1);
-insert into ciudades (nombre, abreviatura, departamento_id) values('Lambare', 'LAM', 1);
-insert into ciudades (nombre, abreviatura, departamento_id) values('Fernando de la Mora', 'FDO', 1);
-
+insert into ciudades (nombre, abreviatura, departamento_id) values('Ciudad del Este', 'CDE', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Encarnacion', 'EN', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Aregua', 'ARE', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Luque', 'LQ', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Caacupe', 'CAA', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Buenos Aires', 'BS', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Ciudad de Cordoba', 'CO', 1);
+insert into ciudades (nombre, abreviatura, departamento_id) values('Rosario', 'RO', 1);
 
 insert into barrios (nombre, abreviatura, ciudad_id) values('Republicano', 'REP', 1);
 insert into barrios (nombre, abreviatura, ciudad_id) values('Roberto L. Petit', 'RLP', 1);
