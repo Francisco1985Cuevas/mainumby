@@ -70,8 +70,14 @@ https://www.laraveltip.com/insertar-registros-con-transacciones-en-eloquent/
 cardinalidad laravel
 
 https://www.youtube.com/watch?v=hR9474tdzSc&list=PLhFAH4E45x8sJQKW92TYE-pW-x1_2XX8G&index=54
+https://es.stackoverflow.com/questions/279549/entendiendo-las-relaciones-en-laravel-en-migraciones-y-en-su-orm-eloquent
 -----------------------------------------------------------------------------------------------------------
 
+
+validate foreign key laravel delete
+https://www.youtube.com/watch?v=-77LnBSL2Zk
+https://stackoverflow.com/questions/29611807/is-there-any-way-to-validate-a-foreign-key-using-laravels-validation-syntax
+--------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -241,3 +247,20 @@ tabla de personas tabla de proveedores tabla de usuarios
 
 add check constraint column unique case sensitive postgres
 https://stackoverflow.com/questions/16905867/deferrable-case-insensitive-unique-constraint
+
+
+
+
+
+
+SI la base de datos no funciona...
+REINICIAR EL SERVICIO
+
+
+
+
+
+
+
+modal button data-dismiss not working
+https://stackoverflow.com/questions/38537651/bootstrap-close-modal-not-working

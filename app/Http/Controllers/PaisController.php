@@ -9,8 +9,9 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de la clase: Pais
+// import de las clases: Pais, Departamento
 use App\Pais;
+use App\Departamento;//NO SE USA
 
 
 
@@ -45,11 +46,18 @@ class PaisController extends Controller
      */
     public function index()
     {
+
         $paises = Pais::all();
         //foreach ($paises as $pais) {
         //    echo $pais->nombre;
         //}
         return view('pais.list', ['paises' => $paises]);
+
+
+        /*
+        $paises = Pais::withCount('departamentos')->get();
+        return view('pais.list', ['paises' => $paises]);
+        */
     }
 
     /**
@@ -80,18 +88,18 @@ class PaisController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:paises',
+                        ['nombre' => 'required|min:2|max:255|unique:paises',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
                         ['required' => 'El campo <b>:attribute</b> es obligatorio.',
                             //'unique' => 'El <b>Nombre de Pais</b> que ingreso ya ha sido registrado.',
-                            'unique' => 'El campo <b>:attribute</b> que ingreso ya ha sido registrado.',
+                            'unique' => 'El <b>:attribute</b> que ingreso ya ha sido registrado.',
                             'max' => 'El campo <b>:attribute</b> no debe ser mayor que :max caracteres.',
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Pais',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -103,7 +111,7 @@ class PaisController extends Controller
         Pais::create(['nombre' => $request['nombre'],
                             'abreviatura' => $request['abreviatura']
                         ]);
-
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('pais.create');
@@ -153,18 +161,18 @@ class PaisController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:paises,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:paises,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
                         ['required' => 'El campo <b>:attribute</b> es obligatorio.',
                             //'unique' => 'El <b>Nombre de Pais</b> que ingreso ya ha sido registrado.',
-                            'unique' => 'El campo <b>:attribute</b> que ingreso ya ha sido registrado.',
+                            'unique' => 'El <b>:attribute</b> que ingreso ya ha sido registrado.',
                             'max' => 'El campo <b>:attribute</b> no debe ser mayor que :max caracteres.',
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Pais',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -177,6 +185,7 @@ class PaisController extends Controller
                     ]);
         $pais-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
         return view('pais.edit', ['pais' => $pais]);
     }
@@ -189,12 +198,47 @@ class PaisController extends Controller
      */
     public function destroy($id)
     {
-       // Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
-        $pais = Pais::find($id);
-        $pais->delete();
+        //// Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
+        //$pais = Pais::find($id);
+        //$pais->delete();
 
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+        //Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+
+        //return Redirect::to('/paises');
+
+
+        ////Validar que No existan Departamentos relacionados con el Pais que se trata de eliminar.
+        //$departamentos = Departamento::where('pais_id', $id)->get();
+        //if (count($departamentos) > 0) {
+        //    Session::flash('message', 'No se puede eliminar este registro porque tiene asociado Departamentos, Verifique!');
+        //    Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //} else {
+        //   // Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
+        //    $pais = Pais::find($id);
+        //    $pais->delete();
+        //    Session::flash('validated', true);
+        //    Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+        //    Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //}
+        //return Redirect::to('/paises');
+
+
+        //Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
+        //$pais = Pais::withCount('departamentos')->findOrFail($id);
+        //$pais = Pais::withCount('departamentos')->find($id);
+        $pais = Pais::withCount('regiones')->find($id);
+        //if ($pais->departamentos_count > 0) {
+        if ($pais->regiones_count > 0) {
+            //Session::flash('message', 'No se puede eliminar este registro porque tiene asociado Regiones, Verifique!');
+            Session::flash('message', 'NO se pudo eliminar de este dato... tiene registros que estan asociados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $pais->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/paises');
     }

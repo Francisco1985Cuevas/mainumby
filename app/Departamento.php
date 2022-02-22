@@ -19,14 +19,23 @@ class Departamento extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'abreviatura', 'pais_id', 'region'];
+    protected $fillable = ['nombre', 'abreviatura', 'region_id'];
 
 
     /**
      * Get the pais_id that owns the Departamento.
      */
-    public function pais() {
-        return $this->belongsTo(Pais::class);
+    //public function pais() {
+    //    return $this->belongsTo(Pais::class);  //belongs To = pertenece a
+    //    //si lo leemos diria algo asi: 1 departamento pertenece a 1 pais
+    //}
+
+    /**
+     * Get the pais_id that owns the Departamento.
+     */
+    public function region() {
+        return $this->belongsTo(Region::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 departamento pertenece a 1 region
     }
 
 }

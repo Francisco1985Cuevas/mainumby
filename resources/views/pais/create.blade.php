@@ -60,4 +60,5 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
 @endsection

@@ -41,16 +41,35 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
-				@if(Session::has('mostrar_en_listado'))
-					@if(Session::has('message'))
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							<i class="fas fa-check-circle"></i> {{Session::get('message')}}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-					@endif
-				@endif
+                @if(Session::has('validated'))
+                    @if(Session::has('mostrar_en_listado'))
+					    @if(Session::has('message'))
+						    <div class="alert alert-success alert-dismissible fade show" role="alert">
+							    <i class="fas fa-check-circle"></i> {{Session::get('message')}}
+							    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+							    </button>
+						    </div>
+                        @endif
+                    @endif
+                @else
+                    @if(Session::has('message'))
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="alert-heading">
+                                <i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema
+                            </h4>
+                            <hr>
+                            <p>
+                                <ul><li>{{Session::get('message')}}</li></ul>
+                            </p>
+                        </div>
+                    @endif
+                @endif
+
+
 
 				@if (count($paises) > 0)
 					<div class="table-responsive">
@@ -58,20 +77,20 @@
 							<thead>
 								<tr>
 									<th>#ID</th>
-									<th>Nombre Pa&iacute;s</th>
-									<th>Abrev.</th>
-									<th>Fecha Creaci&oacute;n</th>
-									<th>Fecha Actualizaci&oacute;n</th>
+									<th>Nombre</th>
+									<th>Abreviatura</th>
+									<th>Fecha de creaci&oacute;n</th>
+									<th>Fecha de actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>#ID</th>
-									<th>Nombre Pa&iacute;s</th>
-									<th>Abrev.</th>
-									<th>Fecha Creaci&oacute;n</th>
-									<th>Fecha Actualizaci&oacute;n</th>
+									<th>Nombre</th>
+									<th>Abreviatura</th>
+									<th>Fecha de creaci&oacute;n</th>
+									<th>Fecha de actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
 								</tr>
 							</tfoot>
@@ -91,10 +110,10 @@
 												<i class="fas fa-info"></i>
 											</a>
 
-											<!-- link(enlace) al Modal -->
-											<a href="#" id="btn_delete_listPais" class="btn btn-danger" title="Eliminar Registro">
-												<i class="fas fa-trash"></i>
-											</a>
+                                            <!-- link(enlace) al Modal -->
+                                            <a href="#" id="btn_delete_listPais" class="btn btn-danger" title="Eliminar Registro">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
 										</td>
 									</tr>
 								@endforeach
@@ -110,7 +129,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="listModalLabelPais">Eliminar Registro</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -123,7 +142,7 @@
                                         Esta Seguro de que desea Eliminar este Registro?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Aceptar</button>
                                     </div>
                                 </form>
@@ -153,4 +172,40 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
+@push('pais.list')
+<script>
+    //DataTable list Paises
+	$('#dataTable_paises').DataTable({
+		language: {
+            url: '/js/localisation/Spanish.json'
+        }
+	});//close dataTable_Paises
+
+    //boton eliminar del listado.
+	var dataTablePaises = $('#dataTable_paises').DataTable();
+    dataTablePaises.on('click', '#btn_delete_listPais', function(){//hace referencia al link del listado a href delete
+    //$('#dataTable_paises').DataTable().on('click', '#btn_delete_listPais', function(){
+        //alert("entro aca");
+        var $tr = $(this).closest('tr');
+        if($($tr).hasClass('child')){
+            $tr = $tr.prev('.parent');
+        }
+
+        var dataPais = dataTablePaises.row($tr).data();
+        //var data = $('#dataTable_paises').DataTable().row($tr).data();
+        console.log("data: "+dataPais);
+        console.log("data2: "+dataPais[0]);
+
+        //var $tr = $(this).closest('tr');
+        //var rowData = $('#dataTable_paises').DataTable().row($tr).data();
+        //console.log(rowData);
+
+        //$('#id').val(data[0]);
+        $('#form_delete_listPais').attr('action', '/paises/'+dataPais[0]);  //Agrega la propiedad action al formulario
+        $('#modal_delete_listPais').modal('show');
+    });
+</script>
+@endpush
+
 @endsection

@@ -11,14 +11,11 @@
         <!-- Bootstrap -->
 		{!!Html::style('css/bootstrap/bootstrap.min.css') !!}
 
-
-
-
-        <!-- Custom fonts for this template-->
+        <!-- Custom fonts for this template -->
 		{!!Html::style('vendor/fontawesome-free/css/all.min.css') !!}
         {!!Html::style('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') !!}
 
-		<!-- Custom styles for this template-->
+		<!-- Custom styles for this template -->
 		{!!Html::style('css/sb-admin-2.min.css')!!}
 
 		<!-- Custom styles for this page -->
@@ -51,38 +48,20 @@
 			<!-- End of Content Wrapper -->
 		</div>
 		<!-- End of Page Wrapper -->
-		<!-- Scroll to Top Button-->
+
+		<!-- Scroll to Top Button -->
 		<a class="scroll-to-top rounded" href="#page-top">
 			<i class="fas fa-angle-up"></i>
 		</a>
 
-        <!-- Bootstrap core JavaScript CODIGO ORIGINAL-->
-		{{-- {!!Html::script('vendor/jquery/jquery.min.js')!!}
-        {!!Html::script('vendor/bootstrap/js/bootstrap.bundle.min.js')!!} --}}
-
-
+        <!-- JQuery -->
         {!!Html::script('vendor/jquery/jquery.min.js')!!}
         <!-- Bootstrap -->
         {!!Html::script('js/bootstrap/bootstrap.min.js')!!}
+        <!-- Bootstrap core JavaScript -->
         {!!Html::script('vendor/bootstrap/js/bootstrap.bundle.min.js')!!}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- Core plugin JavaScript-->
+        <!-- Core plugin JavaScript-->
 		{!!Html::script('vendor/jquery-easing/jquery.easing.min.js')!!}
 
 		<!-- Custom scripts for all pages-->
@@ -91,14 +70,15 @@
 		<!-- Page level plugins -->
 		{!!Html::script('vendor/chart.js/Chart.min.js')!!}
 
+        <!-- dataTables -->
 		{!!Html::script('vendor/datatables/jquery.dataTables.min.js')!!}
         {!!Html::script('vendor/datatables/dataTables.bootstrap4.min.js')!!}
 
         <!-- include Page scripts -->
-		{{-- {!!Html::script('js/demo/chart-area-demo.js')!!}
-        {!!Html::script('js/demo/chart-pie-demo.js')!!} --}}
+		{{--
+        {!!Html::script('js/demo/chart-area-demo.js')!!}
+        {!!Html::script('js/demo/chart-pie-demo.js')!!}
 
-        {{--
         {!!Html::script('js/demo/datatables-demo.js')!!}
         --}}
 
@@ -106,5 +86,10 @@
 
         @stack('scriptsPersona')
         @stack('scriptsPersonaEdit')
+
+
+
+        @stack('pais.list')
+        @stack('pais.edit')
 	</body>
 </html>

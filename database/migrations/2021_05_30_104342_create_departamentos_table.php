@@ -17,15 +17,18 @@ class CreateDepartamentosTable extends Migration
             $table->id();
             $table->string('nombre', 255)->nullable($value = false);
             $table->string('abreviatura', 3)->nullable($value = true);
-            $table->unsignedBigInteger('pais_id');
-            $table->string('region', 255)->nullable($value = false);
+            $table->unsignedBigInteger('region_id');
+            //$table->unsignedBigInteger('pais_id');
+            //$table->string('region', 255)->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS
-            $table->foreign('pais_id')->references('id')->on('paises')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+            //$table->foreign('pais_id')->references('id')->on('paises')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+            $table->foreign('region_id')->references('id')->on('paises')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
 
             //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE DEPARTAMENTO Y PAIS
-            $table->unique(['nombre', 'pais_id']);
+            //$table->unique(['nombre', 'pais_id']);
+			$table->unique(['nombre', 'region_id']);
         });
     }
 

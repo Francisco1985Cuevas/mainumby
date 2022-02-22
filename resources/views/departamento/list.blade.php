@@ -60,6 +60,7 @@
 									<th>Nombre Depto.</th>
 									<th>Abrev.</th>
 									<th>Pa&iacute;s</th>
+                                    <th>Region</th>
 									<th>Fecha Creaci&oacute;n</th>
 									<th>Fecha Actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
@@ -71,6 +72,7 @@
 									<th>Nombre Depto.</th>
 									<th>Abrev.</th>
 									<th>Pa&iacute;s</th>
+                                    <th>Region</th>
 									<th>Fecha Creaci&oacute;n</th>
 									<th>Fecha Actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
@@ -82,7 +84,8 @@
 										<td>{{$departamento -> id}}</td>
 										<td>{{$departamento -> nombre}}</td>
 										<td>{{$departamento -> abreviatura}}</td>
-                                        <td>{{$departamento->pais->nombre}}</td>
+                                        <td>{{$departamento->region->pais->nombre}}</td>
+                                        <td>{{$departamento->region->nombre}}</td>
 										<td>{{$departamento -> created_at}}</td>
 										<td>{{$departamento -> updated_at}}</td>
 										<td>

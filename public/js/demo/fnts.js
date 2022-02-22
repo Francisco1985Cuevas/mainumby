@@ -1,6 +1,7 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
 
+    /*
     //--- Paises ---//
     //DataTable list Paises
 	$('#dataTable_paises').DataTable({
@@ -43,6 +44,11 @@ $(document).ready(function() {
         $('#modal_delete_listPais').modal('show');
     });
     //--- End Paises ---//
+    */
+
+
+
+
 
 
     //--- Departamentos ---//
