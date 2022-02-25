@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/paises')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Actualizar Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Form Pais -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -52,9 +61,9 @@
 				{!! Form::model( $pais, ['route' => ['paises.update', $pais->id], 'method' => 'PUT' ]) !!}
 					@include('pais.forms.formulario')
                     {{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
-
+                    {{ Form::button('<span class="icon text-white-50"><i class="far fa-window-restore"></i></span><span class="text">Cancelar</span>', ['type' => 'reset', 'class' => 'btn btn-secondary btn-icon-split'] )  }}
 					<!-- link(enlace) al Modal -->
-					<a data-id="{{$pais->id}}" href="#" id="btn_delete_editFormPais" class="btn btn-danger" title="Eliminar Registro">
+					<a data-id="{{$pais->id}}" href="#" id="btn_delete_editFormPais" class="btn btn-danger  btn-icon-split" title="Eliminar Registro">
 						<span class="icon text-white-50"><i class="fas fa-trash"></i></span>
 						<span class="text">Eliminar</span>
 					</a>

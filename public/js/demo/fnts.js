@@ -44,10 +44,6 @@ $(document).ready(function() {
         $('#modal_delete_listPais').modal('show');
     });
     //--- End Paises ---//
-    */
-
-
-
 
 
 
@@ -86,7 +82,7 @@ $(document).ready(function() {
         $('#modal_delete_listDepartamento').modal('show');
     });
     //--- End Departamentos ---//
-
+*/
 
     //--- Ciudades ---//
     //DataTable list Ciudades

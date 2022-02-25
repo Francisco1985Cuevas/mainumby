@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/departamentos')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nuevo Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Form Departamentos -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -61,4 +70,40 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
+@push('departamento.create')
+<script>
+
+    //Host Name and Protocol
+    var host = window.location.protocol + "//" + window.location.host; //obtiene por ejemplo: http://localhost:8080
+
+    //Selects dependientes de Regiones por Pais.
+    jQuery(document).ready(function (){
+        jQuery('select[name="pais_id"]').on('change', function() {
+            var paisId = jQuery(this).val();
+            console.log("paisId: "+paisId);
+            if(paisId){
+                jQuery.ajax({
+                    url : host+'/regiones/findByPais/' +paisId,
+                    type : "GET",
+                    dataType : "json",
+                    success:function(data) {
+                        //console.log("url: "+url);
+                        console.log("url: ");
+                        jQuery('select[name="region_id"]').empty();
+                        $('select[name="region_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                        jQuery.each(data, function(key, value){
+                            $('select[name="region_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="region_id"]').empty();
+            }
+        });
+    });
+
+</script>
+@endpush
+
 @endsection

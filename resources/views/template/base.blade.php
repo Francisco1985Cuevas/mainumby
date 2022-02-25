@@ -89,7 +89,13 @@
 
 
 
+
+
         @stack('pais.list')
         @stack('pais.edit')
+
+        @stack('departamento.create')
+        @stack('departamento.list')
+        @stack('departamento.edit')
 	</body>
 </html>

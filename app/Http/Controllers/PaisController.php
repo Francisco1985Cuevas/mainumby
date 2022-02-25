@@ -230,8 +230,7 @@ class PaisController extends Controller
         $pais = Pais::withCount('regiones')->find($id);
         //if ($pais->departamentos_count > 0) {
         if ($pais->regiones_count > 0) {
-            //Session::flash('message', 'No se puede eliminar este registro porque tiene asociado Regiones, Verifique!');
-            Session::flash('message', 'NO se pudo eliminar de este dato... tiene registros que estan asociados, Verifique!');
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Regiones que estan relacionados, Verifique!');
             Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
         }else {
             $pais->delete();

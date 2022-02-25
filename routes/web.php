@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::resource('paises', 'PaisController');
 
+Route::resource('regiones', 'RegionController');
+
 Route::resource('departamentos', 'DepartamentoController');
 
 Route::resource('ciudades', 'CiudadController');
@@ -70,3 +72,6 @@ Route::get('dropdownlist/DepartamentosPais/{id}','DataController@DepartamentosPa
 //Route::get('http://127.0.0.1:8000/dropdownlist/getdepartamentos/{id}','DataController@getDepartamentos');
 Route::get('dropdownlist/CiudadesDepartamento/{id}','DataController@CiudadesDepartamento');
 Route::get('dropdownlist/BarriosCiudad/{id}','DataController@BarriosCiudad');
+
+
+Route::get('regiones/findByPais/{id}','RegionController@findByPais');

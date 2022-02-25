@@ -38,4 +38,9 @@ class Departamento extends Model
         //si lo leemos diria algo asi: 1 departamento pertenece a 1 region
     }
 
+    public function ciudades() {
+        return $this->hasMany(Ciudad::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 Departamento tiene muchos(as) ciudades
+    }
+
 }

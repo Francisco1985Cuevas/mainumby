@@ -22,6 +22,15 @@
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
 
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Listado de Registros</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
+
 		<!-- DataTales Listado Pais -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -68,8 +77,6 @@
                         </div>
                     @endif
                 @endif
-
-
 
 				@if (count($paises) > 0)
 					<div class="table-responsive">

@@ -105,7 +105,7 @@ class DepartamentoController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:departamentos',
+                        ['nombre' => 'required|min:2|max:255|unique:departamentos',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -115,7 +115,7 @@ class DepartamentoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Departamento',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -126,7 +126,7 @@ class DepartamentoController extends Controller
         // referencia a su nombre de espacio completo.
         Departamento::create(['nombre' => $request['nombre'],
                                 'abreviatura' => $request['abreviatura'],
-                                'pais_id' => $request['pais_id']
+                                'region_id' => $request['region_id']
                             ]);
 
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
@@ -179,7 +179,7 @@ class DepartamentoController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:departamentos,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:departamentos,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -189,7 +189,7 @@ class DepartamentoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Departamento',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -199,14 +199,14 @@ class DepartamentoController extends Controller
         $departamento = Departamento::find($id);
         $departamento-> fill(['nombre' => $request['nombre'],
                                 'abreviatura' => $request['abreviatura'],
-                                'pais_id' => $request['pais_id']
+                                'region_id' => $request['region_id']
                             ]);
         $departamento-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
 
         return view('departamento.edit', ['departamento' => $departamento,
-                                            'lista_personas' => $this->lista_personas,
                                             'lista_paises' => $this->lista_paises
                                         ]);
     }
@@ -219,14 +219,21 @@ class DepartamentoController extends Controller
      */
     public function destroy($id)
     {
-        // Obtener el Departamento que corresponda con el ID dado (o null si no es encontrado).
-        $departamento = Departamento::find($id);
-        $departamento->delete();
-
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Obtener el Departamento que corresponda con el ID dado (o null si no es encontrado).
+        //EL REGISTRO NO SE PUDO ELIMINAR DE LA BASE DE DATOS PORQUE CONTIENE REGISTROS DE CIUDADES QUE ESTAN RELACIONADOS, VERIFIQUE!
+        $departamento = Departamento::withCount('ciudades')->find($id);
+        if ($departamento->ciudades_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Ciudades que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $departamento->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/departamentos');
+
     }
 
 

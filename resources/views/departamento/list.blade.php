@@ -21,6 +21,16 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Listado de Registros</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
+
 		<!-- DataTales Listado Departamento -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -40,16 +50,33 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
-				@if(Session::has('mostrar_en_listado'))
-					@if(Session::has('message'))
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							<i class="fas fa-check-circle"></i> {{Session::get('message')}}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-					@endif
-				@endif
+                @if(Session::has('validated'))
+                    @if(Session::has('mostrar_en_listado'))
+					    @if(Session::has('message'))
+						    <div class="alert alert-success alert-dismissible fade show" role="alert">
+							    <i class="fas fa-check-circle"></i> {{Session::get('message')}}
+							    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+							    </button>
+						    </div>
+                        @endif
+                    @endif
+                @else
+                    @if(Session::has('message'))
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="alert-heading">
+                                <i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema
+                            </h4>
+                            <hr>
+                            <p>
+                                <ul><li>{{Session::get('message')}}</li></ul>
+                            </p>
+                        </div>
+                    @endif
+                @endif
 
 				@if (count($departamentos) > 0)
 					<div class="table-responsive">
@@ -57,24 +84,24 @@
 							<thead>
 								<tr>
 									<th>#ID</th>
-									<th>Nombre Depto.</th>
-									<th>Abrev.</th>
-									<th>Pa&iacute;s</th>
+                                    <th>Pa&iacute;s</th>
                                     <th>Region</th>
-									<th>Fecha Creaci&oacute;n</th>
-									<th>Fecha Actualizaci&oacute;n</th>
+									<th>Nombre</th>
+									<th>Abreviatura</th>
+									<th>Fecha de creaci&oacute;n</th>
+									<th>Fecha de actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>#ID</th>
-									<th>Nombre Depto.</th>
-									<th>Abrev.</th>
 									<th>Pa&iacute;s</th>
                                     <th>Region</th>
-									<th>Fecha Creaci&oacute;n</th>
-									<th>Fecha Actualizaci&oacute;n</th>
+									<th>Nombre</th>
+									<th>Abreviatura</th>
+									<th>Fecha de creaci&oacute;n</th>
+									<th>Fecha de actualizaci&oacute;n</th>
 									<th>Operaci&oacute;n</th>
 								</tr>
 							</tfoot>
@@ -82,10 +109,10 @@
 								@foreach($departamentos as $departamento)
 									<tr>
 										<td>{{$departamento -> id}}</td>
-										<td>{{$departamento -> nombre}}</td>
-										<td>{{$departamento -> abreviatura}}</td>
                                         <td>{{$departamento->region->pais->nombre}}</td>
                                         <td>{{$departamento->region->nombre}}</td>
+                                        <td>{{$departamento -> nombre}}</td>
+										<td>{{$departamento -> abreviatura}}</td>
 										<td>{{$departamento -> created_at}}</td>
 										<td>{{$departamento -> updated_at}}</td>
 										<td>
@@ -115,7 +142,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="listModalLabelDepartamento">Eliminar Registro</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -128,7 +155,7 @@
                                         Esta Seguro de que desea Eliminar este Registro?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary">Aceptar</button>
                                     </div>
                                 </form>
@@ -158,4 +185,34 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
+@push('departamento.list')
+<script>
+    //DataTable list Departamentos
+	$('#dataTable_departamentos').DataTable({
+		language: {
+            url: '/js/localisation/Spanish.json'
+        }
+	});//close dataTable_departamentos
+
+    //boton eliminar del listado.
+    var dataTableDepartamentos = $('#dataTable_departamentos').DataTable();
+    dataTableDepartamentos.on('click', '#btn_delete_listDepartamento', function(){//hace referencia al link del listado a href delete
+        //alert("entro aca");
+        $tr = $(this).closest('tr');
+        if($($tr).hasClass('child')){
+            $tr = $tr.prev('.parent');
+        }
+
+        var dataDepartamento = dataTableDepartamentos.row($tr).data();
+        console.log("dataDepartamento: "+dataDepartamento);
+
+        //$('#id').val(data[0]);
+        $('#form_delete_listDepartamento').attr('action', '/departamentos/'+dataDepartamento[0]);
+        $('#modal_delete_listDepartamento').modal('show');
+    });
+
+</script>
+@endpush
+
 @endsection

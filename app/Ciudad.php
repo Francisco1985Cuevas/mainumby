@@ -25,7 +25,8 @@ class Ciudad extends Model
      * Get the departamento_id that owns the Ciudad.
      */
     public function departamento() {
-        return $this->belongsTo(Departamento::class);
+        return $this->belongsTo(Departamento::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 ciudad pertenece a 1 departamento
     }
 
 }
