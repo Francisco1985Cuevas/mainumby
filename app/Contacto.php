@@ -25,7 +25,8 @@ class Contacto extends Model
      * Get the tipo_contacto_id that owns the Contacto.
      */
     public function tipoContacto() {
-        return $this->belongsTo(TipoContacto::class);
+        return $this->belongsTo(TipoContacto::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Contacto pertenece a 1 tipoContacto
     }
 
 }

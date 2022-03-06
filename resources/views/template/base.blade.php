@@ -90,6 +90,10 @@
 
 
 
+        <!-- Blade permite empujar a secciones con nombre que se pueden representar
+         en otro lugar, o en otra vista o diseño. Esto puede ser particularmente
+         útil para especificar las bibliotecas de JavaScript requeridas por
+         las vistas. -->
 
         @stack('pais.list')
         @stack('pais.edit')
@@ -97,5 +101,20 @@
         @stack('departamento.create')
         @stack('departamento.list')
         @stack('departamento.edit')
+
+        @stack('ciudad.create')
+        @stack('ciudad.list')
+        @stack('ciudad.edit')
+
+        @stack('barrio.create')
+        @stack('barrio.list')
+        @stack('barrio.edit')
+
+        @stack('tipoDireccion.list')
+        @stack('tipoDireccion.edit')
+
+        @stack('tipoContacto.list')
+        @stack('tipoContacto.edit')
+
 	</body>
 </html>

@@ -77,7 +77,7 @@ class TipoDireccionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_direcciones',
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_direcciones',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -87,7 +87,7 @@ class TipoDireccionController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Direcci&oacute;n',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -100,6 +100,7 @@ class TipoDireccionController extends Controller
                                 'abreviatura' => $request['abreviatura']
                             ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('tipoDireccion.create');
@@ -149,7 +150,7 @@ class TipoDireccionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_direcciones,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_direcciones,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -172,6 +173,7 @@ class TipoDireccionController extends Controller
                             ]);
         $tipoDireccion-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
         return view('tipoDireccion.edit', ['tipoDireccion' => $tipoDireccion]);
     }
@@ -184,13 +186,19 @@ class TipoDireccionController extends Controller
      */
     public function destroy($id)
     {
-        // Obtener el Tipo Direccion que corresponda con el ID dado (o null si no es encontrado).
-        $tipoDireccion = TipoDireccion::find($id);
-        $tipoDireccion->delete();
-
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Obtener el tipoDireccion que corresponda con el ID dado (o null si no es encontrado).
+        $tipoDireccion = TipoDireccion::withCount('direcciones')->find($id);
+        if ($tipoDireccion->direcciones_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Direcciones que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $tipoDireccion->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/tiposdirecciones');
     }
+
 }

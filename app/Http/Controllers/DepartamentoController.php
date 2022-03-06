@@ -129,6 +129,7 @@ class DepartamentoController extends Controller
                                 'region_id' => $request['region_id']
                             ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('departamento.create', ['lista_paises' => $this->lista_paises]);
@@ -158,8 +159,7 @@ class DepartamentoController extends Controller
         // Obtener el Departamento que corresponda con el ID dado (o null si no es encontrado).
         $departamento = Departamento::find($id);
         return view('departamento.edit', ['departamento' => $departamento,
-                                            'lista_paises' => $this->lista_paises
-                                        ]);
+                                            'lista_paises' => $this->lista_paises]);
     }
 
     /**
@@ -233,16 +233,21 @@ class DepartamentoController extends Controller
         }
 
         return Redirect::to('/departamentos');
-
     }
 
-
     /**
-     * Show a list of the specific resource.
+     * Display a listing of the resource filter by Region.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function findByRegion($id)
+    {
+        $departamentos = Departamento::where('region_id', $id)
+                            ->orderBy('nombre', 'desc')
+                            ->get();
+        return json_encode($departamentos);
+    }
+
     /*public function list($id)
     {
         //echo "im in AjaxController index";
@@ -255,27 +260,5 @@ class DepartamentoController extends Controller
             return response()->json(['succes'=>false]);
         }
     }*/
-    /*public function listDepartamentos(Request $request){
-        if(isset($request->texto)){
-            $departamentos = Departamento::wherePais_id($request->texto)->get();
-            return response()->json(
-                [
-                    'lista' => $departamentos,
-                    'success' => true
-                ]
-                );
-        }else{
-            return response()->json(
-                [
-                    'success' => false
-                ]
-                );
-
-        }
-
-    }*/
-
-
-
 
 }

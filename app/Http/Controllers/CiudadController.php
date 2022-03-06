@@ -11,9 +11,10 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de las clases: Ciudad, Departamento
+// import de las clases: Pais, Region, Departamento, Ciudad
+use App\Pais;
 use App\Ciudad;
-use App\Departamento;
+
 
 
 
@@ -42,7 +43,7 @@ use Redirect;
 class CiudadController extends Controller
 {
 
-    public $lista_departamentos;//ESTE DEPARTAMENTO SE DEBE MOSTRAR DE ACUERDO AL PAIS SELECCIONADO.
+    public $lista_paises;
 
     // Constructor
     /**
@@ -53,7 +54,7 @@ class CiudadController extends Controller
      *
      */
     public function __construct(){
-        $this->lista_departamentos = Departamento::orderBy('nombre')->get();
+        $this->lista_paises = Pais::orderBy('nombre')->get();
     }
 
     /**
@@ -74,7 +75,7 @@ class CiudadController extends Controller
      */
     public function create()
     {
-        return view('ciudad.create', ['lista_departamentos' =>  $this->lista_departamentos]);
+        return view('ciudad.create', ['lista_paises' =>  $this->lista_paises]);
     }
 
     /**
@@ -93,7 +94,7 @@ class CiudadController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:ciudades',
+                        ['nombre' => 'required|min:2|max:255|unique:ciudades',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -103,7 +104,7 @@ class CiudadController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Ciudad',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -115,9 +116,11 @@ class CiudadController extends Controller
                             'departamento_id' => $request['departamento_id']
                         ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
-        return view('ciudad.create', ['lista_departamentos' => $this->lista_departamentos]);
+        return view('ciudad.create', ['lista_paises' => $this->lista_paises
+                                    ]);
     }
 
     /**
@@ -144,7 +147,7 @@ class CiudadController extends Controller
         // Obtener la Ciudad que corresponda con el ID dado (o null si no es encontrado).
         $ciudad = Ciudad::find($id);
         return view('ciudad.edit', ['ciudad' => $ciudad,
-                                        'lista_departamentos' => $this->lista_departamentos
+                                        'lista_paises' => $this->lista_paises
                                     ]);
     }
 
@@ -165,7 +168,7 @@ class CiudadController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:ciudades,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:ciudades,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -175,7 +178,7 @@ class CiudadController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Ciudad',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -189,10 +192,11 @@ class CiudadController extends Controller
                         ]);
         $ciudad-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
 
         return view('ciudad.edit', ['ciudad' => $ciudad,
-                                    'lista_departamentos' => $this->lista_departamentos
+                                    'lista_paises' => $this->lista_paises
                                     ]);
     }
 
@@ -204,13 +208,33 @@ class CiudadController extends Controller
      */
     public function destroy($id)
     {
-        // Obtener la Ciudad que corresponda con el ID dado (o null si no es encontrado).
-        $ciudad = Ciudad::find($id);
-        $ciudad->delete();
-
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Obtener la Ciudad que corresponda con el ID dado (o null si no es encontrado).
+        $ciudad = Ciudad::withCount('barrios')->find($id);
+        if ($ciudad->barrios_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Barrios que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $ciudad->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/ciudades');
     }
+
+
+     /**
+     * Display a listing of the resource filter by Region.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function findByDepartamento($id)
+    {
+        $ciudades = Ciudad::where('departamento_id', $id)
+                            ->orderBy('nombre', 'desc')
+                            ->get();
+        return json_encode($ciudades);
+    }
+
 }

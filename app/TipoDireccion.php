@@ -19,4 +19,11 @@ class TipoDireccion extends Model
      * @var array
      */
     protected $fillable = ['nombre', 'abreviatura', 'comentario'];
+
+
+    public function direcciones() {
+        return $this->hasMany(Direccion::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 TipoDireccion tiene muchos(as) direcciones
+    }
+
 }

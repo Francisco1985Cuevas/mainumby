@@ -82,7 +82,7 @@ $(document).ready(function() {
         $('#modal_delete_listDepartamento').modal('show');
     });
     //--- End Departamentos ---//
-*/
+
 
     //--- Ciudades ---//
     //DataTable list Ciudades
@@ -102,7 +102,7 @@ $(document).ready(function() {
     });
 
 
-   //boton eliminar del listado.
+    //boton eliminar del listado.
 	var dataTableCiudades = $('#dataTable_ciudades').DataTable();
     dataTableCiudades.on('click', '#btn_delete_listCiudad', function(){//hace referencia al link del listado a href delete
         //alert("entro aca");
@@ -127,7 +127,7 @@ $(document).ready(function() {
 		language: {
             url: '/js/localisation/Spanish.json'
         }
-	});//close dataTable_
+	});//close dataTable_barrios
 
 
     //boton eliminar del form edit.
@@ -227,7 +227,7 @@ $(document).ready(function() {
         $('#modal_delete_listTipoContacto').modal('show');
     });
     //--- End Tipos Contactos ---//
-
+*/
 
     //--- Tipos Personas ---//
     //DataTable list Tipos Personas

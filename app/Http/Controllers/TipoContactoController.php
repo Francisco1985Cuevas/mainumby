@@ -77,7 +77,7 @@ class TipoContactoController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_contactos',
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_contactos',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -87,7 +87,7 @@ class TipoContactoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Contacto Telefonico',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -100,6 +100,7 @@ class TipoContactoController extends Controller
                                 'abreviatura' => $request['abreviatura']
                             ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('tipoContacto.create');
@@ -148,7 +149,7 @@ class TipoContactoController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_contactos,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_contactos,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -158,7 +159,7 @@ class TipoContactoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Contacto Telefonico',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -171,6 +172,7 @@ class TipoContactoController extends Controller
                         ]);
         $tipoContacto-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
         return view('tipoContacto.edit', ['tipoContacto' => $tipoContacto]);
     }
@@ -183,11 +185,27 @@ class TipoContactoController extends Controller
      */
     public function destroy($id)
     {
+        /*
         $tipoContacto = TipoContacto::find($id);
         $tipoContacto->delete();
 
         Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
         Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+
+        return Redirect::to('/tiposcontactos');
+        */
+
+        //Obtener el tipoContacto que corresponda con el ID dado (o null si no es encontrado).
+        $tipoContacto = TipoContacto::withCount('contactos')->find($id);
+        if ($tipoContacto->direcciones_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Contactos que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $tipoContacto->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/tiposcontactos');
     }

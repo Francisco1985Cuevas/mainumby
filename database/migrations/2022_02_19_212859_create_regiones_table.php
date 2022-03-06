@@ -19,6 +19,7 @@ class CreateRegionesTable extends Migration
             $table->string('abreviatura', 3)->nullable($value = true);
             $table->string('subregion', 255)->nullable($value = true);
             $table->unsignedBigInteger('pais_id');
+            $table->string('descripcion', 255)->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS

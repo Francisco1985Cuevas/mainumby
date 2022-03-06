@@ -38,6 +38,37 @@ Request Validation: StoreCiudadRequest.php, UpdateCiudadRequest.php
 Views: \views\ciudad\list.blade.php, \views\ciudad\create.blade.php, \views\ciudad\edit.blade.php
 Problema:funciona a medias la vista show,
 PENDIENTE:REVISAR LA PARTE DEL JAVASCRIPT DE TODOS
+-----------------------------------------------------------------
+
+
+
+PARA EL CREATE, AGREGAR
+BREADCRUMPS EN EL CREATE		OK
+
+BOTON DE CANCELAR	OK
+
+JQUERY DE SELECTS DEPENDIENTES		OK
+
+AGREGAR EN EL ARCHIVO DE RUTAS LOS SELECTS DEPENDIENTES 	OK
+
+VERIFICAR METODO STORE DEL CONTROLLER		OK
+
+VERIFICAR MENSAJE DE ALERTA EN CASO DE ERROR O SUCCESS EN EL LISTADO
+
+VERIFICAR DATATABLE DEL JQUERY EN EL LISTADO	ok
+
+VERIFICAR EL BOTON ELIMINAR DEL LISTADO, JQUERY		OK
+
+VERIFICAR MODAL CANCELAR DEL MODAL DEL LISTADO		OK
+
+VERIFICAR MODAL CANCELAR DEL MODAL DEL EDIT
+
+BREADBRUMPS EN EL LISTADO		OK
+
+
+------------------------------------------------------
+
+
 
 
 

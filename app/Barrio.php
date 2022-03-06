@@ -25,6 +25,7 @@ class Barrio extends Model
      * Get the ciudad_id that owns the Barrio.
      */
     public function ciudad() {
-        return $this->belongsTo(Ciudad::class);
+        return $this->belongsTo(Ciudad::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 barrio pertenece a 1 ciudad
     }
 }

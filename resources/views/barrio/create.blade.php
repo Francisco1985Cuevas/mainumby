@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/barrios')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nuevo Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Form Barrios -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -51,6 +60,7 @@
 				{!! Form::open(['route' => 'barrios.store', 'method' => 'post', 'id' => 'barrioForm']) !!}
 					@include('barrio.forms.formulario')
 					{{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
+                    {{ Form::button('<span class="icon text-white-50"><i class="far fa-window-restore"></i></span><span class="text">Cancelar</span>', ['type' => 'reset', 'class' => 'btn btn-secondary btn-icon-split'] )  }}
                 {!!Form::close()!!}
 			</div>
 		</div>
@@ -58,4 +68,84 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
+@push('barrio.create')
+<script>
+    //Host Name and Protocol
+    var host = window.location.protocol + "//" + window.location.host; //obtiene por ejemplo: http://localhost:8080
+
+    //Selects dependientes de Regiones por Pais, Departamentos por Region
+    jQuery(document).ready(function (){
+        jQuery('select[name="pais_id"]').on('change', function() {
+            var paisId = jQuery(this).val();
+            if(paisId){
+                jQuery.ajax({
+                    url : host+'/regiones/findByPais/' +paisId,
+                    type : "GET",
+                    dataType : "json",
+                    success:function(data) {
+                        jQuery('select[name="region_id"]').empty();
+                        jQuery('select[name="departamento_id"]').empty();
+                        jQuery('select[name="ciudad_id"]').empty();
+                        $('select[name="region_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                        jQuery.each(data, function(key, value){
+                            $('select[name="region_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="region_id"]').empty();
+                $('select[name="departamento_id"]').empty();
+                $('select[name="ciudad_id"]').empty();
+            }
+        });
+    });
+
+    jQuery(document).ready(function (){
+        jQuery('select[name="region_id"]').on('change', function() {
+            var regionId = jQuery(this).val();
+            if(regionId){
+                jQuery.ajax({
+                    url : host+'/departamentos/findByRegion/' +regionId,
+                    type : "GET",
+                    dataType : "json",
+                    success:function(data) {
+                        jQuery('select[name="departamento_id"]').empty();
+                        $('select[name="departamento_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                        jQuery.each(data, function(key, value){
+                            $('select[name="departamento_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="departamento_id"]').empty();
+            }
+        });
+    });
+
+    jQuery(document).ready(function (){
+        jQuery('select[name="departamento_id"]').on('change', function() {
+            var departamentoId = jQuery(this).val();
+            if(departamentoId){
+                jQuery.ajax({
+                    url : host+'/ciudades/findByDepartamento/' +departamentoId,
+                    type : "GET",
+                    dataType : "json",
+                    success:function(data) {
+                        jQuery('select[name="ciudad_id"]').empty();
+                        $('select[name="ciudad_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                        jQuery.each(data, function(key, value){
+                            $('select[name="ciudad_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="ciudad_id"]').empty();
+            }
+        });
+    });
+
+</script>
+@endpush
+
 @endsection

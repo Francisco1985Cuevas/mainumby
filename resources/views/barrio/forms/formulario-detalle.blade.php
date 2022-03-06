@@ -1,6 +1,9 @@
 <p class="info"><strong>#C&oacute;digo Identificador</strong>:&nbsp;&nbsp;{{$barrio->id}}</p>
-<p class="info"><strong>Nombre Barrio</strong>:&nbsp;&nbsp;{{$barrio->nombre}}</p>
-<p class="info"><strong>Abreviatura</strong>:&nbsp;&nbsp;{{$barrio->abreviatura}}</p>
+<p class="info"><strong>Pa&iacute;s</strong>:&nbsp;&nbsp;{{$barrio->ciudad->departamento->region->pais->nombre}}</p>
+<p class="info"><strong>Region</strong>:&nbsp;&nbsp;{{$barrio->ciudad->departamento->region->nombre}}</p>
+<p class="info"><strong>Departamento</strong>:&nbsp;&nbsp;{{$barrio->ciudad->departamento->nombre}}</p>
 <p class="info"><strong>Ciudad</strong>:&nbsp;&nbsp;{{$barrio->ciudad->nombre}}</p>
-<p class="info"><strong>Fecha Creaci&oacute;n</strong>:&nbsp;&nbsp;{{$barrio->created_at}}</p>
-<p class="info"><strong>Fecha Actualizaci&oacute;n</strong>:&nbsp;&nbsp;{{$barrio->updated_at}}</p>
+<p class="info"><strong>Nombre</strong>:&nbsp;&nbsp;{{$barrio->nombre}}</p>
+<p class="info"><strong>Abreviatura</strong>:&nbsp;&nbsp;{{$barrio->abreviatura}}</p>
+<p class="info"><strong>Fecha de creaci&oacute;n</strong>:&nbsp;&nbsp;{{$barrio->created_at}}</p>
+<p class="info"><strong>Fecha de actualizaci&oacute;n</strong>:&nbsp;&nbsp;{{$barrio->updated_at}}</p>

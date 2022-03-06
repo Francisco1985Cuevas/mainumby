@@ -19,4 +19,11 @@ class TipoContacto extends Model
      * @var array
      */
     protected $fillable = ['nombre', 'abreviatura', 'comentario'];
+
+
+    public function contactos() {
+        return $this->hasMany(Contacto::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 TipoContacto tiene muchos(as) Contactos
+    }
+
 }

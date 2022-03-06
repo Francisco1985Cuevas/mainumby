@@ -19,11 +19,11 @@ class Region extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'abreviatura', 'pais_id'];
+    protected $fillable = ['nombre', 'abreviatura', 'pais_id', 'subregion', 'descripcion'];
 
 
     /**
-     * Get the pais_id that owns the Departamento.
+     * Get the pais_id that owns the Region.
      */
     public function pais() {
         return $this->belongsTo(Pais::class);  //belongs To = pertenece a

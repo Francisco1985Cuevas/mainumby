@@ -21,14 +21,13 @@ class Direccion extends Model
     protected $fillable = ['persona_id', 'tipo_direccion_id', 'barrio_id', 'calle', 'numero_casa', 'piso', 'departamento', 'comentario'];
 
 
-
     /**
      * Get the tipo_direccion_id that owns the Direccion.
      */
     public function tipoDireccion() {
-        return $this->belongsTo(TipoDireccion::class);
+        return $this->belongsTo(TipoDireccion::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 direccion pertenece a 1 tipoDireccion
     }
-
 
 
     /**

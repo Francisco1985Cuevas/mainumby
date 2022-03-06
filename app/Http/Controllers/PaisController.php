@@ -52,12 +52,6 @@ class PaisController extends Controller
         //    echo $pais->nombre;
         //}
         return view('pais.list', ['paises' => $paises]);
-
-
-        /*
-        $paises = Pais::withCount('departamentos')->get();
-        return view('pais.list', ['paises' => $paises]);
-        */
     }
 
     /**
@@ -109,7 +103,7 @@ class PaisController extends Controller
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
         Pais::create(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura']
+                        'abreviatura' => $request['abreviatura']
                         ]);
         Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
@@ -198,16 +192,6 @@ class PaisController extends Controller
      */
     public function destroy($id)
     {
-        //// Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
-        //$pais = Pais::find($id);
-        //$pais->delete();
-
-        //Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        //Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
-
-        //return Redirect::to('/paises');
-
-
         ////Validar que No existan Departamentos relacionados con el Pais que se trata de eliminar.
         //$departamentos = Departamento::where('pais_id', $id)->get();
         //if (count($departamentos) > 0) {
@@ -224,11 +208,9 @@ class PaisController extends Controller
         //return Redirect::to('/paises');
 
 
+        //Validar que No existan Departamentos relacionados con el Pais que se trata de eliminar.
         //Obtener el Pais que corresponda con el ID dado (o null si no es encontrado).
-        //$pais = Pais::withCount('departamentos')->findOrFail($id);
-        //$pais = Pais::withCount('departamentos')->find($id);
         $pais = Pais::withCount('regiones')->find($id);
-        //if ($pais->departamentos_count > 0) {
         if ($pais->regiones_count > 0) {
             Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Regiones que estan relacionados, Verifique!');
             Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar

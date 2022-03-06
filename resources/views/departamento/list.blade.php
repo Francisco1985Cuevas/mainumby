@@ -21,7 +21,6 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
-
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -30,7 +29,6 @@
             </ol>
         </nav>
         <!-- End of Breadcrumb -->
-
 		<!-- DataTales Listado Departamento -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->

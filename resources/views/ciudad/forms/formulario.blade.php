@@ -3,35 +3,51 @@
 	{!! Form::label('idciudad', '(Campo Autogenerado)', ['class' => 'text-xs']); !!}
 	{!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
 </div>
-<div class="form-group">
-	{!! Form::label('nombre', 'Nombre Ciudad') !!}
-	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
-	{!! Form::text('nombre', null, ['class'=>'form-control', 'required'=>'required', 'maxlength'=>60, 'id'=>'nombre', 'autofocus'=>true]) !!}
-</div>
-<div class="form-group">
-    {!! Form::label('abreviatura', 'Abreviatura') !!}
-    {!! Form::label('abreviatura', '(Max. 3 Caracteres)', ['class' => 'text-xs']); !!}
-    {!! Form::text('abreviatura', null, ['class'=>'form-control', 'maxlength'=>3, 'id'=>'abreviatura']) !!}
-</div>
-@if (count($lista_departamentos) > 0)
+
+@if (count($lista_paises) > 0)
     <div class="form-group">
-        <label for="departamento_id" class="form-label">Seleccione Departamento</label>
-        <select name="departamento_id" class="form-control" autofocus="true" aria-describedby="departamento_idHelp" >
-            @foreach ($lista_departamentos as $departamento)
+        {!! Form::label('pais_id', 'Pa&iacute;s') !!}
+        <select id="pais_id" name="pais_id" class="form-control" required>
+            <option value="">Seleccione Opcion...</option>
+            @foreach ($lista_paises as $pais)
                 @if(empty($ciudad))
-                    <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
+                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                 @else
-                    <option value="{{ $departamento->id }}" {{ $departamento->id == $ciudad->departamento_id ? 'selected':'' }} >{{ $departamento->nombre }}</option>
+                    <option value="{{ $pais->id }}" {{ $pais->id == $ciudad->departamento->region->pais->id ? 'selected':'' }} >{{ $pais->nombre }}</option>
                 @endif
             @endforeach
         </select>
-        <div id="departamento_idHelp" class="form-text">El departamento al cual pertenece esta ciudad.</div>
     </div>
 @else
     <div class="alert alert-info" role="alert">
         <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
-        <strong>Listado:</strong> Departamentos
+        <strong>Listado:</strong> Paises
         <br/>
-        Debe <a href="{!!URL::to('/departamentos/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
+        Debe <a href="{!!URL::to('/paises/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
     </div>
 @endif
+<!-- Form Group (region_id) -->
+<div class="form-group">
+    <label for="region_id">Region</label>
+    <select id="region_id" name="region_id" class="form-control" required>
+        <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+    </select>
+</div>
+<!-- Form Group (departamento_id) -->
+<div class="form-group">
+    <label for="departamento_id">Departamento</label>
+    <select id="departamento_id" name="departamento_id" class="form-control" required>
+        <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+    </select>
+</div>
+
+<div class="form-group">
+	{!! Form::label('nombre', 'Nombre') !!}
+	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
+	{!! Form::text('nombre', null, ['id'=>'nombre', 'class'=>'form-control', 'required'=>'required', 'minlength'=>2, 'maxlength'=>255, 'autofocus'=>true]) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('abreviatura', 'Abreviatura') !!}
+    {!! Form::label('abreviatura', '(Campo opcional m&aacute;ximo 3 caracteres)', ['class' => 'text-xs']); !!}
+    {!! Form::text('abreviatura', null, ['id'=>'abreviatura', 'class'=>'form-control', 'maxlength'=>3]) !!}
+</div>

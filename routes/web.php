@@ -20,10 +20,13 @@ Route::get('/', function () {
 Route::resource('paises', 'PaisController');
 
 Route::resource('regiones', 'RegionController');
+Route::get('regiones/findByPais/{id}','RegionController@findByPais');
 
 Route::resource('departamentos', 'DepartamentoController');
+Route::get('departamentos/findByRegion/{id}','DepartamentoController@findByRegion');
 
 Route::resource('ciudades', 'CiudadController');
+Route::get('ciudades/findByDepartamento/{id}','CiudadController@findByDepartamento');
 
 Route::resource('barrios', 'BarrioController');
 
@@ -74,4 +77,4 @@ Route::get('dropdownlist/CiudadesDepartamento/{id}','DataController@CiudadesDepa
 Route::get('dropdownlist/BarriosCiudad/{id}','DataController@BarriosCiudad');
 
 
-Route::get('regiones/findByPais/{id}','RegionController@findByPais');
+

@@ -11,9 +11,10 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de las clases: Ciudad, Barrio
+// import de las clases: Ciudad, Barrio, Pais
+use App\Pais;
 use App\Barrio;
-use App\Ciudad;
+
 
 
 
@@ -41,8 +42,7 @@ use Redirect;
 
 class BarrioController extends Controller
 {
-    public $list_ciudades;
-    public $lista_ciudades;
+    public $lista_paises;
 
     // Constructor
     /**
@@ -53,7 +53,7 @@ class BarrioController extends Controller
      *
      */
     public function __construct(){
-        $this->lista_ciudades = Ciudad::orderBy('nombre')->get();
+        $this->lista_paises = Pais::orderBy('nombre')->get();
     }
 
     /**
@@ -77,7 +77,7 @@ class BarrioController extends Controller
      */
     public function create()
     {
-        return view('barrio.create', ['lista_ciudades' => $this->lista_ciudades]);
+        return view('barrio.create', ['lista_paises' => $this->lista_paises]);
     }
 
     /**
@@ -96,7 +96,7 @@ class BarrioController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:barrios',
+                        ['nombre' => 'required|min:2|max:255|unique:barrios',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -106,7 +106,7 @@ class BarrioController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Barrio',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -120,9 +120,10 @@ class BarrioController extends Controller
                         'ciudad_id' => $request['ciudad_id']
                     ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
-        return view('barrio.create', ['lista_ciudades' => $this->lista_ciudades]);
+        return view('barrio.create', ['lista_paises' => $this->lista_paises]);
 
     }
 
@@ -149,7 +150,8 @@ class BarrioController extends Controller
     {
         // Obtener el Barrio que corresponda con el ID dado (o null si no es encontrado).
         $barrio = Barrio::find($id);
-        return view('barrio.edit', ['barrio' => $barrio, 'lista_ciudades' => $this->lista_ciudades]);
+        return view('barrio.edit', ['barrio' => $barrio,
+                                    'lista_paises' => $this->lista_paises]);
     }
 
     /**
@@ -169,7 +171,7 @@ class BarrioController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:barrios,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:barrios,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -179,7 +181,7 @@ class BarrioController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Nombre Barrio',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -193,8 +195,9 @@ class BarrioController extends Controller
                         ]);
         $barrio-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
-        return view('barrio.edit', ['barrio' => $barrio, 'lista_ciudades' => $this->lista_ciudades]);
+        return view('barrio.edit', ['barrio' => $barrio, 'lista_paises' => $this->lista_paises]);
 
     }
 
@@ -210,6 +213,7 @@ class BarrioController extends Controller
         $barrio = Barrio::find($id);
         $barrio->delete();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
         Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
 

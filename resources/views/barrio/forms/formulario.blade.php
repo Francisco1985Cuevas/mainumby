@@ -3,36 +3,63 @@
 	{!! Form::label('idbarrio', '(Campo Autogenerado)', ['class' => 'text-xs']); !!}
 	{!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
 </div>
-<div class="form-group">
-	{!! Form::label('nombre', 'Nombre Barrio') !!}
-	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
-	{!! Form::text('nombre', null, ['class'=>'form-control', 'required'=>'required', 'maxlength'=>60, 'id'=>'nombre', 'autofocus'=>true]) !!}
-</div>
-<div class="form-group">
-    {!! Form::label('abreviatura', 'Abreviatura') !!}
-    {!! Form::label('abreviatura', '(Max. 3 Caracteres)', ['class' => 'text-xs']); !!}
-    {!! Form::text('abreviatura', null, ['class'=>'form-control', 'maxlength'=>3, 'id'=>'abreviatura']) !!}
-</div>
 
-@if (count($lista_ciudades) > 0)
+@if (count($lista_paises) > 0)
     <div class="form-group">
-        <label for="ciudad_id" class="form-label">Seleccione Ciudad</label>
-        <select name="ciudad_id" class="form-control" autofocus="true" aria-describedby="ciudad_idHelp" >
-            @foreach ($lista_ciudades as $ciudad)
+        {!! Form::label('pais_id', 'Pa&iacute;s') !!}
+        <select id="pais_id" name="pais_id" class="form-control" required>
+            <option value="">Seleccione Opcion...</option>
+            @foreach ($lista_paises as $pais)
                 @if(empty($barrio))
-                    <option value="{{ $ciudad->id }}">{{ $ciudad->nombre }}</option>
+                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                 @else
-                    <option value="{{ $ciudad->id }}" {{ $ciudad->id == $barrio->ciudad_id ? 'selected':'' }} >{{ $ciudad->nombre }}</option>
+                    <option value="{{ $pais->id }}" {{ $pais->id == $barrio->ciudad->departamento->region->pais->id ? 'selected':'' }} >{{ $pais->nombre }}</option>
                 @endif
             @endforeach
         </select>
-        <div id="ciudad_idHelp" class="form-text">La ciudad a la cual pertenece este barrio.</div>
     </div>
 @else
     <div class="alert alert-info" role="alert">
         <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
-        <strong>Listado:</strong> Ciudades
+        <strong>Listado:</strong> Paises
         <br/>
-        Debe <a href="{!!URL::to('/ciudades/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
+        Debe <a href="{!!URL::to('/paises/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
     </div>
 @endif
+<!-- Form Group (region_id) -->
+<div class="form-group">
+    <label for="region_id">Region</label>
+    <select id="region_id" name="region_id" class="form-control" required>
+        <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+    </select>
+</div>
+<!-- Form Group (departamento_id) -->
+<div class="form-group">
+    <label for="departamento_id">Departamento</label>
+    <select id="departamento_id" name="departamento_id" class="form-control" required>
+        <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+    </select>
+</div>
+<!-- Form Group (ciudad_id) -->
+<div class="form-group">
+    <label for="ciudad_id">Ciudad</label>
+    <select id="ciudad_id" name="ciudad_id" class="form-control" required>
+        <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+    </select>
+</div>
+
+<div class="form-group">
+	{!! Form::label('nombre', 'Nombre') !!}
+	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
+	{!! Form::text('nombre', null, ['id'=>'nombre', 'class'=>'form-control', 'required'=>'required', 'minlength'=>2, 'maxlength'=>255, 'autofocus'=>true]) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('abreviatura', 'Abreviatura') !!}
+    {!! Form::label('abreviatura', '(Campo opcional m&aacute;ximo 3 caracteres)', ['class' => 'text-xs']); !!}
+    {!! Form::text('abreviatura', null, ['id'=>'abreviatura', 'class'=>'form-control', 'maxlength'=>3]) !!}
+</div>
+
+
+
+
+
