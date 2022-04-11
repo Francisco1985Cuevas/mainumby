@@ -4,15 +4,21 @@
 	{!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
 </div>
 <div class="form-group">
-    <label for="nombre" class="form-label">Tipo Correo electr&oacute;nico</label>
-    <label for="nombre" class="text-xs">(*) Campo Obligatorio</label>
-    <input id="nombre" name="nombre" type="text" class="form-control" autofocus required minlength="2" maxlength="60" value="{{  empty($tipoEmail) ? old('nombre') : (empty(old('nombre')) ? $tipoEmail->nombre : old('nombre')) }}" >
-    <label for="nombre" class="text-xs">Es como aparecera en la lista de Tipos correos electr&oacute;nicos.</label>
+	{!! Form::label('nombre', 'Nombre') !!}
+	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
+	{!! Form::text('nombre', null, ['id'=>'nombre', 'class'=>'form-control', 'required'=>'required', 'minlength'=>2, 'maxlength'=>255, 'autofocus'=>true]) !!}
 </div>
 <div class="form-group">
     {!! Form::label('abreviatura', 'Abreviatura') !!}
-    {!! Form::label('abreviatura', '(Max. 3 Caracteres)', ['class' => 'text-xs']); !!}
-    {{-- {!! Form::text('abreviatura', null, ['class'=>'form-control', 'maxlength'=>3, 'id'=>'abreviatura']) !!} --}}
-    <input id="abreviatura" name="abreviatura" type="text" class="form-control" maxlength="3" value="{{  empty($tipoEmail) ? old('abreviatura') : (empty(old('abreviatura')) ? $tipoEmail->abreviatura : old('abreviatura')) }}" >
-    {!! Form::label('abreviatura', 'Campo Opcional, es solo una abreviacion del tipo que puede ser usado para la visualizacion en los Reportes.', ['class' => 'text-xs']); !!}
+    {!! Form::label('abreviatura', '(Campo opcional m&aacute;ximo 3 caracteres)', ['class' => 'text-xs']); !!}
+    {!! Form::text('abreviatura', null, ['id'=>'abreviatura', 'class'=>'form-control', 'maxlength'=>3]) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('comentario', 'Comentario') !!}
+    {!! Form::label('comentario', '(Campo opcional)', ['class' => 'text-xs']); !!}
+    <textarea id="comentario" name="comentario" class="form-control" rows="5" cols="5">
+        @isset($tipoEmail)
+			{{ $tipoEmail->comentario }}
+		@endisset
+    </textarea>
 </div>

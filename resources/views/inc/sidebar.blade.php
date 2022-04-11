@@ -32,6 +32,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Custom Components:</h6>
 				<a class="collapse-item" href="http://127.0.0.1:8000/paises">Paises</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/regiones">Regiones</a>
 				<a class="collapse-item" href="http://127.0.0.1:8000/departamentos">Departamentos</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/ciudades">Ciudades</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/barrios">Barrios</a>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionesTable extends Migration
+class CreateSubregionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreateRegionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('regiones', function (Blueprint $table) {
+        Schema::create('subregiones', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('region_id');
             $table->string('nombre', 255)->nullable($value = false);
-            $table->string('abreviatura', 3)->nullable($value = true);
-            $table->unsignedBigInteger('pais_id');
             $table->string('descripcion', 255)->nullable($value = true);
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS
-            $table->foreign('pais_id')->references('id')->on('paises')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+            $table->foreign('region_id')->references('id')->on('regiones')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
 
-            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE REGION Y PAIS
-            $table->unique(['nombre', 'pais_id']);
+            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE DEPARTAMENTO Y REGION
+			$table->unique(['nombre', 'region_id']);
         });
     }
 
@@ -36,6 +35,6 @@ class CreateRegionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regiones');
+        Schema::dropIfExists('subregiones');
     }
 }

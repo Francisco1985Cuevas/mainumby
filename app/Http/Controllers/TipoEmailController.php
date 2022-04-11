@@ -71,11 +71,12 @@ class TipoEmailController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
                             //rules
-                            ['nombre' => 'required|min:2|max:60|unique:tipos_emails',
+                            ['nombre' => 'required|min:2|max:255|unique:tipos_emails',
                                 'abreviatura' => 'max:3'
                             ],
                             //messages
@@ -85,7 +86,7 @@ class TipoEmailController extends Controller
                                 'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                             ],
                             //atributes
-                            ['nombre' => 'Tipo Correo electr&oacute;nico',
+                            ['nombre' => 'Nombre',
                                 'abreviatura' => 'Abreviatura'
                             ]);
 
@@ -95,9 +96,11 @@ class TipoEmailController extends Controller
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
         TipoEmail::create(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura']
+                            'abreviatura' => $request['abreviatura'],
+                            'comentario' => $request['comentario']
                         ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('tipoEmail.create');
@@ -142,11 +145,12 @@ class TipoEmailController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_emails,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_emails,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -156,7 +160,7 @@ class TipoEmailController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Correo electr&oacute;nico',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -165,10 +169,12 @@ class TipoEmailController extends Controller
         // Obtener el Email que corresponda con el ID dado (o null si no es encontrado).
         $tipoEmail = TipoEmail::find($id);
         $tipoEmail-> fill(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura']
+                            'abreviatura' => $request['abreviatura'],
+                            'comentario' => $request['comentario']
                         ]);
         $tipoEmail-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
         return view('tipoEmail.edit', ['tipoEmail' => $tipoEmail]);
     }
@@ -181,12 +187,17 @@ class TipoEmailController extends Controller
      */
     public function destroy($id)
     {
-        // Obtener el Email que corresponda con el ID dado (o null si no es encontrado).
-        $tipoEmail = TipoEmail::find($id);
-        $tipoEmail->delete();
-
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Obtener el tipoEmail que corresponda con el ID dado (o null si no es encontrado).
+        $tipoEmail = TipoEmail::withCount('emails')->find($id);
+        if ($tipoEmail->emails_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Emails que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $tipoEmail->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/tiposemails');
     }

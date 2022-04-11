@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/tiposemails')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Detalles del Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Detalles Tipo Email -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -40,6 +49,10 @@
 			<div class="card-body">
 				{!!Form::model($tipoEmail, ['route'=>  ['tiposemails.show', $tipoEmail->id], 'method'=>'POST', 'files'=> true])!!}
                     @include('tipoEmail.forms.formulario-detalle')
+                    <a href="{!!URL::to('/tiposemails')!!}" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50"><i class="fa fa-arrow-left"></i></span>
+                        <span class="text">Volver</span>
+                    </a>
                 {!!Form::close()!!}
 			</div>
 		</div>

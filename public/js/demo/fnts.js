@@ -227,7 +227,7 @@ $(document).ready(function() {
         $('#modal_delete_listTipoContacto').modal('show');
     });
     //--- End Tipos Contactos ---//
-*/
+
 
     //--- Tipos Personas ---//
     //DataTable list Tipos Personas
@@ -294,6 +294,40 @@ $(document).ready(function() {
     });
     //--- End Tipos Documentos ---//
 
+
+    //--- Tipos Emails ---//
+    //DataTable list Tipos Emails
+	$('#dataTable_tiposemails').DataTable({
+		language: {
+            url: '/js/localisation/Spanish.json'
+        }
+	});//close dataTable_tiposemails
+
+
+	//boton eliminar del form edit.
+	$("#btn_delete_editFormTipoEmail").click(function() {
+        dataId = $(this).attr("data-id");
+
+        $('#form_delete_editFormTipoEmail').attr('action', '/tiposemails/'+dataId);
+        $('#modal_delete_editFormTipoEmail').modal('show');
+    });
+
+
+	//boton eliminar del listado.
+	var dataTableTiposEmails = $('#dataTable_tiposemails').DataTable();
+    dataTableTiposEmails.on('click', '#btn_delete_listTipoEmail', function(){//hace referencia al link del listado a href delete
+        var $tr = $(this).closest('tr');
+        if($($tr).hasClass('child')){
+            $tr = $tr.prev('.parent');
+        }
+
+        var dataTipoEmail = dataTableTiposEmails.row($tr).data();
+        $('#form_delete_listTipoEmail').attr('action', '/tiposemails/'+dataTipoEmail[0]);
+        $('#modal_delete_listTipoEmail').modal('show');
+    });
+    //--- End Tipos Emails ---//
+
+*/
 
     //--- Personas ---//
     //DataTable list Personas
@@ -499,37 +533,7 @@ $(document).ready(function() {
     //--- End Contactos ---//
 
 
-    //--- Tipos Emails ---//
-    //DataTable list Tipos Emails
-	$('#dataTable_tiposemails').DataTable({
-		language: {
-            url: '/js/localisation/Spanish.json'
-        }
-	});//close dataTable_tiposemails
 
-
-	//boton eliminar del form edit.
-	$("#btn_delete_editFormTipoEmail").click(function() {
-        dataId = $(this).attr("data-id");
-
-        $('#form_delete_editFormTipoEmail').attr('action', '/tiposemails/'+dataId);
-        $('#modal_delete_editFormTipoEmail').modal('show');
-    });
-
-
-	//boton eliminar del listado.
-	var dataTableTiposEmails = $('#dataTable_tiposemails').DataTable();
-    dataTableTiposEmails.on('click', '#btn_delete_listTipoEmail', function(){//hace referencia al link del listado a href delete
-        var $tr = $(this).closest('tr');
-        if($($tr).hasClass('child')){
-            $tr = $tr.prev('.parent');
-        }
-
-        var dataTipoEmail = dataTableTiposEmails.row($tr).data();
-        $('#form_delete_listTipoEmail').attr('action', '/tiposemails/'+dataTipoEmail[0]);
-        $('#modal_delete_listTipoEmail').modal('show');
-    });
-    //--- End Tipos Emails ---//
 
 
 

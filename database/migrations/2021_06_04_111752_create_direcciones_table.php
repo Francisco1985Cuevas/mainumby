@@ -18,10 +18,12 @@ class CreateDireccionesTable extends Migration
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_direccion_id');
             $table->unsignedBigInteger('barrio_id');
-            $table->text('calle')->nullable($value = true);
+            $table->text('calle_principal')->nullable($value = true);
+            $table->text('calle_secundaria')->nullable($value = true);
             $table->string('numero_casa', 30)->nullable($value = true);
-            $table->string('piso', 30)->nullable($value = true);
-            $table->string('departamento', 60)->nullable($value = true);
+            $table->string('edificio', 255)->nullable($value = true);
+            $table->string('piso', 255)->nullable($value = true);
+            $table->string('departamento', 255)->nullable($value = true);
             $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 
@@ -30,11 +32,8 @@ class CreateDireccionesTable extends Migration
             $table->foreign('tipo_direccion_id')->references('id')->on('tipos_direcciones')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->foreign('barrio_id')->references('id')->on('barrios')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
 
-            //SETTING THE PRIMARY KEYS
-            //$table->index(['id', 'persona']);
-
             //ASIGNAR CAMPOS UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR DIRECCIONES-PERSONA
-            $table->unique(['persona_id', 'tipo_direccion_id', 'calle']);
+            $table->unique(['persona_id', 'tipo_direccion_id', 'calle_principal', 'numero_casa']);
         });
     }
 

@@ -25,9 +25,6 @@ class CreateContactosTable extends Migration
             $table->foreign('persona_id')->references('id')->on('personas')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->foreign('tipo_contacto_id')->references('id')->on('tipos_contactos')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
 
-            //SETTING THE PRIMARY KEYS
-            //$table->index(['id', 'persona']);
-
             //ASIGNAR CAMPOS UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR DIRECCIONES-PERSONA
             $table->unique(['persona_id', 'tipo_contacto_id', 'numero_contacto']);
         });

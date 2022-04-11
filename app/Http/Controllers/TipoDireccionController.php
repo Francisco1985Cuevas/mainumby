@@ -73,6 +73,7 @@ class TipoDireccionController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
@@ -97,7 +98,8 @@ class TipoDireccionController extends Controller
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
         TipoDireccion::create(['nombre' => $request['nombre'],
-                                'abreviatura' => $request['abreviatura']
+                                'abreviatura' => $request['abreviatura'],
+                                'comentario' => $request['comentario']
                             ]);
 
         Session::flash('validated', true);
@@ -146,6 +148,7 @@ class TipoDireccionController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
@@ -160,7 +163,7 @@ class TipoDireccionController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Direcci&oacute;n',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -169,7 +172,8 @@ class TipoDireccionController extends Controller
         // Obtener el Tipo Direccion que corresponda con el ID dado (o null si no es encontrado).
         $tipoDireccion = TipoDireccion::find($id);
         $tipoDireccion-> fill(['nombre' => $request['nombre'],
-                                'abreviatura' => $request['abreviatura']
+                                'abreviatura' => $request['abreviatura'],
+                                'comentario' => $request['comentario']
                             ]);
         $tipoDireccion-> save();
 

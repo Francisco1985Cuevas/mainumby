@@ -14,10 +14,18 @@ class TipoEmail extends Model
     protected $table = 'tipos_emails';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
     protected $fillable = ['nombre', 'abreviatura', 'comentario'];
+
+    /**
+     * Obtener los Emails para el "Tipo de Email".
+     */
+    public function emails() {
+        return $this->hasMany(Email::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 TipoEmail tiene muchos(as) Emails
+    }
 
 }

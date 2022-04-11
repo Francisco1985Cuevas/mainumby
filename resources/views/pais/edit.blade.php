@@ -105,7 +105,7 @@
 </div>
 <!-- End of Content Row -->
 
-@push('pais.list')
+@push('pais.edit')
 <script>
     //boton eliminar del form edit.
 	$("#btn_delete_editFormPais").click(function() {

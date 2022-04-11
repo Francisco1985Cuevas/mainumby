@@ -4,12 +4,21 @@
 	{!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('nombre', 'Tipo Documento') !!}
+	{!! Form::label('nombre', 'Nombre') !!}
 	{!! Form::label('nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
-	{!! Form::text('nombre', null, ['class'=>'form-control', 'required'=>'required', 'maxlength'=>60, 'id'=>'nombre', 'autofocus'=>true]) !!}
+	{!! Form::text('nombre', null, ['id'=>'nombre', 'class'=>'form-control', 'required'=>'required', 'minlength'=>2, 'maxlength'=>255, 'autofocus'=>true]) !!}
 </div>
 <div class="form-group">
     {!! Form::label('abreviatura', 'Abreviatura') !!}
-    {!! Form::label('abreviatura', '(Max. 3 Caracteres)', ['class' => 'text-xs']); !!}
-    {!! Form::text('abreviatura', null, ['class'=>'form-control', 'maxlength'=>3, 'id'=>'abreviatura']) !!}
+    {!! Form::label('abreviatura', '(Campo opcional m&aacute;ximo 3 caracteres)', ['class' => 'text-xs']); !!}
+    {!! Form::text('abreviatura', null, ['id'=>'abreviatura', 'class'=>'form-control', 'maxlength'=>3]) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('comentario', 'Comentario') !!}
+    {!! Form::label('comentario', '(Campo opcional)', ['class' => 'text-xs']); !!}
+    <textarea id="comentario" name="comentario" class="form-control" rows="5" cols="5">
+        @isset($tipoDocumento)
+			{{ $tipoDocumento->comentario }}
+		@endisset
+    </textarea>
 </div>

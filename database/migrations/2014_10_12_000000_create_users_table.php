@@ -19,12 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            //$table->unsignedBigInteger('persona_id');
+            $table->unsignedBigInteger('persona_id');
             $table->rememberToken();
             $table->timestamps();
 
             //FOREIGN KEY CONSTRAINTS
-            //$table->foreign('persona_id')->references('id')->on('personas')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
+            $table->foreign('persona_id')->references('id')->on('personas')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
         });
     }
 

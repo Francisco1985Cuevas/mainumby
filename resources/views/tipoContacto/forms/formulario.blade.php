@@ -13,3 +13,12 @@
     {!! Form::label('abreviatura', '(Campo opcional m&aacute;ximo 3 caracteres)', ['class' => 'text-xs']); !!}
     {!! Form::text('abreviatura', null, ['id'=>'abreviatura', 'class'=>'form-control', 'maxlength'=>3]) !!}
 </div>
+<div class="form-group">
+    {!! Form::label('comentario', 'Comentario') !!}
+    {!! Form::label('comentario', '(Campo opcional)', ['class' => 'text-xs']); !!}
+    <textarea id="comentario" name="comentario" class="form-control" rows="5" cols="5">
+        @isset($tipoContacto)
+			{{ $tipoContacto->comentario }}
+		@endisset
+    </textarea>
+</div>

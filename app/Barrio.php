@@ -13,8 +13,8 @@ class Barrio extends Model
      */
     protected $table = 'barrios';
 
-    /**
-     * The attributes that are mass assignable.
+     /**
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
@@ -22,10 +22,19 @@ class Barrio extends Model
 
 
     /**
-     * Get the ciudad_id that owns the Barrio.
+     *  Obtiene la "Ciudad(ciudad_id)" que posee el Barrio.
      */
     public function ciudad() {
         return $this->belongsTo(Ciudad::class);  //belongs To = pertenece a
         //si lo leemos diria algo asi: 1 barrio pertenece a 1 ciudad
     }
+
+    /**
+     * Obtiene los Direcciones para el "Barrio".
+     */
+    public function direcciones() {
+        return $this->hasMany(Direccion::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 Barrio tiene muchos(as) direcciones
+    }
+
 }

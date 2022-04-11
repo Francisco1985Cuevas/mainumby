@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class NacionalidadPersona extends Model
 {
-    //
      /**
      * The table associated with the model.
      *
@@ -15,7 +14,7 @@ class NacionalidadPersona extends Model
     protected $table = 'nacionalidades_persona';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
@@ -23,14 +22,14 @@ class NacionalidadPersona extends Model
 
 
     /**
-     * Get the persona_id that owns the NacionalidadPersona.
+     *  Obtiene la "Persona(persona_id)" que posee la NacionalidadPersona.
      */
     public function persona() {
         return $this->belongsTo(Persona::class);
     }
 
     /**
-     * Get the nacionalidad_id that owns the NacionalidadPersona.
+     *  Obtiene la "Nacionalidad(nacionalidad_id)" que posee la NacionalidadPersona.
      */
     public function nacionalidad() {
         return $this->belongsTo(Nacionalidad::class);

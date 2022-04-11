@@ -14,7 +14,7 @@ class Contacto extends Model
     protected $table = 'contactos';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
@@ -22,11 +22,19 @@ class Contacto extends Model
 
 
     /**
-     * Get the tipo_contacto_id that owns the Contacto.
+     *  Obtiene el "Tipo de Contacto(tipo_contacto_id)" que posee el Contacto.
      */
     public function tipoContacto() {
         return $this->belongsTo(TipoContacto::class);  //belongs To = pertenece a
         //si lo leemos diria algo asi: 1 Contacto pertenece a 1 tipoContacto
+    }
+
+    /**
+     * Obtiene la "Persona(persona_id)" que posee el Contacto.
+     */
+    public function persona() {
+        return $this->belongsTo(Persona::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Contacto pertenece a 1 persona
     }
 
 }

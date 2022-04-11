@@ -6,7 +6,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-	<h1 class="h3 mb-0 text-gray-800">Nuevo Registro - Tipos de Documentos</h1>
+	<h1 class="h3 mb-0 text-gray-800">Nuevo Registro - Regiones</h1>
 </div>
 <!-- End of Heading -->
 
@@ -17,12 +17,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{!!URL::to('/tiposdocumentos')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/regiones')!!}">Listado de Registros</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Nuevo Registro</li>
             </ol>
         </nav>
         <!-- End of Breadcrumb -->
-		<!-- Form Tipos Documentos -->
+		<!-- Form Regiones -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
 			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -34,11 +34,11 @@
 					<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
 						<div class="dropdown-header">Acciones:</div>
 						<a class="dropdown-item" href="{!!URL::to('/')!!}" title="P&aacute;gina de Inicio"><i class="fas fa-home"></i> Inicio</a>
-						<a class="dropdown-item" href="{!!URL::to('/tiposdocumentos/create')!!}" title="Actualizar P&aacute;gina Actual">
+						<a class="dropdown-item" href="{!!URL::to('/regiones/create')!!}" title="Actualizar P&aacute;gina Actual">
 							<i class="fas fa-sync-alt"></i> Actualizar
 						</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{!!URL::to('/tiposdocumentos')!!}" title="Volver al listado">
+						<a class="dropdown-item" href="{!!URL::to('/regiones')!!}" title="Volver al listado">
 							<i class="fas fa-list"></i> Volver
 						</a>
 					</div>
@@ -51,22 +51,24 @@
 
 				@if(Session::has('message'))
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<i class="fas fa-check-circle"></i> {{Session::get('message')}} <a href="{!!URL::to('/tiposdocumentos')!!}">Ver</a>
+						<i class="fas fa-check-circle"></i> {{Session::get('message')}} <a href="{!!URL::to('/regiones')!!}">Ver</a>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 				@endif
 
-				{!! Form::open(['route' => 'tiposdocumentos.store', 'method' => 'post', 'id' => 'tipoDocumentoForm']) !!}
-					@include('tipoDocumento.forms.formulario')
+				{!! Form::open(['route' => 'regiones.store', 'method' => 'post', 'id' => 'regionForm']) !!}
+					@include('region.forms.formulario')
 					{{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
                     {{ Form::button('<span class="icon text-white-50"><i class="far fa-window-restore"></i></span><span class="text">Cancelar</span>', ['type' => 'reset', 'class' => 'btn btn-secondary btn-icon-split'] )  }}
                 {!!Form::close()!!}
 			</div>
+
 		</div>
-        <!-- End of Form Tipos Documentos -->
+        <!-- End of Form Regiones -->
 	</div>
 </div>
 <!-- End of Content Row -->
+
 @endsection

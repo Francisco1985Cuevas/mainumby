@@ -72,11 +72,12 @@ class TipoDocumentoController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_documentos',
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_documentos',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -86,7 +87,7 @@ class TipoDocumentoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Documento',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -96,9 +97,11 @@ class TipoDocumentoController extends Controller
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
         TipoDocumento::create(['nombre' => $request['nombre'],
-                                'abreviatura' => $request['abreviatura']
+                                'abreviatura' => $request['abreviatura'],
+                                'comentario' => $request['comentario']
                             ]);
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
         return view('tipoDocumento.create');
@@ -144,11 +147,12 @@ class TipoDocumentoController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:60|unique:tipos_documentos,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:tipos_documentos,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -158,7 +162,7 @@ class TipoDocumentoController extends Controller
                             'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['nombre' => 'Tipo Documento',
+                        ['nombre' => 'Nombre',
                             'abreviatura' => 'Abreviatura'
                         ]);
 
@@ -167,10 +171,12 @@ class TipoDocumentoController extends Controller
         // Obtener el Tipo Documento que corresponda con el ID dado (o null si no es encontrado).
         $tipoDocumento = TipoDocumento::find($id);
         $tipoDocumento-> fill(['nombre' => $request['nombre'],
-                                'abreviatura' => $request['abreviatura']
+                                'abreviatura' => $request['abreviatura'],
+                                'comentario' => $request['comentario']
                             ]);
         $tipoDocumento-> save();
 
+        Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
         return view('tipoDocumento.edit', ['tipoDocumento' => $tipoDocumento]);
     }
@@ -183,12 +189,17 @@ class TipoDocumentoController extends Controller
      */
     public function destroy($id)
     {
-        // Obtener el Tipo Documento que corresponda con el ID dado (o null si no es encontrado).
-        $tipoDocumento = TipoDocumento::find($id);
-        $tipoDocumento->delete();
-
-        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        //Obtener el tipoDocumento que corresponda con el ID dado (o null si no es encontrado).
+        $tipoDocumento = TipoDocumento::withCount('documentos')->find($id);
+        if ($tipoDocumento->documentos_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Documentos que estan relacionados, Verifique!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }else {
+            $tipoDocumento->delete();
+            Session::flash('validated', true);
+            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+        }
 
         return Redirect::to('/tiposdocumentos');
     }

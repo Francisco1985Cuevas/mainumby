@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/tiposemails')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Actualizar Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Form Tipo Email -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -54,7 +63,7 @@
                     {{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
 
 					<!-- link(enlace) al Modal -->
-					<a data-id="{{$tipoEmail->id}}" href="#" id="btn_delete_editFormTipoEmail" class="btn btn-danger" title="Eliminar Registro">
+					<a data-id="{{$tipoEmail->id}}" href="#" id="btn_delete_editFormTipoEmail" class="btn btn-danger btn-icon-split" title="Eliminar Registro">
 						<span class="icon text-white-50"><i class="fas fa-trash"></i></span>
 						<span class="text">Eliminar</span>
 					</a>
@@ -66,7 +75,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="editFormModalLabelTipoEmail">Eliminar Registro</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -80,7 +89,7 @@
 									Esta Seguro de que desea Eliminar este Registro?
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 									<button type="submit" class="btn btn-primary">Aceptar</button>
 								</div>
 							</form>
@@ -94,4 +103,17 @@
 	</div>
 </div>
 <!-- End of Content Row -->
+
+@push('tipoEmail.edit')
+<script>
+    //boton eliminar del form edit.
+	$("#btn_delete_editFormTipoEmail").click(function() {
+        dataId = $(this).attr("data-id");
+
+        $('#form_delete_editFormTipoEmail').attr('action', '/tiposemails/'+dataId);
+        $('#modal_delete_editFormTipoEmail').modal('show');
+    });
+</script>
+@endpush
+
 @endsection

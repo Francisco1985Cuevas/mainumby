@@ -48,15 +48,15 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
-            @if(Session::has('validated'))
+                @if(Session::has('validated'))
                     @if(Session::has('mostrar_en_listado'))
-					    @if(Session::has('message'))
-						    <div class="alert alert-success alert-dismissible fade show" role="alert">
-							    <i class="fas fa-check-circle"></i> {{Session::get('message')}}
-							    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								    <span aria-hidden="true">&times;</span>
-							    </button>
-						    </div>
+                        @if(Session::has('message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-check-circle"></i> {{Session::get('message')}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         @endif
                     @endif
                 @else

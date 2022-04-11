@@ -15,7 +15,7 @@ class Rol extends Model
     protected $table = 'roles';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */

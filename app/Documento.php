@@ -14,18 +14,26 @@ class Documento extends Model
     protected $table = 'documentos';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que son asignables.
      *
      * @var array
      */
-    protected $fillable = ['persona_id', 'tipo_documento_id', 'numero_documento', 'comentario'];
-
+    protected $fillable = ['persona_id', 'tipo_documento_id', 'numero_documento', 'foto_documento_frente', 'foto_documento_dorso', 'fecha_emision', 'fecha_vencimiento', 'comentario'];
 
     /**
-     * Get the tipo_documento_id that owns the Documento.
+     *  Obtiene el "Tipo de Documento(tipo_documento_id)" que posee el Documento.
      */
     public function tipoDocumento() {
-        return $this->belongsTo(TipoDocumento::class);
+        return $this->belongsTo(TipoDocumento::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Documento pertenece a 1 tipoDocumento
+    }
+
+    /**
+     * Obtiene la "Persona(persona_id)" que posee el Documento.
+     */
+    public function persona() {
+        return $this->belongsTo(Persona::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Documento pertenece a 1 persona
     }
 
 }

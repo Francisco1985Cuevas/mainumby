@@ -73,6 +73,7 @@ class TipoContactoController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
@@ -97,7 +98,8 @@ class TipoContactoController extends Controller
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
         TipoContacto::create(['nombre' => $request['nombre'],
-                                'abreviatura' => $request['abreviatura']
+                                'abreviatura' => $request['abreviatura'],
+                                'comentario' => $request['comentario']
                             ]);
 
         Session::flash('validated', true);
@@ -145,6 +147,7 @@ class TipoContactoController extends Controller
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
         $request['nombre'] = strtoupper($request['nombre']);
         $request['abreviatura'] = strtoupper($request['abreviatura']);
+        $request['comentario'] = trim($request['comentario']);
 
         // lógica para validar campos del formulario.
         $this->validate($request,
@@ -168,7 +171,8 @@ class TipoContactoController extends Controller
         // Obtener el Tipo Contacto que corresponda con el ID dado (o null si no es encontrado).
         $tipoContacto = TipoContacto::find($id);
         $tipoContacto-> fill(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura']
+                            'abreviatura' => $request['abreviatura'],
+                            'comentario' => $request['comentario']
                         ]);
         $tipoContacto-> save();
 

@@ -98,6 +98,9 @@
         @stack('pais.list')
         @stack('pais.edit')
 
+        @stack('region.list')
+        @stack('region.edit')
+
         @stack('departamento.create')
         @stack('departamento.list')
         @stack('departamento.edit')
@@ -115,6 +118,12 @@
 
         @stack('tipoContacto.list')
         @stack('tipoContacto.edit')
+
+        @stack('tipoDocumento.list')
+        @stack('tipoDocumento.edit')
+
+        @stack('tipoEmail.list')
+        @stack('tipoEmail.edit')
 
 	</body>
 </html>

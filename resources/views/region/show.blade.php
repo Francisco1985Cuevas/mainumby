@@ -6,7 +6,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-	<h1 class="h3 mb-0 text-gray-800">Detalles del Registro - Tipos de Documentos</h1>
+	<h1 class="h3 mb-0 text-gray-800">Detalles del Registro - Regiones</h1>
 </div>
 <!-- End of Heading -->
 
@@ -17,12 +17,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{!!URL::to('/tiposdocumentos')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/regiones')!!}">Listado de Registros</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Detalles del Registro</li>
             </ol>
         </nav>
         <!-- End of Breadcrumb -->
-		<!-- Detalles Tipo Documento -->
+		<!-- Detalles Region -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
 			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -34,11 +34,11 @@
 					<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
 						<div class="dropdown-header">Acciones:</div>
 						<a class="dropdown-item" href="{!!URL::to('/')!!}" title="P&aacute;gina de Inicio"><i class="fas fa-home"></i> Inicio</a>
-						<a class="dropdown-item" href="{{ URL::route('tiposdocumentos.show', [$tipoDocumento->id]) }}" title="Actualizar P&aacute;gina Actual">
+						<a class="dropdown-item" href="{{ URL::route('regiones.show', [$region->id]) }}" title="Actualizar P&aacute;gina Actual">
 							<i class="fas fa-sync-alt"></i> Actualizar
 						</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{!!URL::to('/tiposdocumentos')!!}" title="Volver al listado">
+						<a class="dropdown-item" href="{!!URL::to('/regiones')!!}" title="Volver al listado">
 							<i class="fas fa-list"></i> Volver
 						</a>
 					</div>
@@ -47,16 +47,17 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
-				{!!Form::model($tipoDocumento, ['route'=>  ['tiposdocumentos.show', $tipoDocumento->id], 'method'=>'POST', 'files'=> true])!!}
-                    @include('tipoDocumento.forms.formulario-detalle')
-                    <a href="{!!URL::to('/tiposdocumentos')!!}" class="btn btn-primary btn-icon-split">
+				{!!Form::model($region, ['route'=>  ['regiones.show', $region->id], 'method'=>'POST', 'files'=> true])!!}
+                    @include('region.forms.formulario-detalle')
+                    <a href="{!!URL::to('/regiones')!!}" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50"><i class="fa fa-arrow-left"></i></span>
                         <span class="text">Volver</span>
                     </a>
                 {!!Form::close()!!}
 			</div>
+
 		</div>
-        <!-- End of Detalles Tipo Documento -->
+        <!-- End of Detalles Region -->
 	</div>
 </div>
 <!-- End of Content Row -->

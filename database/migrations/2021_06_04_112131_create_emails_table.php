@@ -14,12 +14,10 @@ class CreateEmailsTable extends Migration
     public function up()
     {
         Schema::create('emails', function (Blueprint $table) {
-            //$table->id();
             $table->bigIncrements('id');
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('tipo_email_id');
             $table->string('descripcion', 255)->nullable($value = false);
-            //$table->string('comentario', 500)->nullable($value = true);
             $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 

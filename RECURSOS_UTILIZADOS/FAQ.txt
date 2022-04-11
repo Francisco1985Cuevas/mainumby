@@ -264,3 +264,29 @@ REINICIAR EL SERVICIO
 
 modal button data-dismiss not working
 https://stackoverflow.com/questions/38537651/bootstrap-close-modal-not-working
+
+
+
+
+
+
+
+
+
+
+simple editor laravel
+
+https://www.positronx.io/how-to-install-integrate-ckeditor-in-laravel/
+https://ckeditor.com/ckeditor-4/download/?null-addons=
+file:///C:/xampp/htdocs/mainumbyVersionPruebas/public/ckeditor/samples/index.html
+file:///C:/xampp/htdocs/mainumbyVersionPruebas/public/ckeditor/samples/toolbarconfigurator/index.html#basic
+
+
+
+
+
+
+
+
+tabla de telefonos base de datos
+https://es.stackoverflow.com/questions/260093/deber%C3%ADa-poner-todos-los-telefonos-de-un-cliente-como-atributos-en-una-base-de-d

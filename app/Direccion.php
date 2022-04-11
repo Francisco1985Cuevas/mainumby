@@ -14,27 +14,34 @@ class Direccion extends Model
     protected $table = 'direcciones';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
-    protected $fillable = ['persona_id', 'tipo_direccion_id', 'barrio_id', 'calle', 'numero_casa', 'piso', 'departamento', 'comentario'];
-
+    protected $fillable = ['persona_id', 'tipo_direccion_id', 'barrio_id', 'calle_principal', 'calle_secundaria', 'numero_casa', 'edificio', 'piso', 'departamento', 'comentario'];
 
     /**
-     * Get the tipo_direccion_id that owns the Direccion.
+     * Obtiene el "Tipo de Direccion(tipo_direccion_id)" que posee la Direccion.
      */
     public function tipoDireccion() {
         return $this->belongsTo(TipoDireccion::class);  //belongs To = pertenece a
         //si lo leemos diria algo asi: 1 direccion pertenece a 1 tipoDireccion
     }
 
-
     /**
-     * Get the barrio_id that owns the Direccion.
+     * Obtiene el "Barrio(barrio_id)" que posee la Direccion.
      */
     public function barrio() {
-        return $this->belongsTo(Barrio::class);
+        return $this->belongsTo(Barrio::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 direccion pertenece a 1 barrio
+    }
+
+    /**
+     * Obtiene la "Persona(persona_id)" que posee la Direccion.
+     */
+    public function persona() {
+        return $this->belongsTo(Persona::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Direccion pertenece a 1 persona
     }
 
 }
