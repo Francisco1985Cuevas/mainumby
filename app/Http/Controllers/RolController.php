@@ -11,9 +11,8 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de las clases: Pais, Region
-use App\Pais;
-use App\Region;
+// import de las clases: Rol
+use App\Rol;
 
 
 
@@ -50,31 +49,17 @@ de datos en su aplicación y funciona en todos los sistemas de base de datos com
 //use Illuminate\Support\Facades\DB;
 
 
-class RegionController extends Controller
+class RolController extends Controller
 {
-    public $listaPaises;
-
-    // Constructor
     /**
-     * __construct()
-     * el array de lista de paises se utiliza en varias partes, entonces
-     * se crea este metodo constructor con el proposito de crear una sola vez
-     * la variable $listaPaises e inicializarla con los datos correspondientes.
-     *
-     */
-    public function __construct(){
-        $this->listaPaises = Pais::orderBy('nombre')->get();
-    }
-
-    /**
-     * Muestra un listado del recurso (Regiones).
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $regiones = Region::all();
-        return view('region.list', ['regiones' => $regiones]);
+        $roles = Rol::all();
+        return view('rol.list', ['roles' => $roles]);
     }
 
     /**
@@ -84,7 +69,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        return view('region.create', ['listaPaises' =>  $this->listaPaises]);
+        return view('rol.create');
     }
 
     /**
@@ -103,7 +88,7 @@ class RegionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:255|unique:regiones',
+                        ['nombre' => 'required|min:2|max:255|unique:roles',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -119,19 +104,18 @@ class RegionController extends Controller
 
         // Si pasa las reglas de validación, proceder a insertar nuevo registro.
 
-        // Creacion de registros utilizando Eloquent ORM, se hizo import de la clase(Model:Region) al
+        // Creacion de registros utilizando Eloquent ORM, se hizo import de la clase(Model:Rol) al
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
-        Region::create(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura'],
-                            'pais_id' => $request['pais_id'],
-                            'descripcion' => trim($request['descripcion'])
-                            ]);
+        Rol::create(['nombre' => $request['nombre'],
+                        'abreviatura' => $request['abreviatura'],
+                        'comentario' => trim($request['comentario'])
+                    ]);
 
         Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
-        return view('region.create', ['listaPaises' => $this->listaPaises]);
+        return view('rol.create');
     }
 
     /**
@@ -142,9 +126,9 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        return view('region.show', ['region' => $region]);
+        // Obtener el Rol que corresponda con el ID dado (o null si no es encontrado).
+        $rol = Rol::find($id);
+        return view('rol.show', ['rol' => $rol]);
     }
 
     /**
@@ -155,10 +139,9 @@ class RegionController extends Controller
      */
     public function edit($id)
     {
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        return view('region.edit', ['region' => $region,
-                                            'listaPaises' => $this->listaPaises]);
+        // Obtener el Rol que corresponda con el ID dado (o null si no es encontrado).
+        $rol = Rol::find($id);
+        return view('rol.edit', ['rol' => $rol]);
     }
 
     /**
@@ -178,7 +161,7 @@ class RegionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:255|unique:regiones,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:roles,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -194,21 +177,18 @@ class RegionController extends Controller
 
         // Si pasa las reglas de validación, proceder a actualizar registro.
 
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        $region->fill(['nombre' => $request['nombre'],
+        // Obtener el Rol que corresponda con el ID dado (o null si no es encontrado).
+        $rol = Rol::find($id);
+        $rol->fill(['nombre' => $request['nombre'],
                         'abreviatura' => $request['abreviatura'],
-                        'pais_id' => $request['pais_id'],
-                        'descripcion' => trim($request['descripcion'])
+                        'comentario' => trim($request['comentario'])
                         ]);
-        $region->save();
+        $rol->save();
 
         Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
 
-        return view('region.edit', ['region' => $region,
-                                        'listaPaises' => $this->listaPaises
-                                    ]);
+        return view('rol.edit', ['rol' => $rol]);
     }
 
     /**
@@ -219,32 +199,13 @@ class RegionController extends Controller
      */
     public function destroy($id)
     {
-        //Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::withCount('departamentos')->find($id);
-        if ($region->departamentos_count > 0) {
-            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Departamentos que estan relacionados, Verifique!');
-            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
-        }else {
-            $region->delete();
-            Session::flash('validated', true);
-            Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
-            Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
-        }
+        //Obtener el Rol que corresponda con el ID dado (o null si no es encontrado).
+        $rol = Rol::find($id);
+        $rol->delete();
+        Session::flash('validated', true);
+        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
 
-        return Redirect::to('/regiones');
+        return Redirect::to('/roles');
     }
-
-    /**
-     * Muestra una lista de recursos(Regiones) filtrado por país.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function findByPais($id)
-    {
-        $regiones = Region::where('pais_id', $id)
-                            ->orderBy('nombre', 'desc')
-                            ->get();
-        return json_encode($regiones);
-    }
-
 }

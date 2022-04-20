@@ -63,6 +63,7 @@ class PersonaController extends Controller
     public $lista_barrios;
     public $lista_tiposContactos;
     public $lista_tiposEmails;
+    public $listaPaises;
 
      /**
      *
@@ -74,7 +75,7 @@ class PersonaController extends Controller
         $this->lista_barrios = Barrio::orderBy('nombre')->get();
         $this->lista_tiposContactos = TipoContacto::orderBy('nombre')->get();
         $this->lista_tiposEmails = TipoEmail::orderBy('nombre')->get();
-        $this->lista_paises = Pais::orderBy('nombre')->get();
+        $this->listaPaises = Pais::orderBy('nombre')->get();
     }
 
 
@@ -104,7 +105,7 @@ class PersonaController extends Controller
                         'lista_barrios' =>  $this->lista_barrios,
                         'lista_tiposContactos' =>  $this->lista_tiposContactos,
                         'lista_tiposEmails' =>  $this->lista_tiposEmails,
-                        'lista_paises' =>  $this->lista_paises]);
+                        'listaPaises' =>  $this->listaPaises]);
     }
 
     /**
@@ -132,17 +133,22 @@ class PersonaController extends Controller
         //print_r("errors: ".$errors."<br>");
         //die();
 
-        //convierto previamente los campos(Nombres y Apellidos) a mayusculas, como alguna forma de "unificar" ya
-        //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
-        $request['nombres'] = strtoupper($request['nombres']);
+        //convierto previamente los campos(primer_nombre, segundo_nombre y primer_apellido, segundo_apellido) a
+        //mayusculas, como alguna forma de "unificar" ya que validate() no tiene en cuenta mayusculas
+        //ni minusculas y se pueden duplicar registros...
+        $request['primer_nombre'] = strtoupper($request['primer_nombre']);
+
 
         //Si es una persona fisica, entonces capturar todos los  datos posibles como: apellido,
         //sexo, etc.
         //Si es persona juridica, solo capturar datos relevantes para tipo_persona
         //como: Nombre o Razon Social, Numero de RUC, etc.
-        $personaFisica = "F";
+        $personaFisica = "f";
         if (strcmp($request['tipo_persona'], $personaFisica) === 0) { //Al comparar los strings, coinciden...
-            $request['apellidos'] = strtoupper($request['apellidos']);
+            $request['primer_apellido'] = strtoupper($request['primer_apellido']);
+            $request['segundo_nombre'] = strtoupper($request['segundo_nombre']);
+            $request['primer_apellido'] = strtoupper($request['primer_apellido']);
+            $request['segundo_apellido'] = strtoupper($request['segundo_apellido']);
         }
 
         // lógica para validar campos del formulario.
@@ -151,7 +157,7 @@ class PersonaController extends Controller
             $request,
             //rules
             [
-                'nombres' => 'required|min:2|max:100'
+                'primer_nombre' => 'required|min:2|max:100'
             ],
             //messages
             [
@@ -161,7 +167,7 @@ class PersonaController extends Controller
             ],
             //atributes
             [
-                'nombres' => 'Nombres'
+                'primer_nombre' => 'Primer Nombre/Razon Social'
             ]
         );
 
@@ -201,11 +207,17 @@ class PersonaController extends Controller
 
                 //Insertar datos en la tabla Personas.
                 $persona = new Persona;
-                $persona->nombres = $request['nombres'];
-                $persona->apellidos = $request['apellidos'];
+                $persona->primer_nombre = $request['primer_nombre'];
+                $persona->segundo_nombre = $request['segundo_nombre'];
+                $persona->primer_apellido = $request['primer_apellido'];
+                $persona->segundo_apellido = $request['segundo_apellido'];
+                $persona->ciudad_id = $request['ciudad_id'];
                 $persona->fecha_nacimiento = $request['fecha_nacimiento'];
                 $persona->tipo_persona = $request['tipo_persona'];
+                $persona->estado_civil = $request['estado_civil'];
                 $persona->sexo = $request['sexo'];
+                //$persona->foto = $request['foto'];
+                $persona->estado = 'activo';
                 $persona->comentario = $request['comentario'];
                 $persona-> save();
 
@@ -311,7 +323,7 @@ class PersonaController extends Controller
                                 'lista_barrios' =>  $this->lista_barrios,
                                 'lista_tiposContactos' =>  $this->lista_tiposContactos,
                                 'lista_tiposEmails' =>  $this->lista_tiposEmails,
-                                'lista_paises' =>  $this->lista_paises
+                                'listaPaises' =>  $this->listaPaises
                             ]);
 
             }//end if [ is_array(item_tipoDocumentoId) ]
@@ -383,7 +395,7 @@ class PersonaController extends Controller
                                         'lista_barrios' =>  $this->lista_barrios,
                                         'lista_tiposContactos' =>  $this->lista_tiposContactos,
                                         'lista_tiposEmails' =>  $this->lista_tiposEmails,
-                                        'lista_paises' =>  $this->lista_paises,
+                                        'listaPaises' =>  $this->listaPaises,
                                         'persona' => $persona,
                                         'documentos' => $documentos,
                                         'direcciones' => $direcciones,
@@ -402,7 +414,7 @@ class PersonaController extends Controller
     {
         //convierto previamente los campos a mayusculas, como alguna forma de "unificar" ya
         //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
-        $request['nombres'] = strtoupper($request['nombres']);
+        $request['primer_nombre'] = strtoupper($request['primer_nombre']);
         $personaFisica = "F";
         if (strcmp($request['tipo_persona'], $personaFisica) === 0) { //Los strings coinciden...
             $request['apellidos'] = strtoupper($request['apellidos']);
@@ -413,7 +425,7 @@ class PersonaController extends Controller
             $request,
             //rules
             [
-                'nombres' => 'required|min:2|max:100',
+                'primer_nombre' => 'required|min:2|max:100',
             ],
             //messages
             [
@@ -423,7 +435,7 @@ class PersonaController extends Controller
             ],
             //atributes
             [
-                'nombres' => 'Nombres',
+                'primer_nombre' => 'Nombres',
             ]
         );
 
@@ -435,7 +447,7 @@ class PersonaController extends Controller
         if (strcmp($request['tipo_persona'], $personaFisica) === 0) { //Los strings coinciden...
             $persona = Persona::find($id);
             $persona->fill([
-                'nombres' => $request['nombres'],
+                'primer_nombre' => $request['primer_nombre'],
                 'apellidos' => $request['apellidos'],
                 'fecha_nacimiento' => $request['fecha_nacimiento'],
                 'tipo_persona' => $request['tipo_persona'],
@@ -444,7 +456,7 @@ class PersonaController extends Controller
         } else {
             $persona = Persona::find($id);
             $persona->fill([
-                'nombres' => $request['nombres'],
+                'primer_nombre' => $request['primer_nombre'],
                 'tipo_persona' => 'J',
                 'comentario' => $request['comentario']
             ]);
@@ -588,7 +600,7 @@ class PersonaController extends Controller
                                         'lista_barrios' =>  $this->lista_barrios,
                                         'lista_tiposContactos' =>  $this->lista_tiposContactos,
                                         'lista_tiposEmails' =>  $this->lista_tiposEmails,
-                                        'lista_paises' =>  $this->lista_paises,
+                                        'listaPaises' =>  $this->listaPaises,
                                         'persona' => $persona,
                                         'documentos' => $documentos,
                                         'direcciones' => $direcciones,

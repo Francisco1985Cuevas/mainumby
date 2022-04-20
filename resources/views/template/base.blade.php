@@ -83,10 +83,10 @@
         --}}
 
         {!!Html::script('js/demo/fnts.js')!!}
-
+        {{--
         @stack('scriptsPersona')
         @stack('scriptsPersonaEdit')
-
+        --}}
 
 
 
@@ -125,5 +125,21 @@
         @stack('tipoEmail.list')
         @stack('tipoEmail.edit')
 
+        @stack('nacionalidad.list')
+        @stack('nacionalidad.edit')
+
+        @stack('usuario.list')
+        @stack('usuario.edit')
+
+        @stack('rol.list')
+        @stack('rol.edit')
+
+        @stack('moneda.list')
+        @stack('moneda.edit')
+
+        @stack('periodoFiscal.list')
+        @stack('periodoFiscal.edit')
+
+        @stack('persona.create')
 	</body>
 </html>

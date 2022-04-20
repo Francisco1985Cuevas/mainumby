@@ -36,4 +36,12 @@ class Pais extends Model
         //si lo leemos diria algo asi: 1 Pais tiene muchos(as) nacionalidades
     }
 
+    /**
+     * Obtiene las Monedas para el "Pais".
+     */
+    public function monedas() {
+        return $this->hasMany(Moneda::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 Pais tiene muchos(as) monedas
+    }
+
 }

@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            //ASIGNAR CAMPO UNIQUE PARA EVITAR QUE SE DUPLIQUEN REGISTROS POR NOMBRE DE USUARIO
+            $table->unique(['name']);
+
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('persona_id')->references('id')->on('personas')->nullable()->constrained()->onDelete('RESTRICT')->onUpdate('CASCADE');
         });

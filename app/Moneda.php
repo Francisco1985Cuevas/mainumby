@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moneda extends Model
 {
-    //
     /**
      * The table associated with the model.
      *
@@ -15,7 +14,7 @@ class Moneda extends Model
     protected $table = 'monedas';
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
@@ -23,7 +22,7 @@ class Moneda extends Model
 
 
     /**
-     * Get the pais_id that owns the Moneda.
+     *  Obtiene el "Pais(pais_id)" que posee la Moneda.
      */
     public function pais() {
         return $this->belongsTo(Pais::class);

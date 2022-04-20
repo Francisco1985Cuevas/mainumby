@@ -60,4 +60,12 @@ class Persona extends Model
         //si lo leemos diria algo asi: 1 Persona tiene muchos(as) Emails
     }
 
+    /**
+     * Obtiene los Usuarios para la "Persona".
+     */
+    public function usuarios() {
+        return $this->hasMany(User::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 Persona tiene muchos(as) Usuarios
+    }
+
 }

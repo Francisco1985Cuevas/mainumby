@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar en masa.
      *
      * @var array
      */
@@ -20,7 +20,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Los atributos que deben ocultarse para los arrays.
      *
      * @var array
      */
@@ -29,11 +29,28 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Los atributos que se deben convertir a los tipos nativos.
      *
      * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     *  Obtiene la "Persona(persona_id)" que posee el Usuario.
+     */
+    public function persona() {
+        return $this->belongsTo(Persona::class);  //belongs To = pertenece a
+        //si lo leemos diria algo asi: 1 Usuario pertenece a 1 Persona
+    }
+
+    /**
+     * Obtiene los Periodos Fiscales para el "Usuario".
+     */
+    public function periodosFiscales() {
+        return $this->hasMany(PeriodoFiscal::class); // has many = tiene muchos(as)
+        //si lo leemos diria algo asi: 1 Usuario tiene muchos(as) periodos fiscales
+    }
+
 }

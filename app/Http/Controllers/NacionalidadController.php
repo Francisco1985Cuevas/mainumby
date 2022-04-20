@@ -11,9 +11,10 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de las clases: Pais, Region
+// import de las clases: Pais, Nacionalidad
 use App\Pais;
-use App\Region;
+use App\Nacionalidad;
+use App\NacionalidadPersona;
 
 
 
@@ -50,11 +51,11 @@ de datos en su aplicación y funciona en todos los sistemas de base de datos com
 //use Illuminate\Support\Facades\DB;
 
 
-class RegionController extends Controller
+class NacionalidadController extends Controller
 {
     public $listaPaises;
 
-    // Constructor
+     // Constructor
     /**
      * __construct()
      * el array de lista de paises se utiliza en varias partes, entonces
@@ -66,15 +67,16 @@ class RegionController extends Controller
         $this->listaPaises = Pais::orderBy('nombre')->get();
     }
 
+
     /**
-     * Muestra un listado del recurso (Regiones).
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $regiones = Region::all();
-        return view('region.list', ['regiones' => $regiones]);
+        $nacionalidades = Nacionalidad::all();
+        return view('nacionalidad.list', ['nacionalidades' => $nacionalidades]);
     }
 
     /**
@@ -84,7 +86,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        return view('region.create', ['listaPaises' =>  $this->listaPaises]);
+        return view('nacionalidad.create', ['listaPaises' =>  $this->listaPaises]);
     }
 
     /**
@@ -103,7 +105,7 @@ class RegionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:255|unique:regiones',
+                        ['nombre' => 'required|min:2|max:255|unique:nacionalidades',
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -119,19 +121,19 @@ class RegionController extends Controller
 
         // Si pasa las reglas de validación, proceder a insertar nuevo registro.
 
-        // Creacion de registros utilizando Eloquent ORM, se hizo import de la clase(Model:Region) al
+        // Creacion de registros utilizando Eloquent ORM, se hizo import de la clase(Model:Nacionalidad) al
         // principio de este archivo para poder para poder utilizarlo sin necesidad de hacer
         // referencia a su nombre de espacio completo.
-        Region::create(['nombre' => $request['nombre'],
-                            'abreviatura' => $request['abreviatura'],
-                            'pais_id' => $request['pais_id'],
-                            'descripcion' => trim($request['descripcion'])
+        Nacionalidad::create(['nombre' => $request['nombre'],
+                                'abreviatura' => $request['abreviatura'],
+                                'pais_id' => $request['pais_id'],
+                                'comentario' => trim($request['comentario'])
                             ]);
 
         Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
-        return view('region.create', ['listaPaises' => $this->listaPaises]);
+        return view('nacionalidad.create', ['listaPaises' => $this->listaPaises]);
     }
 
     /**
@@ -142,9 +144,9 @@ class RegionController extends Controller
      */
     public function show($id)
     {
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        return view('region.show', ['region' => $region]);
+        // Obtener la Nacionalidad que corresponda con el ID dado (o null si no es encontrado).
+        $nacionalidad = Nacionalidad::find($id);
+        return view('nacionalidad.show', ['nacionalidad' => $nacionalidad]);
     }
 
     /**
@@ -155,9 +157,9 @@ class RegionController extends Controller
      */
     public function edit($id)
     {
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        return view('region.edit', ['region' => $region,
+        // Obtener la Nacionalidad que corresponda con el ID dado (o null si no es encontrado).
+        $nacionalidad = Nacionalidad::find($id);
+        return view('nacionalidad.edit', ['nacionalidad' => $nacionalidad,
                                             'listaPaises' => $this->listaPaises]);
     }
 
@@ -178,7 +180,7 @@ class RegionController extends Controller
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['nombre' => 'required|min:2|max:255|unique:regiones,nombre,'.$id,
+                        ['nombre' => 'required|min:2|max:255|unique:nacionalidades,nombre,'.$id,
                             'abreviatura' => 'max:3'
                         ],
                         //messages
@@ -194,19 +196,19 @@ class RegionController extends Controller
 
         // Si pasa las reglas de validación, proceder a actualizar registro.
 
-        // Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::find($id);
-        $region->fill(['nombre' => $request['nombre'],
-                        'abreviatura' => $request['abreviatura'],
-                        'pais_id' => $request['pais_id'],
-                        'descripcion' => trim($request['descripcion'])
-                        ]);
-        $region->save();
+        // Obtener la Nacionalidad que corresponda con el ID dado (o null si no es encontrado).
+        $nacionalidad = Nacionalidad::find($id);
+        $nacionalidad->fill(['nombre' => $request['nombre'],
+                                'abreviatura' => $request['abreviatura'],
+                                'pais_id' => $request['pais_id'],
+                                'comentario' => trim($request['comentario'])
+                            ]);
+        $nacionalidad->save();
 
         Session::flash('validated', true);
         Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
 
-        return view('region.edit', ['region' => $region,
+        return view('nacionalidad.edit', ['nacionalidad' => $nacionalidad,
                                         'listaPaises' => $this->listaPaises
                                     ]);
     }
@@ -219,32 +221,18 @@ class RegionController extends Controller
      */
     public function destroy($id)
     {
-        //Obtener la Region que corresponda con el ID dado (o null si no es encontrado).
-        $region = Region::withCount('departamentos')->find($id);
-        if ($region->departamentos_count > 0) {
-            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Departamentos que estan relacionados, Verifique!');
+        //Obtener la Nacionalidad que corresponda con el ID dado (o null si no es encontrado).
+        /*$nacionalidad = Nacionalidad::withCount('nacionalidades_persona')->find($id);
+        if ($nacionalidad->nacionalidades_count > 0) {
+            Session::flash('message', 'El Registro No se puede eliminar de la Base de Datos porque tiene registros de Nacionalidad-Persona que estan relacionados, Verifique!');
             Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
-        }else {
-            $region->delete();
+        }else {*/
+            $nacionalidad->delete();
             Session::flash('validated', true);
             Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
             Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
-        }
+        //}
 
-        return Redirect::to('/regiones');
+        return Redirect::to('/nacionalidades');
     }
-
-    /**
-     * Muestra una lista de recursos(Regiones) filtrado por país.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function findByPais($id)
-    {
-        $regiones = Region::where('pais_id', $id)
-                            ->orderBy('nombre', 'desc')
-                            ->get();
-        return json_encode($regiones);
-    }
-
 }

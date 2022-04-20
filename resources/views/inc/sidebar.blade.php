@@ -36,15 +36,33 @@
 				<a class="collapse-item" href="http://127.0.0.1:8000/departamentos">Departamentos</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/ciudades">Ciudades</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/barrios">Barrios</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/nacionalidades">Nacionalidades</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposdirecciones">Tipos Direcciones</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposcontactos">Tipos Contactos</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposdocumentos">Tipos Documentos</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/tiposemails">Tipos Emails</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/personas">Personas</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/usuarios">Usuarios</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/roles">Roles</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/monedas">Monedas</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/periodosFiscales">Periodos Fiscales</a>
                 <!-- <a class="collapse-item" href="http://127.0.0.1:8000/contactos">Contactos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/documentos">Documentos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/direcciones">Direcciones x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/emails">Emails x Persona</a> -->
+                <?php
+                    //echo $_SERVER['PHP_SELF'];
+                    //echo "<br>";
+                    //echo $_SERVER['SERVER_NAME'];
+                    //echo "<br>";
+                    //echo $_SERVER['HTTP_HOST'];
+                    //echo "<br>";
+                    //echo $_SERVER['HTTP_REFERER'];
+                    //echo "<br>";
+                    //echo $_SERVER['HTTP_USER_AGENT'];
+                    //echo "<br>";
+                    //echo $_SERVER['SCRIPT_NAME'];
+                ?>
 			</div>
 		</div>
 	</li>

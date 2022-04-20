@@ -290,3 +290,14 @@ file:///C:/xampp/htdocs/mainumbyVersionPruebas/public/ckeditor/samples/toolbarco
 
 tabla de telefonos base de datos
 https://es.stackoverflow.com/questions/260093/deber%C3%ADa-poner-todos-los-telefonos-de-un-cliente-como-atributos-en-una-base-de-d
+
+
+
+
+
+
+
+
+Form:: email laravel input type email
+INPUTS DE LARAVEL
+https://stackoverflow.com/questions/35602187/html-form-in-laravel-form

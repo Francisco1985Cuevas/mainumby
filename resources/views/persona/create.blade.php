@@ -13,6 +13,15 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{!!URL::to('/personas')!!}">Listado de Registros</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nuevo Registro</li>
+            </ol>
+        </nav>
+        <!-- End of Breadcrumb -->
 		<!-- Form Personas -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -54,7 +63,8 @@
 					</div>
 				@endif
 
-				{!! Form::open(['route' => 'personas.store', 'method' => 'post', 'id' => 'personaForm']) !!}
+				{!! Form::open(['route' => 'personas.store', 'method' => 'post', 'id' => 'personaForm', 'enctype' => 'multipart/form-data']) !!}
+                    <!-- <form id="personaForm" action="personas.store" method="post" enctype="multipart/form-data"> -->
 
                     <div class="accordion" id="accordionPersona">
                         <div class="accordion-item">
@@ -74,14 +84,75 @@
                                         {!! Form::text('id', null, $attributes = ['class'=>'form-control', 'readonly'=>'true']) !!}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('nombres', 'Nombres/Raz&oacute;n Social') !!}
-                                        {!! Form::label('nombres', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
-                                        {!! Form::text('nombres', null, ['class'=>'form-control', 'required'=>'required', 'maxlength'=>60, 'id'=>'nombres', 'autofocus'=>true]) !!}
+                                        {!! Form::label('primer_nombre', 'Primer Nombre/Raz&oacute;n Social') !!}
+                                        {!! Form::label('primer_nombre', '(*) Campo Obligatorio', ['class' => 'text-xs']); !!}
+                                        {!! Form::text('primer_nombre', null, ['id'=>'primer_nombre', 'class'=>'form-control', 'required'=>'required', 'minlength'=>2, 'maxlength'=>255, 'autofocus'=>true]) !!}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('apellidos', 'Apellidos') !!}
-                                        {!! Form::text('apellidos', null, ['class'=>'form-control', 'maxlength'=>60, 'id'=>'apellidos']) !!}
+                                        {!! Form::label('segundo_nombre', 'Segundo Nombre') !!}
+                                        {!! Form::label('segundo_nombre', '(Campo opcional)', ['class' => 'text-xs']); !!}
+                                        {!! Form::text('segundo_nombre', null, ['id'=>'segundo_nombre', 'class'=>'form-control', 'maxlength'=>255]) !!}
                                     </div>
+                                    <div class="form-group">
+                                        {!! Form::label('primer_apellido', 'Primer Apellido') !!}
+                                        {!! Form::label('segundo_nombre', '(Campo opcional)', ['class' => 'text-xs']); !!}
+                                        {!! Form::text('primer_apellido', null, ['id'=>'primer_apellido', 'class'=>'form-control', 'maxlength'=>255]) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('segundo_apellido', 'Segundo Apellido') !!}
+                                        {!! Form::label('segundo_apellido', '(Campo opcional)', ['class' => 'text-xs']); !!}
+                                        {!! Form::text('segundo_apellido', null, ['id'=>'segundo_apellido', 'class'=>'form-control', 'maxlength'=>255]) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('estado_civil', 'Estado Civil') !!}
+                                        <select id="estado_civil" name="estado_civil" class="form-control">
+                                            <option value="s" selected >Soltero/a</option>
+                                            <option value="c">Casado/a</option>
+                                            <option value="v">Viudo/a</option>
+                                            <option value="d">Divorciado/a</option>
+                                        </select>
+                                    </div>
+
+                                    @if (count($listaPaises) > 0)
+                                        <div class="form-group">
+                                            {!! Form::label('pais_id', 'Pa&iacute;s') !!}
+                                            <select id="pais_id" name="pais_id" class="form-control" required>
+                                                <option value="">Seleccione Opcion...</option>
+                                                @foreach ($listaPaises as $pais)
+                                                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-info" role="alert">
+                                            <div class="text-xs"><i class="fas fa-info-circle"></i> Informaci&oacute;n del Sistema</div>
+                                            <strong>Listado:</strong> Paises
+                                            <br/>
+                                            Debe <a href="{!!URL::to('/paises/create')!!}" class="alert-link" title="Nuevo Registro">Cargar Datos</a> para Visualizar el Listado.
+                                        </div>
+                                    @endif
+                                    <!-- Form Group (region_id) -->
+                                    <div class="form-group">
+                                        <label for="region_id">Region</label>
+                                        <select id="region_id" name="region_id" class="form-control" required>
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
+                                    <!-- Form Group (departamento_id) -->
+                                    <div class="form-group">
+                                        <label for="departamento_id">Departamento</label>
+                                        <select id="departamento_id" name="departamento_id" class="form-control" required>
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
+                                    <!-- Form Group (ciudad_id) -->
+                                    <div class="form-group">
+                                        <label for="ciudad_id">Ciudad</label>
+                                        <select id="ciudad_id" name="ciudad_id" class="form-control" required>
+                                            <!-- Las opciones se cargan dinamicamente a traves de JQuery/JavaScript -->
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         {!! Form::label('fecha_nacimiento', 'Fecha Nacimiento') !!}
                                         {!! Form::input('date', 'fecha_nacimiento', $value = null, $options = array('class'=>'form-control')) !!}
@@ -99,6 +170,11 @@
                                             <option value="f">Femenino</option>
                                             <option value="m" selected >Masculino</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('foto', 'Foto') !!}
+                                        {!! Form::label('foto', '(Campo opcional)', ['class' => 'text-xs']); !!}
+                                        <input id="foto" name="foto" class="form-control" type="file">
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('comentario', 'Comentarios') !!}
@@ -233,7 +309,7 @@
                                         <label for="addItem_paisId">Seleccione Pa&iacute;s</label>
                                         <select id="addItem_paisId" name="addItem_paisId" class="form-control">
                                             <option selected value="">Seleccione Opci&oacute;n...</option>
-                                            @foreach ($lista_paises as $pais)
+                                            @foreach ($listaPaises as $pais)
                                                 <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                             @endforeach
                                         </select>
@@ -520,6 +596,8 @@
 
                     <br />
 					{{ Form::button('<span class="icon text-white-50"><i class="fas fa-save"></i></span><span class="text">Guardar</span>', ['type' => 'submit', 'class' => 'btn btn-primary btn-icon-split'] )  }}
+                    {{ Form::button('<span class="icon text-white-50"><i class="far fa-window-restore"></i></span><span class="text">Cancelar</span>', ['type' => 'reset', 'class' => 'btn btn-secondary btn-icon-split'] )  }}
+                    <!-- </form> -->
                 {!!Form::close()!!}
 			</div>
 
@@ -529,7 +607,7 @@
 </div>
 <!-- End of Content Row -->
 
-@push('scriptsPersona')
+@push('persona.create')
 	<script>
         var contadorDocumentos = 0;
         var contadorDirecciones = 0;
@@ -538,6 +616,109 @@
 
         //Host Name and Protocol
  		var host = window.location.protocol + "//" + window.location.host; //obtiene por ejemplo: http://localhost:8080
+
+        //Selects dependientes de Regiones por Pais, Departamentos por Region
+        jQuery(document).ready(function (){
+            jQuery('select[name="pais_id"]').on('change', function() {
+                var paisId = jQuery(this).val();
+                if(paisId){
+                    jQuery.ajax({
+                        url : host+'/regiones/findByPais/' +paisId,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="region_id"]').empty();
+                            jQuery('select[name="departamento_id"]').empty();
+                            jQuery('select[name="ciudad_id"]').empty();
+                            $('select[name="region_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="region_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="region_id"]').empty();
+                    $('select[name="departamento_id"]').empty();
+                    $('select[name="ciudad_id"]').empty();
+                }
+            });
+        });
+
+        jQuery(document).ready(function (){
+            jQuery('select[name="region_id"]').on('change', function() {
+                var regionId = jQuery(this).val();
+                if(regionId){
+                    jQuery.ajax({
+                        url : host+'/departamentos/findByRegion/' +regionId,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="departamento_id"]').empty();
+                            $('select[name="departamento_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="departamento_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="departamento_id"]').empty();
+                }
+            });
+        });
+
+        jQuery(document).ready(function (){
+            jQuery('select[name="departamento_id"]').on('change', function() {
+                var departamentoId = jQuery(this).val();
+                if(departamentoId){
+                    jQuery.ajax({
+                        url : host+'/ciudades/findByDepartamento/' +departamentoId,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data) {
+                            jQuery('select[name="ciudad_id"]').empty();
+                            $('select[name="ciudad_id"]').append('<option value="">Seleccione Opci&oacute;n...</option>');
+                            jQuery.each(data, function(key, value){
+                                $('select[name="ciudad_id"]').append('<option value="'+ value.id +'">'+ value.nombre +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="ciudad_id"]').empty();
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //boton Agregar item Documento
         $("#btn_addItem_createFormDocumento").click(function() {

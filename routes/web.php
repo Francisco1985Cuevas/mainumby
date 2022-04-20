@@ -52,6 +52,15 @@ Route::resource('tiposemails', 'TipoEmailController');
 
 Route::resource('emails', 'EmailController');
 
+Route::resource('nacionalidades', 'NacionalidadController');
+
+Route::resource('usuarios', 'UserController');
+
+Route::resource('roles', 'RolController');
+
+Route::resource('monedas', 'MonedaController');
+
+Route::resource('periodosfiscales', 'PeriodoFiscalController');
 
 //Route::get('/list', 'DepartamentoController@list');
 //Route::get('/list','PersonaController@list');
