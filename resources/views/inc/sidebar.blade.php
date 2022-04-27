@@ -45,7 +45,7 @@
                 <a class="collapse-item" href="http://127.0.0.1:8000/usuarios">Usuarios</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/roles">Roles</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/monedas">Monedas</a>
-                <a class="collapse-item" href="http://127.0.0.1:8000/periodosFiscales">Periodos Fiscales</a>
+                <a class="collapse-item" href="http://127.0.0.1:8000/periodosfiscales">Periodos Fiscales</a>
                 <!-- <a class="collapse-item" href="http://127.0.0.1:8000/contactos">Contactos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/documentos">Documentos x Persona</a>
                 <a class="collapse-item" href="http://127.0.0.1:8000/direcciones">Direcciones x Persona</a>

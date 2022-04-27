@@ -52,6 +52,20 @@ de datos en su aplicación y funciona en todos los sistemas de base de datos com
 
 class PeriodoFiscalController extends Controller
 {
+    public $listaUsuarios;
+
+    // Constructor
+    /**
+     * __construct()
+     * el array de lista de usuarios se utiliza en varias partes, entonces
+     * se crea este metodo constructor con el proposito de crear una sola vez
+     * la variable $listaUsuarios e inicializarla con los datos correspondientes.
+     *
+     */
+    public function __construct(){
+        $this->listaUsuarios = User::orderBy('name')->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +73,8 @@ class PeriodoFiscalController extends Controller
      */
     public function index()
     {
-        //
+        $periodosFiscales = PeriodoFiscal::all();
+        return view('periodoFiscal.list', ['periodosFiscales' => $periodosFiscales]);
     }
 
     /**
@@ -69,7 +84,7 @@ class PeriodoFiscalController extends Controller
      */
     public function create()
     {
-        return view('periodoFiscal.create');
+        return view('periodoFiscal.create', ['listaUsuarios' =>  $this->listaUsuarios]);
     }
 
     /**
@@ -80,26 +95,21 @@ class PeriodoFiscalController extends Controller
      */
     public function store(Request $request)
     {
-        //convierto previamente los campos a mayusculas, como alguna forma de "unificar" ya
-        //que validate() no tiene en cuenta mayusculas ni minusculas y se pueden duplicar registros...
-        //$request['nombre'] = strtoupper($request['nombre']);
-        //$request['abreviatura'] = strtoupper($request['abreviatura']);
-
         // lógica para validar campos del formulario.
         $this->validate($request,
                         //rules
-                        ['periodo' => 'required'//,
-                            //'abreviatura' => 'max:3'
+                        ['periodo' => 'required',
+                            'descripcion' => 'required'
                         ],
                         //messages
                         ['required' => 'El campo <b>:attribute</b> es obligatorio.',
-                            //'unique' => 'El campo <b>:attribute</b> que ingreso ya ha sido registrado.',
-                            //'max' => 'El campo <b>:attribute</b> no debe ser mayor que :max caracteres.',
-                            //'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
+                            'unique' => 'El campo <b>:attribute</b> que ingreso ya ha sido registrado.',
+                            'max' => 'El campo <b>:attribute</b> no debe ser mayor que :max caracteres.',
+                            'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
                         ],
                         //atributes
-                        ['periodo' => 'Periodo'//,
-                            //'abreviatura' => 'Abreviatura'
+                        ['periodo' => 'Periodo',
+                            'descripcion' => 'Descripcion'
                         ]);
 
         // Si pasa las reglas de validación, proceder a insertar nuevo registro.
@@ -116,7 +126,7 @@ class PeriodoFiscalController extends Controller
         Session::flash('validated', true);
         Session::flash('message', 'El Nuevo Registro Ingresado, se guardo Exitosamente en la Base de Datos!');
 
-        return view('periodoFiscal.create');
+        return view('periodoFiscal.create', ['listaUsuarios' =>  $this->listaUsuarios]);
     }
 
     /**
@@ -127,7 +137,9 @@ class PeriodoFiscalController extends Controller
      */
     public function show($id)
     {
-        //
+        // Obtener el Periodo Fiscal que corresponda con el ID dado (o null si no es encontrado).
+        $periodoFiscal = PeriodoFiscal::find($id);
+        return view('periodoFiscal.show', ['periodoFiscal' => $periodoFiscal]);
     }
 
     /**
@@ -138,7 +150,10 @@ class PeriodoFiscalController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Obtener el Periodo Fiscal que corresponda con el ID dado (o null si no es encontrado).
+        $periodoFiscal = PeriodoFiscal::find($id);
+        return view('periodoFiscal.edit', ['periodoFiscal' => $periodoFiscal,
+                                        'listaUsuarios' => $this->listaUsuarios]);
     }
 
     /**
@@ -150,7 +165,40 @@ class PeriodoFiscalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // lógica para validar campos del formulario.
+        $this->validate($request,
+                        //rules
+                        ['periodo' => 'required',
+                            'descripcion' => 'required'
+                        ],
+                        //messages
+                        ['required' => 'El campo <b>:attribute</b> es obligatorio.',
+                            'unique' => 'El campo <b>:attribute</b> que ingreso ya ha sido registrado.',
+                            'max' => 'El campo <b>:attribute</b> no debe ser mayor que :max caracteres.',
+                            'min' => 'El campo <b>:attribute</b> debe contener al menos :min caracteres.'
+                        ],
+                        //atributes
+                        ['periodo' => 'Periodo',
+                            'descripcion' => 'Descripcion'
+                        ]);
+
+        // Si pasa las reglas de validación, proceder a actualizar registro.
+
+        // Obtener el Periodo Fiscal que corresponda con el ID dado (o null si no es encontrado).
+        $periodoFiscal = PeriodoFiscal::find($id);
+        $periodoFiscal->fill(['periodo' => $request['periodo'],
+                                'descripcion' => trim($request['descripcion']),
+                                'user_id' => $request['user_id'],
+                                'comentario' => trim($request['comentario'])
+                        ]);
+        $periodoFiscal->save();
+
+        Session::flash('validated', true);
+        Session::flash('message', 'El Registro se Actualizo Exitosamente en la Base de Datos!');
+
+        return view('periodoFiscal.edit', ['periodoFiscal' => $periodoFiscal,
+                                            'listaUsuarios' => $this->listaUsuarios
+                                        ]);
     }
 
     /**
@@ -161,6 +209,13 @@ class PeriodoFiscalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Obtener el Periodo Fiscal que corresponda con el ID dado (o null si no es encontrado).
+        $periodoFiscal = PeriodoFiscal::find($id);
+        $periodoFiscal->delete();
+        Session::flash('validated', true);
+        Session::flash('message', 'El Registro se elimino exitosamente de la Base de datos!');
+        Session::flash('mostrar_en_listado', true);//solo le doy un valor de true para probar
+
+        return Redirect::to('/periodosfiscales');
     }
 }
