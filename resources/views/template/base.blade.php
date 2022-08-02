@@ -141,5 +141,7 @@
         @stack('periodoFiscal.edit')
 
         @stack('persona.create')
+        @stack('persona.list')
+        @stack('persona.edit')
 	</body>
 </html>

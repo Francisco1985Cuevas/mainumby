@@ -13,15 +13,6 @@
 <!-- Content Row -->
 <div class="row">
 	<div class="col-xl-12 col-lg-12">
-        <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!!URL::to('/')!!}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{!!URL::to('/personas')!!}">Listado de Registros</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Detalles del Registro</li>
-            </ol>
-        </nav>
-        <!-- End of Breadcrumb -->
 		<!-- Detalles Persona -->
 		<div class="card shadow mb-4">
             <!-- Dropdown - MenuLinks -->
@@ -34,9 +25,11 @@
 					<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
 						<div class="dropdown-header">Acciones:</div>
 						<a class="dropdown-item" href="{!!URL::to('/')!!}" title="P&aacute;gina de Inicio"><i class="fas fa-home"></i> Inicio</a>
-						<a class="dropdown-item" href="{{ URL::route('personas.show', [$persona->id]) }}" title="Actualizar P&aacute;gina Actual">
-                            <i class="fas fa-sync-alt"></i> Actualizar
-                        </a>
+
+                            <a class="dropdown-item" href="{{ URL::route('personas.show', [$persona->id]) }}" title="Actualizar P&aacute;gina Actual">
+                                <i class="fas fa-sync-alt"></i> Actualizar
+                            </a>
+
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="{!!URL::to('/personas')!!}" title="Volver al listado">
 							<i class="fas fa-list"></i> Volver
@@ -47,17 +40,16 @@
             <!-- End of Dropdown MenuLinks -->
 
 			<div class="card-body">
-				{!!Form::model($persona, ['route'=>  ['personas.show', $persona->id], 'method'=>'POST', 'files'=> true])!!}
+                {!!Form::model($persona, ['route'=>  ['personas.show', $persona->id], 'method'=>'POST', 'files'=> true])!!}
+
                     @include('persona.forms.formulario-detalle')
-                    <a href="{!!URL::to('/personas')!!}" class="btn btn-primary btn-icon-split">
-                        <span class="icon text-white-50"><i class="fa fa-arrow-left"></i></span>
-                        <span class="text">Volver</span>
-                    </a>
+
+
+
                 {!!Form::close()!!}
 			</div>
-
 		</div>
-        <!-- End of Detalles Persona -->
+        <!-- End of  Detalles Persona -->
 	</div>
 </div>
 <!-- End of Content Row -->

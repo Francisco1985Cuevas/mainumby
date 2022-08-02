@@ -20,8 +20,8 @@ class CreateDocumentosTable extends Migration
             $table->string('numero_documento', 60)->nullable($value = false);
             $table->string('foto_documento_frente', 255)->nullable($value = true);
             $table->string('foto_documento_dorso', 255)->nullable($value = true);
-            $table->date('fecha_emision');
-            $table->date('fecha_vencimiento');
+            $table->date('fecha_emision')->nullable($value = true);
+            $table->date('fecha_vencimiento')->nullable($value = true);
             $table->text('comentario')->nullable($value = true);
             $table->timestamps();
 

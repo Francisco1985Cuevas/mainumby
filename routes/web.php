@@ -24,6 +24,7 @@ Route::get('regiones/findByPais/{id}','RegionController@findByPais');
 
 Route::resource('departamentos', 'DepartamentoController');
 Route::get('departamentos/findByRegion/{id}','DepartamentoController@findByRegion');
+Route::get('departamentos/findByRegionByPais/{id}','DepartamentoController@findByRegionByPais');
 
 Route::resource('ciudades', 'CiudadController');
 Route::get('ciudades/findByDepartamento/{id}','CiudadController@findByDepartamento');

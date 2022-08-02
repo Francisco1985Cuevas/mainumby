@@ -327,7 +327,7 @@ $(document).ready(function() {
     });
     //--- End Tipos Emails ---//
 
-*/
+
 
     //--- Personas ---//
     //DataTable list Personas
@@ -361,6 +361,40 @@ $(document).ready(function() {
     });
     //--- End Personas ---//
 
+
+    //--- Documentos ---//
+    //DataTable list Documentos
+	$('#dataTable_documentos').DataTable({
+		language: {
+            url: '/js/localisation/Spanish.json'
+        }
+	});//close dataTable_documentos
+
+
+	//boton eliminar del form edit.
+	$("#btn_delete_editFormDocumento").click(function() {
+        dataId = $(this).attr("data-id");
+
+        $('#form_delete_editFormDocumento').attr('action', '/documentos/'+dataId);
+        $('#modal_delete_editFormDocumento').modal('show');
+    });
+
+
+	//boton eliminar del listado.
+	var dataTableDocumentos = $('#dataTable_documentos').DataTable();
+    dataTableDocumentos.on('click', '#btn_delete_listDocumento', function(){//hace referencia al link del listado a href delete
+        var $tr = $(this).closest('tr');
+        if($($tr).hasClass('child')){
+            $tr = $tr.prev('.parent');
+        }
+
+        var dataDocumento = dataTableDocumentos.row($tr).data();
+
+        $('#form_delete_listDocumento').attr('action', '/documentos/'+dataDocumento[0]);
+        $('#modal_delete_listDocumento').modal('show');
+    });
+    //--- End Documentos ---//
+*/
 
     //--- Direcciones ---//
     //DataTable list Direcciones
@@ -462,40 +496,6 @@ $(document).ready(function() {
         $('#modal_delete_listEmail').modal('show');
     });
     //--- End Emails ---//
-
-
-    //--- Documentos ---//
-    //DataTable list Documentos
-	$('#dataTable_documentos').DataTable({
-		language: {
-            url: '/js/localisation/Spanish.json'
-        }
-	});//close dataTable_documentos
-
-
-	//boton eliminar del form edit.
-	$("#btn_delete_editFormDocumento").click(function() {
-        dataId = $(this).attr("data-id");
-
-        $('#form_delete_editFormDocumento').attr('action', '/documentos/'+dataId);
-        $('#modal_delete_editFormDocumento').modal('show');
-    });
-
-
-	//boton eliminar del listado.
-	var dataTableDocumentos = $('#dataTable_documentos').DataTable();
-    dataTableDocumentos.on('click', '#btn_delete_listDocumento', function(){//hace referencia al link del listado a href delete
-        var $tr = $(this).closest('tr');
-        if($($tr).hasClass('child')){
-            $tr = $tr.prev('.parent');
-        }
-
-        var dataDocumento = dataTableDocumentos.row($tr).data();
-
-        $('#form_delete_listDocumento').attr('action', '/documentos/'+dataDocumento[0]);
-        $('#modal_delete_listDocumento').modal('show');
-    });
-    //--- End Documentos ---//
 
 
     //--- Contactos ---//

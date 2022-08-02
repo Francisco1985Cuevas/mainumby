@@ -11,8 +11,9 @@ Laravel incluye un ORM llamado Eloquent, el cual nos permite abstraer aún más 
 operaciones de base de datos, puesto que podemos interactuar con «Modelos» (representados
 por clases y objetos de PHP) en vez de tener que escribir sentencias SQL manualmente.
 */
-// import de las clases: Pais, Departamento
+// import de las clases: Pais, Departamento, Region
 use App\Pais;
+use App\Region;
 use App\Departamento;
 
 
@@ -247,6 +248,8 @@ class DepartamentoController extends Controller
                             ->get();
         return json_encode($departamentos);
     }
+
+
 
     /*public function list($id)
     {
